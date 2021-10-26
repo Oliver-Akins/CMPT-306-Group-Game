@@ -4,7 +4,7 @@ on: [pull_request]
 
 jobs:
   build:
-    name: Build my project
+    name: Build Project
     runs-on: ubuntu-latest
     steps:
       # Checkout
