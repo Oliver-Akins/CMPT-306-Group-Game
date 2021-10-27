@@ -1,18 +1,3 @@
-// KELLY NEUDA
-// kvn904
-// 11265322
-// Cody Phillips
-// CMPT-306 01 T01
-
-/* sources used:
-
-player movement - https://www.youtube.com/watch?v=--N5IgSUQWI
-player animation - https://www.youtube.com/watch?v=Vfq13LRggwk
-health bar - https://www.youtube.com/watch?v=BLfNP4Sc_iA
-health damage and heal - CMPT-306 "UI Worksheet.pdf"
-damage flash effect - https://www.youtube.com/watch?v=9rZkiEyS66I */
-
-
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -20,16 +5,11 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
     
-    [SerializeField]
-    private Slider slider;
-    [SerializeField]
-    private Gradient gradient;
-    [SerializeField]
-    private Image fill;
-    [SerializeField]
-    private GameObject healthDivPrefab;
-    [SerializeField]
-    private GameObject healthDivLayout;
+    [SerializeField] private Slider slider;
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private Image fill;
+    [SerializeField] private GameObject healthDivPrefab;
+    [SerializeField] private GameObject healthDivLayout;
     private List<GameObject> healthDivList;
     private Coroutine flashRoutine;
 
