@@ -16,6 +16,19 @@ public class Player : MonoBehaviour {
 
     Vector2 movement;
 
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int currentHealth;
+    [SerializeField] private int damageValue;
+    [SerializeField] private int healValue;
+    [SerializeField] private int healthUp;
+    [SerializeField] private HealthBar healthBar;
+
+    void Start() {
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
     // Update is called once per frame
     // not good for physics D: but great for inputs
     void Update()
@@ -31,6 +44,34 @@ public class Player : MonoBehaviour {
         // more optimized with square root magnitude as we won't need to calculate it on the vector
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
+
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(currentHealth > 0)
+            {
+                TakeDamage();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            if(currentHealth < maxHealth)
+            {
+                HealPlayer();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            DecreaseMaxHealth();
+        }
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            IncreaseMaxHealth();
+        }
+
     }
 
     // works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -38,5 +79,39 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+
+    private void TakeDamage() {
+
+        currentHealth = currentHealth - damageValue;
+        healthBar.SetCurrentHealth(currentHealth);
+    }
+    
+    private void HealPlayer() {
+
+        currentHealth = currentHealth + healValue;
+        healthBar.SetCurrentHealth(currentHealth);
+    }
+    
+    private void DecreaseMaxHealth() {
+
+        maxHealth = maxHealth - healthUp;
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;;
+        }
+            
+        healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
+    }
+
+    private void IncreaseMaxHealth() {
+        
+        maxHealth = maxHealth + healthUp;
+
+        currentHealth = maxHealth;
+
+        healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
     }
 }
