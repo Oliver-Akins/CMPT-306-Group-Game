@@ -16,23 +16,35 @@ public class Player : MonoBehaviour {
 
     Vector2 movement;
 
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int damageValue;
-    [SerializeField] private int healValue;
-    [SerializeField] private int healthUp;
-    [SerializeField] private HealthBar healthBar;
+    // player max health
+    public int maxHealth;
 
+    // player current health - initializes to max health at start
+    public int currentHealth;
+
+    // damage value for testing
+    public int damageValue;
+
+    // heal value for testing
+    public int healValue;
+
+    // health up for testing
+    public int healthUp;
+
+    // player health bar
+    public HealthBar healthBar;
+
+    // Start() is called when script is enabled
     void Start() {
-
+        // initialize max health to inspector value input
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
     // not good for physics D: but great for inputs
-    void Update()
-    {
+    void Update() {
+
         // gives a value between -1 and 1 depending on which key left or right, 
 		// but if no move in this direction will return 0 
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -44,74 +56,56 @@ public class Player : MonoBehaviour {
         // more optimized with square root magnitude as we won't need to calculate it on the vector
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
+        // SPACE to damage player
+        if(Input.GetKeyDown(KeyCode.Space)) {
             if(currentHealth > 0)
-            {
                 TakeDamage();
-            }
         }
 
-        if(Input.GetKeyDown(KeyCode.H))
-        {
+        // H to heal player
+        if(Input.GetKeyDown(KeyCode.H)) {
             if(currentHealth < maxHealth)
-            {
                 HealPlayer();
-            }
         }
 
+        // N to decrease max health
         if(Input.GetKeyDown(KeyCode.N))
-        {
             DecreaseMaxHealth();
-        }
 
+        // M to increase max health
         if(Input.GetKeyDown(KeyCode.M))
-        {
             IncreaseMaxHealth();
-        }
 
     }
 
     // works the same way, but executed on a fixed timer and stuck to the frame rate
     // approx 50 times a second
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-
     private void TakeDamage() {
-
         currentHealth = currentHealth - damageValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
     
     private void HealPlayer() {
-
         currentHealth = currentHealth + healValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
     
     private void DecreaseMaxHealth() {
-
         maxHealth = maxHealth - healthUp;
 
         if(currentHealth > maxHealth)
-        {
             currentHealth = maxHealth;;
-        }
             
         healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
     }
 
     private void IncreaseMaxHealth() {
-        
         maxHealth = maxHealth + healthUp;
-
         currentHealth = maxHealth;
-
         healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
     }
 }
