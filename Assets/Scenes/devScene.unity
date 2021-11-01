@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 895339938}
   - component: {fileID: 895339939}
   - component: {fileID: 895339940}
+  - component: {fileID: 895339941}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -379,6 +380,10 @@ MonoBehaviour:
   healValue: 20
   healthUp: 100
   healthBar: {fileID: 1678370253}
+  strength: 0
+  agility: 0
+  stamina: 0
+  skillCoins: 0
 --- !u!50 &895339935
 Rigidbody2D:
   serializedVersion: 4
@@ -529,12 +534,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67, y: 0.89}
   m_EdgeRadius: 0
+--- !u!114 &895339941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895339933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 892bceba24d4e8f4cb412dd20e0f3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 895339938}
   meleeAttackPoint: {fileID: 1705225202}
-  attackRange: 0.29
+  attackRange: 0.5
   startTimeBetweenAttacks: 0.3
   enemyLayers:
     serializedVersion: 2
@@ -856,7 +870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 895339937}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854750051
 GameObject:

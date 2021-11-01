@@ -23,7 +23,6 @@ public class Rock : MonoBehaviour {
 		TO NOT INTERACT but really the rock doesn't know what its hitting... unless it checks :)
 	*/
 	void OnTriggerEnter2D(Collider2D collisionInfo){
-		Debug.Log(collisionInfo.gameObject);
 		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 		// Destroy(effect, 5f);	
 
