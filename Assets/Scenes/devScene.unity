@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 433332948}
   - component: {fileID: 433332947}
   - component: {fileID: 433332946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,8 @@ GameObject:
   - component: {fileID: 895339934}
   - component: {fileID: 895339938}
   - component: {fileID: 895339939}
-  m_Layer: 0
+  - component: {fileID: 895339940}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +399,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &895339936
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -500,6 +501,33 @@ MonoBehaviour:
   firePoint: {fileID: 1468726274}
   rangedWeapPrefab: {fileID: 2004395586902086213, guid: f29fde569a9a1a0428ce59e820b580d1, type: 3}
   weapForce: 20
+  startTimeBetweenShots: 0.25
+--- !u!61 &895339940
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895339933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1, y: -0.06}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 0.89}
+  m_EdgeRadius: 0
 --- !u!1 &1042536114
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1468726274}
   - component: {fileID: 1468726275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468726273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.63, z: 0}
+  m_LocalPosition: {x: 0.288, y: -0.147, z: 0}
   m_LocalScale: {x: 2.54, y: 2.31, z: 0.45}
   m_Children: []
   m_Father: {fileID: 895339937}
@@ -1123,7 +1151,7 @@ GameObject:
   - component: {fileID: 2040916534}
   - component: {fileID: 2040916533}
   - component: {fileID: 2040916532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1232,7 +1260,7 @@ GameObject:
   - component: {fileID: 2116318093}
   - component: {fileID: 2116318092}
   - component: {fileID: 2116318091}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

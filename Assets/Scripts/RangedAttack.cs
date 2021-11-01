@@ -8,11 +8,22 @@ public class RangedAttack : MonoBehaviour
     public Transform firePoint;
     public GameObject rangedWeapPrefab;
     public float weapForce = 20f;
+    // limit the fire rate for the player
+    private float timeBetweenShots;
+    public float startTimeBetweenShots;
+
     // Update is called once per frame
     void Update(){
-        if(Input.GetButtonDown("Fire2")){
-            RangeAttack();
+
+        if (timeBetweenShots <= 0){
+            if(Input.GetButtonDown("Fire2")){
+                RangeAttack();
+                timeBetweenShots = startTimeBetweenShots;
+            }
+        } else {
+            timeBetweenShots -= Time.deltaTime;
         }
+   
     }
 
     void RangeAttack(){
