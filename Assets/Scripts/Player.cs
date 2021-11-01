@@ -11,11 +11,17 @@ public class Player : MonoBehaviour {
     // used to manipluate the driver/rigid body
     public Rigidbody2D rb;
 
+    public Rigidbody2D firePointRb;
+
 	// for animations this can be used with the blend tree
-    public Animator animator;
+    public Animator animator; 
+    
+    // Camera reference to handle aiming weapon attacks
+    public Camera cam;
 
     Vector2 movement;
-
+    Vector2 mousePosition;
+    
     // player max health
     public int maxHealth;
 
@@ -63,6 +69,8 @@ public class Player : MonoBehaviour {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+
 		// Sets the animation when we need it
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
@@ -95,6 +103,15 @@ public class Player : MonoBehaviour {
     // approx 50 times a second
     void FixedUpdate() {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        Vector2 aimDirection = mousePosition - rb.position;
+        // calculate the angle so the firepoint can rotate to correctly shoot from the player
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        // because the original implementation was on the sprite and rotated the sprite
+        // this is instead rotating the fire point at the center of the player
+        // note this isn't perfect when we start adding colliders onto the player
+        firePointRb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        firePointRb.rotation = angle;
     }
 
     private void TakeDamage() {
