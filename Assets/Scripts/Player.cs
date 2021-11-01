@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     public Rigidbody2D rb;
 
 	// for animations this can be used with the blend tree
-    public Animator animator; 
+    public Animator animator;
 
     Vector2 movement;
 
@@ -34,6 +34,19 @@ public class Player : MonoBehaviour {
     // player health bar
     public HealthBar healthBar;
 
+    // player strength
+    public int strength;
+
+    //player agility
+    public int agility;
+
+    //player stamina
+    public int stamina;
+
+    //player skill coins
+    public int skillCoins;
+
+
     // Start() is called when script is enabled
     void Start() {
         // initialize max health to inspector value input
@@ -45,8 +58,8 @@ public class Player : MonoBehaviour {
     // not good for physics D: but great for inputs
     void Update() {
 
-        // gives a value between -1 and 1 depending on which key left or right, 
-		// but if no move in this direction will return 0 
+        // gives a value between -1 and 1 depending on which key left or right,
+		// but if no move in this direction will return 0
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -88,18 +101,18 @@ public class Player : MonoBehaviour {
         currentHealth = currentHealth - damageValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
-    
+
     private void HealPlayer() {
         currentHealth = currentHealth + healValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
-    
+
     private void DecreaseMaxHealth() {
         maxHealth = maxHealth - healthUp;
 
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;;
-            
+
         healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
     }
 
