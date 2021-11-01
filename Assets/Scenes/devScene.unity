@@ -389,6 +389,7 @@ MonoBehaviour:
   animator: {fileID: 895339938}
   meleeAttackPoint: {fileID: 1705225202}
   attackRange: 0.29
+  startTimeBetweenAttacks: 0.3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
