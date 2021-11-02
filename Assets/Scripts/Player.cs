@@ -28,15 +28,6 @@ public class Player : MonoBehaviour {
     // player current health - initializes to max health at start
     public int currentHealth;
 
-    // damage value for testing
-    public int damageValue;
-
-    // heal value for testing
-    public int healValue;
-
-    // health up for testing
-    public int healthUp;
-
     // player health bar
     public HealthBar healthBar;
 
@@ -93,18 +84,18 @@ public class Player : MonoBehaviour {
         firePointRb.rotation = angle;
     }
 
-    public void TakeDamage() {
+    public void TakeDamage(int damageValue) {
         currentHealth = currentHealth - damageValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
 
-    public void HealPlayer() {
+    public void HealPlayer(int healValue) {
         currentHealth = currentHealth + healValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
 
-    public void DecreaseMaxHealth() {
-        maxHealth = maxHealth - healthUp;
+    public void DecreaseMaxHealth(int healthDown) {
+        maxHealth = maxHealth - healthDown;
 
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;;
@@ -112,7 +103,7 @@ public class Player : MonoBehaviour {
         healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
     }
 
-    public void IncreaseMaxHealth() {
+    public void IncreaseMaxHealth(int healthUp) {
         maxHealth = maxHealth + healthUp;
         currentHealth = maxHealth;
         healthBar.IncreaseMaxHealth(currentHealth, maxHealth);

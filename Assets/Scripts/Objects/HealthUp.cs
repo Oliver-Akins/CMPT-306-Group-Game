@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class HealthUp : MonoBehaviour {
 
-	// Start is called before the first frame update
-	void Start() {}
+	Player player;
+	public int healthUpValue = 200;
 
-	// Update is called once per frame
-	void Update() {}
+	void Awake() {
+		player = FindObjectOfType<Player>();
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		Destroy(gameObject);
+		player.IncreaseMaxHealth(healthUpValue);
+	}
 };

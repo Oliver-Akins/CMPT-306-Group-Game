@@ -5,6 +5,7 @@ using UnityEngine;
 public class Potion : MonoBehaviour {
 
 	Player player;
+	public int healValue = 100;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
@@ -12,6 +13,6 @@ public class Potion : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		Destroy(gameObject);
-		player.HealPlayer();
+		player.HealPlayer(healValue);
 	}
 };
