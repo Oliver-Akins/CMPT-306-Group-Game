@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour {
 
-	// Start is called before the first frame update
-	void Start() {}
+	Player player;
 
-	// Update is called once per frame
-	void Update() {}
+	void Awake() {
+		player = FindObjectOfType<Player>();
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		Destroy(gameObject);
+		player.HealPlayer();
+	}
 };

@@ -114,17 +114,17 @@ public class Player : MonoBehaviour {
         firePointRb.rotation = angle;
     }
 
-    private void TakeDamage() {
+    public void TakeDamage() {
         currentHealth = currentHealth - damageValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
 
-    private void HealPlayer() {
+    public void HealPlayer() {
         currentHealth = currentHealth + healValue;
         healthBar.SetCurrentHealth(currentHealth);
     }
 
-    private void DecreaseMaxHealth() {
+    public void DecreaseMaxHealth() {
         maxHealth = maxHealth - healthUp;
 
         if(currentHealth > maxHealth)
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour {
         healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
     }
 
-    private void IncreaseMaxHealth() {
+    public void IncreaseMaxHealth() {
         maxHealth = maxHealth + healthUp;
         currentHealth = maxHealth;
         healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
