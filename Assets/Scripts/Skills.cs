@@ -16,6 +16,8 @@ public class Skills : MonoBehaviour
   public int stamina;
 
 
+    // TODO make a public void function to get data from game state (initializeStats)
+
     // Start is called before the first frame update
     void Start()
     {
