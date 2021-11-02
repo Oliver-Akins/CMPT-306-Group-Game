@@ -76,27 +76,6 @@ public class Player : MonoBehaviour {
         animator.SetFloat("Vertical", movement.y);
         // more optimized with square root magnitude as we won't need to calculate it on the vector
         animator.SetFloat("Speed", movement.sqrMagnitude);
-
-        // SPACE to damage player
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            if(currentHealth > 0)
-                TakeDamage();
-        }
-
-        // H to heal player
-        if(Input.GetKeyDown(KeyCode.H)) {
-            if(currentHealth < maxHealth)
-                HealPlayer();
-        }
-
-        // N to decrease max health
-        if(Input.GetKeyDown(KeyCode.N))
-            DecreaseMaxHealth();
-
-        // M to increase max health
-        if(Input.GetKeyDown(KeyCode.M))
-            IncreaseMaxHealth();
-
     }
 
     // works the same way, but executed on a fixed timer and stuck to the frame rate
