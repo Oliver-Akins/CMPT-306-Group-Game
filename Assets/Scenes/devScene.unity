@@ -705,6 +705,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+<<<<<<< HEAD
 --- !u!1 &1620176261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,8 @@ MonoBehaviour:
   speed: 0.2
   maxRange: 6
   minRange: 0.75
+=======
+>>>>>>> 950ace0d0fbfb1eed80eb20f373ae45d8467ee82
 --- !u!1 &1678370250
 GameObject:
   m_ObjectHideFlags: 0
