@@ -12,14 +12,14 @@ public class EnemyController : MonoBehaviour {
 	[SerializeField]
 	private float speed;
 
-	[SerializeField]
-	private float maxRange;
+	// variables to restrict the range of enemies can be modified here.
+	public float maxRange = 4f;
 
-	[SerializeField]
-	private float minRange;
+	public float minRange = 0.75f;
 
 	// Start is called before the first frame update
 	void Start() {
+		// getting an animator and player object to operate onto.
 		myAnim = GetComponent<Animator>();
 		target = FindObjectOfType<Player>().transform;
 	}
