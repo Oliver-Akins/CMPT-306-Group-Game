@@ -5,7 +5,7 @@ using UnityEngine;
 public class Potion : MonoBehaviour {
 
 	Player player;
-	public int healValue = 100;
+	public int healValue;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();

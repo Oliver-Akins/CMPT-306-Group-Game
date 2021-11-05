@@ -41,7 +41,7 @@ public class HealthBar : MonoBehaviour {
         int healthDivider = maxHealth / 100;
 
         // initialize health dividers
-        for (int i = 0; i < healthDivider; i = i + 1) {
+        for (int i = 0; i < healthDivider; i++) {
             GameObject new_health = Instantiate(healthDivPrefab);
             new_health.transform.SetParent(healthDivLayout.transform, false);
             healthDivList.Add(new_health);
@@ -52,8 +52,8 @@ public class HealthBar : MonoBehaviour {
         // call Flash() effect when taking damage
         if(slider.value > currentHealth)
             Flash();
-        else
-            fill.color = gradient.Evaluate(slider.normalizedValue);
+        
+        fill.color = gradient.Evaluate(slider.normalizedValue);
         
         slider.value = currentHealth;
     }
@@ -72,7 +72,7 @@ public class HealthBar : MonoBehaviour {
     public void IncreaseMaxHealth(int currentHealth, int maxHealth) {
         slider.maxValue = maxHealth;
 
-        SetCurrentHealth(maxHealth);
+        SetCurrentHealth(currentHealth);
         
         // add health divider
         GameObject healthDiv = Instantiate(healthDivPrefab);

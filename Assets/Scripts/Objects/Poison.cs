@@ -5,7 +5,7 @@ using UnityEngine;
 public class Poison : MonoBehaviour {
 
 	Player player;
-	public int damageValue = 100;
+	public int damageValue;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
@@ -13,6 +13,8 @@ public class Poison : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		Destroy(gameObject);
-		player.TakeDamage(damageValue);
+
+		if(player.currentHealth > 0)
+			player.TakeDamage(damageValue);
 	}
 };

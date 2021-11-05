@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthUp : MonoBehaviour {
 
 	Player player;
-	public int healthUpValue = 200;
+	public int healthUpValue;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
