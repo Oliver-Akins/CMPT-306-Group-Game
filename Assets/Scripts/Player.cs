@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -43,7 +42,13 @@ public class Player : MonoBehaviour {
     //player skill coins
     public int skillCoins;
 
-    public GameObject player;
+    // current number of kills
+    public int kills;
+
+    // number of keys acquired
+    public int keys;
+    
+    // screen damage effect overlay
     public GameObject damageEffectOverlay;
     private Coroutine damageEffectOverlayRoutine;
 
@@ -134,23 +139,50 @@ public class Player : MonoBehaviour {
         if (damageEffectOverlayRoutine != null)
             StopCoroutine(damageEffectOverlayRoutine);
             
-        damageEffectOverlayRoutine = StartCoroutine(DamageEffectOverlayRoutine());
+        damageEffectOverlayRoutine =
+            StartCoroutine(DamageEffectOverlayRoutine());
     }
 
     private IEnumerator DamageEffectOverlayRoutine() {
 
-        GameObject overlay = Instantiate(damageEffectOverlay, transform.position, transform.rotation) as GameObject;
-
-        // GameObject overlay = Instantiate(damageEffectOverlay);
-        // overlay.transform.SetParent(player.transform, false);
+        GameObject overlay = Instantiate(damageEffectOverlay,
+            transform.position, transform.rotation) as GameObject;
 
         yield return new WaitForSeconds(1f);
 
         Destroy(overlay);
     }
 
-    public void AddCoin(int coinVal) {
-        skillCoins += coinVal;
+    public void AddCoin(int numCoins) {
+        skillCoins += numCoins;
+    }
+
+    public void UseCoins(int numCoins) {
+        skillCoins -= numCoins;
+    }
+
+    public void AddKey(int numKey) {
+        keys += numKey;
+    }
+
+    public void UseKey(int numKey) {
+        keys -= numKey;
+    }
+
+    public void IncreaseStrength(int strengthUp) {
+        strength += strengthUp;
+    }
+
+    public void IncreaseAgility(int agilityUp) {
+        agility += agilityUp;
+    }
+
+    public void IncreaseStamina(int staminaUp) {
+        stamina += staminaUp;
+    }
+
+    public void AddKill(int numKill) {
+        kills += numKill;
     }
     
 }
