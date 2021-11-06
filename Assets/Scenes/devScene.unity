@@ -4242,9 +4242,7 @@ MonoBehaviour:
   stamina: 0
   skillCoins: 0
   player: {fileID: 895339933}
-  healMessageOverlay: {fileID: 3980498702116039156, guid: 10cafdd15efa44268a90144b92316bc8, type: 3}
-  damageMessageOverlay: {fileID: 3651922926750491016, guid: 78d5d4e5e5cfd4b6d8065510dd60f1a5, type: 3}
-  healthUpMessageOverlay: {fileID: 7636758182253508009, guid: 649c82f9a1a194e08937051e8e8b3d9d, type: 3}
+  damageEffectOverlay: {fileID: 2703339448765065643, guid: bd9afbbe817d44d908b757afbc8caee0, type: 3}
 --- !u!50 &895339935
 Rigidbody2D:
   serializedVersion: 4

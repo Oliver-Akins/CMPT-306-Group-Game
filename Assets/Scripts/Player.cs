@@ -144,7 +144,7 @@ public class Player : MonoBehaviour {
         // GameObject overlay = Instantiate(damageEffectOverlay);
         // overlay.transform.SetParent(player.transform, false);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         Destroy(overlay);
     }
