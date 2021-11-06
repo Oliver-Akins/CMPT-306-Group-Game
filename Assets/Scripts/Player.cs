@@ -148,5 +148,9 @@ public class Player : MonoBehaviour {
 
         Destroy(overlay);
     }
+
+    public void AddCoin(int coinVal) {
+        skillCoins += coinVal;
+    }
     
 }
