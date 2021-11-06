@@ -43,6 +43,10 @@ public class Player : MonoBehaviour {
     //player skill coins
     public int skillCoins;
 
+    public GameObject player;
+    public GameObject damageEffectOverlay;
+    private Coroutine damageEffectOverlayRoutine;
+
 
     // Start() is called when script is enabled
     void Start() {
@@ -101,6 +105,7 @@ public class Player : MonoBehaviour {
 
     public void TakeDamage(int damageValue) {
         currentHealth -= damageValue;
+        DamageEffectOverlay();
         healthBar.SetCurrentHealth(currentHealth);
     }
 
@@ -123,4 +128,25 @@ public class Player : MonoBehaviour {
         currentHealth += healthUp;
         healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
     }
+
+
+    public void DamageEffectOverlay() {
+        if (damageEffectOverlayRoutine != null)
+            StopCoroutine(damageEffectOverlayRoutine);
+            
+        damageEffectOverlayRoutine = StartCoroutine(DamageEffectOverlayRoutine());
+    }
+
+    private IEnumerator DamageEffectOverlayRoutine() {
+
+        GameObject overlay = Instantiate(damageEffectOverlay, transform.position, transform.rotation) as GameObject;
+
+        // GameObject overlay = Instantiate(damageEffectOverlay);
+        // overlay.transform.SetParent(player.transform, false);
+
+        yield return new WaitForSeconds(2f);
+
+        Destroy(overlay);
+    }
+    
 }
