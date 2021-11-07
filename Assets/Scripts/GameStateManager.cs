@@ -50,6 +50,8 @@ public class GameStateManager {
 		OnStateChange();
 	}
 
+	// When quitting the application, make sure to purge the singleton so that
+	// it doesn't get accidentally saved.
 	public void OnApplicationQuit(){
 		GameStateManager.instance = null;
 	}
