@@ -55,4 +55,17 @@ public class GameStateManager {
 	public void OnApplicationQuit(){
 		GameStateManager.instance = null;
 	}
+
+
+	//=======================================================================\\
+	// Methods relating to the player data
+	private Player player;
+	public Dictionary<string, int> playerStats {
+		get {
+			return this.player.GetStats();
+		}
+		set {
+			this.player.SetStats(value);
+		}
+	}
 }
