@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class Object : MonoBehaviour {
 
+	// enum for object types
 	public enum ObjectType{COIN, STRENGTHUP, AGILITYUP, STAMINAUP, STATSUP,
 		KEY, POISON, POTION, HEALTHUP}
+	
+	// set object type
 	public ObjectType type;
+
+	// object value to be added or subtracted
 	public int value;
+
+	// player reference
 	private Player player;
 
 	void Awake() {
@@ -16,6 +23,7 @@ public class Object : MonoBehaviour {
 
 		if(col.CompareTag("Player")) {
 			
+			// call corresponding method depending on object type
 			switch(type) {
 
 				case ObjectType.COIN: {
@@ -71,4 +79,4 @@ public class Object : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-};
+}

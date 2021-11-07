@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	//Player movement// can change as needed
+	// Player movement // can change as needed
 	// move speed baseline
     public float moveSpeed = 5f;
 
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 	// for animations this can be used with the blend tree
     public Animator animator; 
     
-    // Camera reference to handle aiming weapon attacks
+    // camera reference to handle aiming weapon attacks
     public Camera cam;
 
     Vector2 movement;
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour {
     private Coroutine healEffectOverlayRoutine;
     private bool healEffectRunning = false;
 
-
     // Start() is called when script is enabled
     void Start() {
         // initialize max health to inspector value input
@@ -69,7 +68,6 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     // not good for physics D: but great for inputs
     void Update() {
-
         // gives a value between -1 and 1 depending on which key left or right,
 		// but if no move in this direction will return 0
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -83,7 +81,7 @@ public class Player : MonoBehaviour {
         // more optimized with square root magnitude as we won't need to calculate it on the vector
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // for testing - delete if needed
+        // keyboard inputs for testing - delete if needed
         if(Input.GetKeyDown(KeyCode.Space))
             if(currentHealth > 0)
                 TakeDamage(100);
@@ -120,31 +118,40 @@ public class Player : MonoBehaviour {
     public void TakeDamage(int damageValue) {
         currentHealth -= damageValue;
         DamageEffectOverlay();
+
+        // update health bar
         healthBar.SetCurrentHealth(currentHealth);
     }
 
     public void HealPlayer(int healValue) {
         currentHealth += healValue;
         HealEffectOverlay();
+
+        // update health bar
         healthBar.SetCurrentHealth(currentHealth);
     }
 
     public void DecreaseMaxHealth(int healthDown) {
         maxHealth -= healthDown;
 
+        // set current health to new max health if current
+        // is greater than max
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;;
 
+        // update health bar
         healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
     }
 
     public void IncreaseMaxHealth(int healthUp) {
         maxHealth += healthUp;
         currentHealth += healthUp;
+
+        // update health bar
         healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
     }
 
-
+    // call damage effect routine if currently not running
     public void DamageEffectOverlay() {
         if(!damageEffectRunning)
             StartCoroutine(DamageEffectOverlayRoutine());
@@ -164,6 +171,7 @@ public class Player : MonoBehaviour {
         damageEffectRunning = false;
     }
 
+    // call heal effect routine if currently not running
     public void HealEffectOverlay() {
         if(!healEffectRunning)
             StartCoroutine(HealEffectOverlayRoutine());
@@ -214,5 +222,4 @@ public class Player : MonoBehaviour {
     public void AddKill(int numKill) {
         kills += numKill;
     }
-    
 }
