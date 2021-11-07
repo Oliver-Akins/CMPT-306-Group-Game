@@ -59,13 +59,30 @@ public class GameStateManager {
 
 	//=======================================================================\\
 	// Methods relating to the player data
-	private Player player;
-	public Dictionary<string, int> playerStats {
-		get {
-			return this.player.GetStats();
+
+
+	// Allow the player property to be set from anywhere if it isn't defined
+	// already, otherwise it will not be updated and will not throw an error
+	private Player _player = null;
+	public Player player {
+		private get {
+			return this._player;
 		}
 		set {
-			this.player.SetStats(value);
+			if (this._player == null) {
+				this._player = value;
+			}
+		}
+	}
+
+	// Allow updating the player's stats by passing a dictionary through with
+	// the stats that are able to be updated
+	public Dictionary<string, int> playerStats {
+		get {
+			return this._player.GetStats();
+		}
+		set {
+			this._player.SetStats(value);
 		}
 	}
 }
