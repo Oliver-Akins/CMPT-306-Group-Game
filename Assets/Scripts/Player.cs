@@ -51,6 +51,12 @@ public class Player : MonoBehaviour {
     // screen damage effect overlay
     public GameObject damageEffectOverlay;
     private Coroutine damageEffectOverlayRoutine;
+    private bool damageEffectRunning = false;
+
+    // screen heal effect overlay
+    public GameObject healEffectOverlay;
+    private Coroutine healEffectOverlayRoutine;
+    private bool healEffectRunning = false;
 
 
     // Start() is called when script is enabled
@@ -91,6 +97,9 @@ public class Player : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.M))
             IncreaseMaxHealth(100);
+
+        if(Input.GetKeyDown(KeyCode.K))
+            AddKill(1);
     }
 
     // works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -116,6 +125,7 @@ public class Player : MonoBehaviour {
 
     public void HealPlayer(int healValue) {
         currentHealth += healValue;
+        HealEffectOverlay();
         healthBar.SetCurrentHealth(currentHealth);
     }
 
@@ -136,21 +146,41 @@ public class Player : MonoBehaviour {
 
 
     public void DamageEffectOverlay() {
-        if (damageEffectOverlayRoutine != null)
-            StopCoroutine(damageEffectOverlayRoutine);
-            
-        damageEffectOverlayRoutine =
+        if(!damageEffectRunning)
             StartCoroutine(DamageEffectOverlayRoutine());
     }
 
     private IEnumerator DamageEffectOverlayRoutine() {
 
+        damageEffectRunning = true;
+
         GameObject overlay = Instantiate(damageEffectOverlay,
             transform.position, transform.rotation) as GameObject;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1);
 
         Destroy(overlay);
+        
+        damageEffectRunning = false;
+    }
+
+    public void HealEffectOverlay() {
+        if(!healEffectRunning)
+            StartCoroutine(HealEffectOverlayRoutine());
+    }
+
+    private IEnumerator HealEffectOverlayRoutine() {
+
+        healEffectRunning = true;
+
+        GameObject overlay = Instantiate(healEffectOverlay,
+            transform.position, transform.rotation) as GameObject;
+
+        yield return new WaitForSeconds(1);
+
+        Destroy(overlay);
+        
+        healEffectRunning = false;
     }
 
     public void AddCoin(int numCoins) {
