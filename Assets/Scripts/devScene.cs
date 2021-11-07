@@ -10,7 +10,14 @@ public class devScene : MonoBehaviour {
 		GM.OnStateChange += HandleOnStateChange;
 	}
 
+	void Start() {
+		GM.SetGameState(GameState.IN_GAME);
+	}
+
 	public void HandleOnStateChange() {
-		Debug.Log("State change event");
+		if (GM.gameState == GameState.IN_GAME) {
+			Player p = GameObject.Find("Player").GetComponent<Player>();
+			GM.player = p;
+		}
 	}
 };
