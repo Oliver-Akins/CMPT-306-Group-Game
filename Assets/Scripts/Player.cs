@@ -102,8 +102,8 @@ public class Player : MonoBehaviour {
     // works the same way, but executed on a fixed timer and stuck to the frame rate
     // approx 50 times a second
     void FixedUpdate() {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
+        // rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = movement.normalized * moveSpeed;
         Vector2 aimDirection = mousePosition - rb.position;
         // calculate the angle so the firepoint can rotate to correctly shoot from the player
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
