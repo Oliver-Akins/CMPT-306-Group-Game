@@ -18,7 +18,7 @@ public static class PCG {
 
 
 	public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition,
-    int corridorLength) {
+        int corridorLength) {
 	
     	List<Vector2Int> corridor = new List<Vector2Int>();
 		var direction = Direction2D.GetRandomCardinalDirection();
@@ -33,7 +33,7 @@ public static class PCG {
 	}
 
 	public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit,
-    int minWidth, int minHeight) {
+        int minWidth, int minHeight) {
 		
         Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
 		List<BoundsInt> roomsList = new List<BoundsInt>();
@@ -68,20 +68,20 @@ public static class PCG {
 		return roomsList;
 	}
 
-	private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
-	{
+	private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room) {
 		var xSplit = Random.Range(1, room.size.x);
 		BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.size.y, room.size.z));
-		BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z), new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
+		BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z),
+            new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
 		roomsQueue.Enqueue(room1);
 		roomsQueue.Enqueue(room2);
 	}
 
-	private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
-	{
+	private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room) {
 		var ySplit = Random.Range(1, room.size.y);
 		BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(room.size.x, ySplit, room.size.z));
-		BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z), new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+		BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+            new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
 		roomsQueue.Enqueue(room1);
 		roomsQueue.Enqueue(room2);
 	}
