@@ -13,14 +13,14 @@ public class Player : MonoBehaviour {
     public Rigidbody2D firePointRb;
 
 	// for animations this can be used with the blend tree
-    public Animator animator; 
-    
-    // camera reference to handle aiming weapon attacks
+    public Animator animator;
+
+    // Camera reference to handle aiming weapon attacks
     public Camera cam;
 
     Vector2 movement;
     Vector2 mousePosition;
-    
+
     // player max health
     public int maxHealth;
 
@@ -57,6 +57,24 @@ public class Player : MonoBehaviour {
     public GameObject healEffectOverlay;
     private Coroutine healEffectOverlayRoutine;
     private bool healEffectRunning = false;
+    
+    public Dictionary<string, int> GetStats() {
+        Dictionary<string, int> stats = new Dictionary<string, int>();
+        stats.Add("maxHealth", this.maxHealth);
+        stats.Add("strength", this.strength);
+        stats.Add("agility", this.agility);
+        stats.Add("stamina", this.stamina);
+        stats.Add("skillCoins", this.skillCoins);
+        return stats;
+    }
+    public void SetStats(Dictionary<string, int> stats) {
+        this.maxHealth = stats["maxHealth"];
+        this.strength = stats["strength"];
+        this.agility = stats["agility"];
+        this.stamina = stats["stamina"];
+        this.skillCoins = stats["skillCoins"];
+    }
+
 
     // Start() is called when script is enabled
     void Start() {
