@@ -597,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 895339938}
   meleeAttackPoint: {fileID: 1705225202}
+  cam: {fileID: 1854750054}
   attackRange: 0.5
   startTimeBetweenAttacks: 0.3
   enemyLayers:
@@ -1017,7 +1018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705225201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: -0.01, z: 0}
+  m_LocalPosition: {x: -0.12, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 895339937}

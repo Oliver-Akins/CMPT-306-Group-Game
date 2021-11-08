@@ -11,7 +11,7 @@ public class Rock : MonoBehaviour {
 	*/
 	// public GameObject hitEffect;
 	
-
+	public int damageAmount;
 	public LayerMask enemyLayers;
 
 	/** only hell this is the ONLY way ive found so far to ensure that the
@@ -25,8 +25,12 @@ public class Rock : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collisionInfo){
 		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 		// Destroy(effect, 5f);	
-
-		if (collisionInfo.gameObject.layer == 7  || collisionInfo.gameObject.layer == 8){
+		int hitLayer = collisionInfo.gameObject.layer;
+		if (hitLayer == 7  || hitLayer == 8){
+			// we hit an enemy!
+			if (hitLayer == 8){
+				collisionInfo.GetComponent<EnemyController>().TakeDamage(damageAmount);
+			}
 			Destroy(gameObject);
 		}
 	}
