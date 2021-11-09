@@ -24,6 +24,10 @@ public class EnemyController : MonoBehaviour {
 
 	public float waitTime;
 
+	// public GameObject lootDrop;
+
+	public List<GameObject> items = new List<GameObject>();
+
 	// Start is called before the first frame update
 	void Start() {
 		// getting an animator and player object to operate onto.
@@ -76,6 +80,9 @@ public class EnemyController : MonoBehaviour {
 	void DestroyEnemy(){
 		// can have a death effect to if we want
 		Destroy(gameObject);
+		
+		// Instantiate(lootDrop, transform.position, Quaternion.identity);
+		Instantiate(items[Random.Range(0, items.Count-1)], transform.position, Quaternion.identity);
 	}
 
 
