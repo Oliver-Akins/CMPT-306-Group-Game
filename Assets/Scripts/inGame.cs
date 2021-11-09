@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Ingame : MonoBehaviour {
+public class inGame : MonoBehaviour {
 	GameStateManager GM;
 
 	void Awake() {
@@ -10,7 +9,14 @@ public class Ingame : MonoBehaviour {
 		GM.OnStateChange += HandleOnStateChange;
 	}
 
-	public void HandleOnStateChange() {
-		Debug.Log("State change event");
+	void Start() {
+		GM.SetGameState(GameState.IN_GAME);
 	}
-}
+
+	public void HandleOnStateChange() {
+		if (GM.gameState == GameState.IN_GAME) {
+			Player p = GameObject.Find("Player").GetComponent<Player>();
+			GM.player = p;
+		}
+	}
+};
