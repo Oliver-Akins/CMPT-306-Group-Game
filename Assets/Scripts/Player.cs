@@ -40,6 +40,11 @@ public class Player : MonoBehaviour {
     //player stamina
     public int stamina;
 
+    //inventory
+    private Inventory inventory;
+    [SerializeField] private UI_Inventory UIinventory;
+
+
     //player skill coins
     public int skillCoins;
 
@@ -76,6 +81,10 @@ public class Player : MonoBehaviour {
         this.skillCoins = stats["skillCoins"];
     }
 
+    private void Awake() {
+        inventory = new Inventory();
+        UIinventory.SetInventory(inventory);
+    }
 
     // Start() is called when script is enabled
     void Start() {
@@ -142,6 +151,15 @@ public class Player : MonoBehaviour {
         healthBar.SetCurrentHealth(currentHealth);
     }
 
+
+    public void HealOrAddPotion( ItemTypes.ItemType type, int value){
+        if(currentHealth < maxHealth){
+            this.HealPlayer(value);
+        } else {
+            inventory.AddItem(type, value);
+            UIinventory.RefreshInventoryItems();
+        }
+    }
     public void HealPlayer(int healValue) {
         currentHealth += healValue;
         HealEffectOverlay();
@@ -210,16 +228,20 @@ public class Player : MonoBehaviour {
         healEffectRunning = false;
     }
 
-    public void AddCoin(int numCoins) {
-        skillCoins += numCoins;
+    public void AddCoin( ItemTypes.ItemType type, int numCoins) {
+        inventory.AddItem(type, numCoins);
+        UIinventory.RefreshInventoryItems();
+        // skillCoins += numCoins;
     }
 
     public void UseCoins(int numCoins) {
         skillCoins -= numCoins;
     }
 
-    public void AddKey(int numKey) {
-        keys += numKey;
+    public void AddKey( ItemTypes.ItemType type, int numKey) {
+        inventory.AddItem(type, numKey);
+        UIinventory.RefreshInventoryItems();
+        // keys += numKey;
     }
 
     public void UseKey(int numKey) {
