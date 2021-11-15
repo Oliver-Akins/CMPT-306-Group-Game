@@ -7,6 +7,7 @@ public class NextLevelHole : MonoBehaviour {
 
 		if(col.CompareTag("Player")) {
 
+			// change string value to name of scene to be loaded when triggered
 			SceneManager.LoadScene("betweenLevels");
 
 		}
