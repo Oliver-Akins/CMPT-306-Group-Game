@@ -63,6 +63,12 @@ public class GameStateManager {
 					break;
 			};
 		};
+
+
+		// Call all of the event listeners if any exist
+		if (OnStateChange != null) {
+			OnStateChange();
+		};
 	}
 
 	// When quitting the application, make sure to purge the singleton so that
