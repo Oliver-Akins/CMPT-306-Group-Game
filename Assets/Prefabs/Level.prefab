@@ -241,6 +241,10 @@ PrefabInstance:
       propertyPath: tilemapVisualizer
       value: 
       objectReference: {fileID: 5001643488843360293}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: randomWalkParamiters
+      value: 
+      objectReference: {fileID: 11400000, guid: 30733a4aa93972c46b28c2d798ddfc2a, type: 2}
     - target: {fileID: 3641175071597000166, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: m_Name
       value: Coridor First Dungeion Gen
