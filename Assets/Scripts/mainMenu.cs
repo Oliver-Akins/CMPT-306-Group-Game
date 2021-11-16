@@ -13,4 +13,8 @@ public class mainMenu : MonoBehaviour {
 	public void StartGame() {
 		this.GM.SetGameState(GameState.IN_GAME);
 	}
+
+	public void QuitGame() {
+		Application.Quit();
+	}
 }
