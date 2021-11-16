@@ -3,16 +3,16 @@
 
 # The scenes we need in the repo
 !/Assets/Scenes/mainMenu.unity
-!/Assets/Scenes/mainMenu.meta
+!/Assets/Scenes/mainMenu.unity.meta
 
 !/Assets/Scenes/inGame.unity
-!/Assets/Scenes/inGame.meta
+!/Assets/Scenes/inGame.unity.meta
 
 !/Assets/Scenes/betweenLevels.unity
-!/Assets/Scenes/betweenLevels.meta
+!/Assets/Scenes/betweenLevels.unity.meta
 
 !/Assets/Scenes/gameOver.unity
-!/Assets/Scenes/gameOver.meta
+!/Assets/Scenes/gameOver.unity.meta
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
