@@ -1,3 +1,19 @@
+# Ignore all scenes excluding those that we need in the repo
+/Assets/Scenes/*
+
+# The scenes we need in the repo
+!/Assets/Scenes/mainMenu.unity
+!/Assets/Scenes/mainMenu.meta
+
+!/Assets/Scenes/inGame.unity
+!/Assets/Scenes/inGame.meta
+
+!/Assets/Scenes/betweenLevels.unity
+!/Assets/Scenes/betweenLevels.meta
+
+!/Assets/Scenes/gameOver.unity
+!/Assets/Scenes/gameOver.meta
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
