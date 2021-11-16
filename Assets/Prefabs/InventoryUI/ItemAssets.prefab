@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordSprite: {fileID: 0}
   healthPotionSprite: {fileID: 21300000, guid: 738b8a7e92b5a4980b88d788ce06077e, type: 3}
-  coinSprite: {fileID: 21300000, guid: da4fee3489a4a463f88b8805dcc535e7, type: 3}
+  coinSprite: {fileID: 21300000, guid: e2b886e67f22e41569d04529bdaed6d4, type: 3}
   keySprite: {fileID: 21300000, guid: 129cbc83e5ae24eab916de553d0e9eb9, type: 3}
