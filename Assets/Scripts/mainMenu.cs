@@ -6,6 +6,11 @@ public class mainMenu : MonoBehaviour {
 	GameStateManager GM;
 
 	void Awake() {
-		GM.SetGameState(GameState.MAIN_MENU);
+		this.GM = GameStateManager.Instance;
+		this.GM.SetGameState(GameState.MAIN_MENU, false);
+	}
+
+	public void StartGame() {
+		this.GM.SetGameState(GameState.IN_GAME);
 	}
 }
