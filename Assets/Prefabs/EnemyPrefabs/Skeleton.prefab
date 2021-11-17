@@ -102,8 +102,18 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   healthBar: {fileID: 6830032365887584351}
-  waitTime: 0
-  items: []
+  waitTime: 1
+  items:
+  - {fileID: 5869400407592566631, guid: 096db07e9e9d14a478bc46fc0038cad5, type: 3}
+  - {fileID: 6052031072712018367, guid: dc7227a1a17134c89a15dc7f2db7ad98, type: 3}
+  - {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
+  - {fileID: 1891078279623990650, guid: eab53792e8bfd4180867ac4f1765fc7d, type: 3}
+  - {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
+  - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
+  - {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
+  - {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
+  - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
+  - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
 --- !u!212 &1226731712122622694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -200,9 +210,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5755103286268653700}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 6830032365887584345}
   m_Father: {fileID: 1111846809823743054}
@@ -210,9 +220,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.06, y: 0.96}
+  m_SizeDelta: {x: 185, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2064665126081582910
 Canvas:
   m_ObjectHideFlags: 0
@@ -222,7 +232,7 @@ Canvas:
   m_GameObject: {fileID: 5755103286268653700}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -256,7 +266,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7172654158965885596
 MonoBehaviour:
   m_ObjectHideFlags: 0
