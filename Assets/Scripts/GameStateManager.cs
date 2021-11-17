@@ -54,8 +54,19 @@ public class GameStateManager {
 			switch (state) {
 				case GameState.IN_GAME:
 					SceneManager.LoadScene("inGame");
+
+					// Update the player's stats from the betweenLevels scene
+					if (this._playerStats != null && this._player != null) {
+						this._player.SetStats(this._playerStats);
+					};
+
 					break;
 				case GameState.BETWEEN_LEVEL:
+					// Get the player's stats before the gameobject gets destroyed
+					if (this._player) {
+						this._playerStats = this._player.GetStats();
+					};
+
 					SceneManager.LoadScene("betweenLevels");
 					break;
 				default:
@@ -98,12 +109,13 @@ public class GameStateManager {
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated
+	private Dictionary<string, int> _playerStats = null;
 	public Dictionary<string, int> playerStats {
 		get {
-			return this._player.GetStats();
+			return this._playerStats;
 		}
 		set {
-			this._player.SetStats(value);
+			this._playerStats = value;
 		}
 	}
 }
