@@ -1,11 +1,6 @@
 using UnityEngine;
 
 public class Object : MonoBehaviour {
-
-	// // enum for object types
-	// public enum ObjectType{COIN, STRENGTHUP, AGILITYUP, STAMINAUP, STATSUP,
-	// 	KEY, POISON, POTION, HEALTHUP}
-	
 	
 	// set object type
 	public ItemTypes.ItemType type;
@@ -66,7 +61,7 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.POTION: {
-					player.HealOrAddPotion(type, value);
+					player.AddPotion(type, value);
 					break;
 				}
 

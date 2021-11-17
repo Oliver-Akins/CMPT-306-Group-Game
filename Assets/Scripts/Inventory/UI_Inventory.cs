@@ -35,7 +35,6 @@ public class UI_Inventory : MonoBehaviour {
 			RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate,
 				itemSlotContainer).GetComponent<RectTransform>();
 			itemSlotRectTransform.gameObject.SetActive(true);
-
 			// if the item is equipable, equip with left click
 			if (item.IsEquipable()){
 				itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
@@ -43,7 +42,8 @@ public class UI_Inventory : MonoBehaviour {
 				};
 			} else if (item.IsConsumable()){ // If the item is consumable, use on left click
 				itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
-
+					InventoryItem dupitem = new InventoryItem{type = item.type, amount = item.amount};
+					inventory.UseItem(dupitem);
 				};
 			}
 			// otherwise do nothing with button ui stuffs

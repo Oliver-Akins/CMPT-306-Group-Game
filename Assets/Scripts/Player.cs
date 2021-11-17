@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Awake() {
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
         UIinventory.SetInventory(inventory);
     }
 
@@ -143,6 +143,16 @@ public class Player : MonoBehaviour {
         firePointRb.rotation = angle;
     }
 
+    private void UseItem(InventoryItem item){
+        switch(item.type){
+            case ItemTypes.ItemType.POTION:
+                HealPlayer(50); // change this later lol
+                inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.POTION, amount = 1});
+                UIinventory.RefreshInventoryItems();
+                break;
+        }
+    }
+
     public void TakeDamage(int damageValue) {
         currentHealth -= damageValue;
         DamageEffectOverlay();
@@ -152,13 +162,9 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void HealOrAddPotion( ItemTypes.ItemType type, int value){
-        if(currentHealth < maxHealth){
-            this.HealPlayer(value);
-        } else {
+    public void AddPotion( ItemTypes.ItemType type, int value){
             inventory.AddItem(type, value);
             UIinventory.RefreshInventoryItems();
-        }
     }
     public void HealPlayer(int healValue) {
         currentHealth += healValue;

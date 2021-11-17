@@ -1,11 +1,14 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Inventory {
 	private List<InventoryItem> itemList;
 
-	public Inventory(){
+	// Action is just a void delegate 
+	private Action<InventoryItem> useInventoryItemAction;
+
+	public Inventory(Action<InventoryItem> useInventoryItemAction ){
+		this.useInventoryItemAction = useInventoryItemAction;
 		itemList = new List<InventoryItem>();
 	}
 
@@ -35,5 +38,25 @@ public class Inventory {
 
 	public bool IsEmpty(){
 		return itemList.Count <= 0;
+	}
+
+	public void UseItem(InventoryItem item){
+		useInventoryItemAction(item);
+	}
+
+	public void RemoveItem( InventoryItem item){
+		if (item.IsStackable()){
+			InventoryItem itemInInventory = null; 
+			foreach (InventoryItem inventoryitem in itemList){
+				if (item.type == inventoryitem.type){
+					inventoryitem.amount -= item.amount;
+					itemInInventory = inventoryitem;
+				}
+			} if (itemInInventory != null && itemInInventory.amount <= 0){ // adds the first instance of stackable items
+				itemList.Remove(itemInInventory);
+			}
+		} else {
+			itemList.Remove(item);
+		}
 	}
 };
