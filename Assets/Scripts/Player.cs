@@ -79,7 +79,6 @@ public class Player : MonoBehaviour {
 			};
 		};
 
-		stats.Add("skillCoins", this.skillCoins);
 		return stats;
 	}
 	public void SetStats(Dictionary<string, int> stats) {
