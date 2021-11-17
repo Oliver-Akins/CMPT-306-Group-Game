@@ -49,3 +49,7 @@ MonoBehaviour:
   corridorLength: 30
   roomPercent: 1
   numberOfRooms: 12
+  coin: {fileID: 5869400407592566631, guid: 096db07e9e9d14a478bc46fc0038cad5, type: 3}
+  coinPercent: 0.05
+  coinStack: {fileID: 6052031072712018367, guid: dc7227a1a17134c89a15dc7f2db7ad98, type: 3}
+  coinStackPercent: 0.005
