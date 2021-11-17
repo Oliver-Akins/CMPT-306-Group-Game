@@ -29,6 +29,13 @@ public class TilemapVisualizer : MonoBehaviour {
 		tilemap.SetTile(tilePosition, tile);
 	}
 
+	public void AddItem(Vector2Int position, GameObject item){
+		Vector2 adjusted = position;
+		adjusted += new Vector2(0.5f, 0.5f);
+		
+		Instantiate(item,(Vector3) adjusted, Quaternion.identity);
+	}
+
 	public void Clear() {
 		floorTilemap.ClearAllTiles();
 		wallTilemap.ClearAllTiles();

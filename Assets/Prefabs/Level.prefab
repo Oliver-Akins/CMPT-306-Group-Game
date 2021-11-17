@@ -238,6 +238,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: poison
+      value: 
+      objectReference: {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: potion
+      value: 
+      objectReference: {fileID: 1891078279623990650, guid: eab53792e8bfd4180867ac4f1765fc7d, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: healthUp
+      value: 
+      objectReference: {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: agilityUp
+      value: 
+      objectReference: {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: allStatUp
+      value: 
+      objectReference: {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: staminaUp
+      value: 
+      objectReference: {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: strenghtUp
+      value: 
+      objectReference: {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: tilemapVisualizer
       value: 
       objectReference: {fileID: 5001643488843360293}
