@@ -1,3 +1,6 @@
+# Ignore all scenes excluding those that we need in the repo
+/Assets/Scenes/*
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
@@ -13,6 +16,10 @@
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+
+# Ignore the scenes metadata to prevent this from overriding our custom gitignore
+#	modifications.
+/[Aa]ssets/[Ss]cenes/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -59,3 +66,15 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# The scenes we need in the repo
+!/Assets/Scenes/mainMenu.unity
+!/Assets/Scenes/mainMenu.unity.meta
+
+!/Assets/Scenes/inGame.unity
+!/Assets/Scenes/inGame.unity.meta
+
+!/Assets/Scenes/betweenLevels.unity
+!/Assets/Scenes/betweenLevels.unity.meta
+
+!/Assets/Scenes/gameOver.unity
+!/Assets/Scenes/gameOver.unity.meta

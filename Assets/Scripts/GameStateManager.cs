@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -43,11 +44,31 @@ public class GameStateManager {
 	}
 
 	// Sets the state of the game
-	public void SetGameState(GameState state){
+	public void SetGameState(GameState state, bool changeScene = true){
 		this.gameState = state;
 
-		// Call all of the event listeners that exist
-		OnStateChange();
+		// Check if the caller is wanting to change the scene as well
+		if (changeScene) {
+
+			// Load the scene that is associated with that game state
+			switch (state) {
+				case GameState.IN_GAME:
+					SceneManager.LoadScene("inGame");
+					break;
+				case GameState.BETWEEN_LEVEL:
+					SceneManager.LoadScene("betweenLevels");
+					break;
+				default:
+					SceneManager.LoadScene("mainMenu");
+					break;
+			};
+		};
+
+
+		// Call all of the event listeners if any exist
+		if (OnStateChange != null) {
+			OnStateChange();
+		};
 	}
 
 	// When quitting the application, make sure to purge the singleton so that

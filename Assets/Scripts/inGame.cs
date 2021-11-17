@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class inGame : MonoBehaviour {
@@ -6,17 +7,13 @@ public class inGame : MonoBehaviour {
 
 	void Awake() {
 		GM = GameStateManager.Instance;
-		GM.OnStateChange += HandleOnStateChange;
 	}
 
 	void Start() {
-		GM.SetGameState(GameState.IN_GAME);
-	}
-
-	public void HandleOnStateChange() {
 		if (GM.gameState == GameState.IN_GAME) {
-			Player p = GameObject.Find("Player").GetComponent<Player>();
-			GM.player = p;
+			GameObject p = GameObject.Find("Player");
+			DontDestroyOnLoad(p);
+			GM.player = p.GetComponent<Player>();
 		}
 	}
 };
