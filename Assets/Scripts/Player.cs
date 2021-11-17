@@ -71,6 +71,14 @@ public class Player : MonoBehaviour {
         stats.Add("strength", this.strength);
         stats.Add("agility", this.agility);
         stats.Add("stamina", this.stamina);
+
+        // Find the amount of coins that the player has
+        foreach (var item in this.inventory.GetItemList()) {
+            if (item.type == ItemTypes.ItemType.COIN) {
+                stats.Add("skillCoins", item.amount);
+            };
+        };
+
         stats.Add("skillCoins", this.skillCoins);
         return stats;
     }
