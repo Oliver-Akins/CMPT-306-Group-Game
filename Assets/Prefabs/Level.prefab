@@ -266,6 +266,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: nextLevelHole
+      value: 
+      objectReference: {fileID: 8365026459688094444, guid: 2867b28ba1b994c48902a65017c6aed1, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: numberOfRooms
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: tilemapVisualizer
       value: 
       objectReference: {fileID: 5001643488843360293}

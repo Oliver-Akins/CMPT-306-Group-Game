@@ -14,7 +14,10 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	private float roomPercent = 1.0f;
 
 	[SerializeField]
-	private int numberOfRooms = 12; //if using a room percent < 1 this is the max number of rooms
+	private int numberOfRooms = 11; //if using a room percent < 1 this is the max number of rooms
+
+	[SerializeField]
+	private GameObject nextLevelHole;
 
 
 	[SerializeField]
@@ -176,12 +179,15 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		var currentPos = startPos;
 		potentialRoomPositions.Add(currentPos);
 
-		//for (int i = 0; i < corridorCount; i++)
+		
 		while (potentialRoomPositions.Count < numberOfRooms) {
 			var corridor = PCG.RandomWalkCorridor(currentPos, corridorLength);
 			currentPos = corridor[corridor.Count - 1];
 			potentialRoomPositions.Add(currentPos);
 			floorPositions.UnionWith(corridor);
 		}
+
+		tilemapVisualizer.AddItem(currentPos, nextLevelHole);
+
 	}
 }
