@@ -58,6 +58,19 @@ public class Player : MonoBehaviour {
     public GameObject healEffectOverlay;
     private Coroutine healEffectOverlayRoutine;
     private bool healEffectRunning = false;
+
+    // achievement variables
+    public int coinsCollected = 0;
+    public int keysCollected = 0;
+    public int potionsCollected = 0;
+    public int healthUpCollected = 0;
+    public int strengthUpCollected = 0;
+    public int agilityUpCollected = 0;
+    public int staminaUpCollected = 0;
+    public int allStatsUpCollected = 0;
+    public int poisonCollected = 0;
+    public int totalKills = 0;
+
     
     public Dictionary<string, int> GetStats() {
         Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -100,7 +113,9 @@ public class Player : MonoBehaviour {
         // more optimized with square root magnitude as we won't need to calculate it on the vector
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // keyboard inputs for testing - delete if needed
+
+        // ========= keyboard inputs for testing - delete if needed ===========
+    
         if(Input.GetKeyDown(KeyCode.Space))
             if(currentHealth > 0)
                 TakeDamage(100);
@@ -116,7 +131,12 @@ public class Player : MonoBehaviour {
             IncreaseMaxHealth(100);
 
         if(Input.GetKeyDown(KeyCode.K))
-            AddKill(1);
+            AddKey(1);
+
+        if(Input.GetKeyDown(KeyCode.C))
+            AddCoin(1);
+        
+        // ====================================================================
     }
 
     // works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -212,6 +232,7 @@ public class Player : MonoBehaviour {
 
     public void AddCoin(int numCoins) {
         skillCoins += numCoins;
+        coinsCollected += numCoins;
     }
 
     public void UseCoins(int numCoins) {
@@ -220,6 +241,7 @@ public class Player : MonoBehaviour {
 
     public void AddKey(int numKey) {
         keys += numKey;
+        keysCollected += numKey;
     }
 
     public void UseKey(int numKey) {
@@ -228,17 +250,21 @@ public class Player : MonoBehaviour {
 
     public void IncreaseStrength(int strengthUp) {
         strength += strengthUp;
+        strengthUpCollected += 1;
     }
 
     public void IncreaseAgility(int agilityUp) {
         agility += agilityUp;
+        agilityUpCollected += 1;
     }
 
     public void IncreaseStamina(int staminaUp) {
         stamina += staminaUp;
+        staminaUpCollected += 1;
     }
 
     public void AddKill(int numKill) {
         kills += numKill;
+        totalKills += numKill;
     }
 }
