@@ -10,39 +10,83 @@ using UnityEditor.AssetImporters;
 public class Achievements : MonoBehaviour {
 
 
-	// general achievement variables
+	// player reference
 	public Player player;
+
 	public GameObject achievementPanel;
+
 	public GameObject achievementImage;
+
+	// achievement description game object
 	public GameObject achievementDescription;
-	// private bool achievementRunning = false;
 
     private Coroutine achievementPanelRoutine;
 
 
-	// collected 5 coins
-	private int coin5Trigger = 5;
-	private bool coin5TriggerBoolean = false;
 
-	// collected 10 coins
+	// ==================== COIN COLLECTION ACHIEVEMENTS ======================
+	// collected 10 coins achievement variables
 	private int coin10Trigger = 10;
 	private bool coin10TriggerBoolean = false;
+
+	// collected 20 coins achievement variables
+	private int coin20Trigger = 20;
+	private bool coin20TriggerBoolean = false;
+
+	// collected 30 coins achievement variables
+	private int coin30Trigger = 30;
+	private bool coin30TriggerBoolean = false;
+
+	// collected 40 coins achievement variables
+	private int coin40Trigger = 40;
+	private bool coin40TriggerBoolean = false;
+
+	// collected 50 coins achievement variables
+	private int coin50Trigger = 50;
+	private bool coin50TriggerBoolean = false;
+
+	// ========================================================================
 
 
 	// Update is called once per frame
 	void Update() {
-		if(player.skillCoins >= coin5Trigger && !coin5TriggerBoolean) {
-			achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 5 coins!";
-			StartCoroutine(AchievementPanelRoutine());
-			coin5TriggerBoolean = true;
-		}
+
+		// ================= COIN COLLECTION ACHIEVEMENTS =====================
 
 		if(player.skillCoins >= coin10Trigger && !coin10TriggerBoolean) {
-			achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 10 coins!";
+			achievementDescription.GetComponent<TextMeshProUGUI>().text = "COIN COLLECTION ACHIVEMENT\n Collected 10 coins";
 			StartCoroutine(AchievementPanelRoutine());
 			coin10TriggerBoolean = true;
 		}
+
+		if(player.skillCoins >= coin20Trigger && !coin20TriggerBoolean) {
+			achievementDescription.GetComponent<TextMeshProUGUI>().text = "COIN COLLECTION ACHIVEMENT\n Collected 20 coins";
+			StartCoroutine(AchievementPanelRoutine());
+			coin20TriggerBoolean = true;
+		}
+
+		if(player.skillCoins >= coin30Trigger && !coin30TriggerBoolean) {
+			achievementDescription.GetComponent<TextMeshProUGUI>().text = "COIN COLLECTION ACHIVEMENT\n Collected 30 coins";
+			StartCoroutine(AchievementPanelRoutine());
+			coin30TriggerBoolean = true;
+		}
+
+		if(player.skillCoins >= coin40Trigger && !coin40TriggerBoolean) {
+			achievementDescription.GetComponent<TextMeshProUGUI>().text = "COIN COLLECTION ACHIVEMENT\n Collected 40 coins";
+			StartCoroutine(AchievementPanelRoutine());
+			coin40TriggerBoolean = true;
+		}
+
+		if(player.skillCoins >= coin50Trigger && !coin50TriggerBoolean) {
+			achievementDescription.GetComponent<TextMeshProUGUI>().text = "COIN COLLECTION ACHIVEMENT\n Collected 50 coins";
+			StartCoroutine(AchievementPanelRoutine());
+			coin50TriggerBoolean = true;
+		}
+
+		// ====================================================================
 	}
+
+
 
 	private IEnumerator AchievementPanelRoutine() {
 
