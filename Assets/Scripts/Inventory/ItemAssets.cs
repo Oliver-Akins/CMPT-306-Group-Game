@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/**
+	this holds references to sprite images so each non stackable item
+	only references one image
+*/
 public class ItemAssets : MonoBehaviour {
 
 	public static ItemAssets Instance {get; private set;}

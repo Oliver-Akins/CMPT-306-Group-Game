@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/**
+	This is to use with the inventory and the inventory UI, objects cannot
+	be created (via new keyword) as object is mono behaviour thus illegal to
+	create like that. This fixes that problem
+*/
 public class InventoryItem {
 
 	public ItemTypes.ItemType type;
@@ -44,10 +49,12 @@ public class InventoryItem {
 		}
 	}
 
-	// checks if the item is consumable by the user, like a health pot
-	// currently keys and coins aren't considered comsumable
-	// think of this as the user opens up the inventory to heal up by clicking 
-	// potions
+	/** 
+		checks if the item is consumable by the user, like a health pot
+		currently keys and coins aren't considered comsumable
+		think of this as the user opens up the inventory to heal up by clicking 
+		potions
+	*/
 	public bool IsConsumable(){
 		switch(type){
 			default:

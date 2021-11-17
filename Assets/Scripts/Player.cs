@@ -42,7 +42,8 @@ public class Player : MonoBehaviour {
 
     //inventory
     private Inventory inventory;
-    [SerializeField] private UI_Inventory UIinventory;
+    [SerializeField] 
+    private UI_Inventory UIinventory;
 
 
     //player skill coins
@@ -82,7 +83,12 @@ public class Player : MonoBehaviour {
     }
 
     private void Awake() {
-        inventory = new Inventory(UseItem);
+        /**
+            this needs to be updatd with the overloaded constructor as the 
+            inbetween levels will delete the player and the player needs to be
+            reinstantiated with the old inventory and the inventory items
+        */
+        inventory = new Inventory(UseItem); 
         UIinventory.SetInventory(inventory);
     }
 
@@ -237,7 +243,6 @@ public class Player : MonoBehaviour {
     public void AddCoin( ItemTypes.ItemType type, int numCoins) {
         inventory.AddItem(type, numCoins);
         UIinventory.RefreshInventoryItems();
-        // skillCoins += numCoins;
     }
 
     public void UseCoins(int numCoins) {
@@ -247,7 +252,6 @@ public class Player : MonoBehaviour {
     public void AddKey( ItemTypes.ItemType type, int numKey) {
         inventory.AddItem(type, numKey);
         UIinventory.RefreshInventoryItems();
-        // keys += numKey;
     }
 
     public void UseKey(int numKey) {

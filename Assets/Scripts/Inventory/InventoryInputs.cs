@@ -3,9 +3,11 @@ using UnityEngine;
 public class InventoryInputs : MonoBehaviour {
 
 	// inventory game object to be toggled
-	[SerializeField] GameObject inventoryGameObject;
+	[SerializeField] 
+	GameObject inventoryGameObject;
 	// the keys we are interested in using to handle inventory or char screen
-	[SerializeField] KeyCode[] toggleInventoryKeys;
+	[SerializeField] 
+	KeyCode[] toggleInventoryKeys;
 	// Update is called once per frame
 	void Update() {
 		int length = toggleInventoryKeys.Length;

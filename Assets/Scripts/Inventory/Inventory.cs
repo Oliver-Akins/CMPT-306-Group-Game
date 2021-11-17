@@ -2,14 +2,28 @@ using System;
 using System.Collections.Generic;
 
 public class Inventory {
+	// The item list!
 	private List<InventoryItem> itemList;
 
-	// Action is just a void delegate 
+	/**
+		Action is just a void delegate; allows this to call the method the 
+		player object without a direct reference to the player
+	*/
 	private Action<InventoryItem> useInventoryItemAction;
 
 	public Inventory(Action<InventoryItem> useInventoryItemAction ){
 		this.useInventoryItemAction = useInventoryItemAction;
 		itemList = new List<InventoryItem>();
+	}
+
+	/**
+		Overloaded constructor to allow the inventory to instantiate with
+		an already existing item list (aka changing scenes)
+	*/
+	public Inventory(Action<InventoryItem> useInventoryItemAction, 
+		List<InventoryItem> alreadyExistingItems){
+			this.useInventoryItemAction = useInventoryItemAction;
+			itemList = alreadyExistingItems;
 	}
 
 	public void AddItem( ItemTypes.ItemType itemType, int value){
@@ -40,6 +54,7 @@ public class Inventory {
 		return itemList.Count <= 0;
 	}
 
+	// this uses the void delegate to use consumable items
 	public void UseItem(InventoryItem item){
 		useInventoryItemAction(item);
 	}
