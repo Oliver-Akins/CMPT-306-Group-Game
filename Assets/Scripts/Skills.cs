@@ -30,7 +30,6 @@ public class Skills : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		  GM.SetGameState(GameState.BETWEEN_LEVEL);
       initializeStats();
 
       // For testing - delete when no longer needed
@@ -105,6 +104,7 @@ public class Skills : MonoBehaviour
 
       //Call this function when the Between Levels UI closes to update the player stats via GameStateManager and switch the game state
       public void endStatsConfig(){
+        Debug.Log("clicked save");
         GM.playerStats = GetStats();
         GM.SetGameState(GameState.IN_GAME);
     }
