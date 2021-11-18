@@ -21,10 +21,19 @@ public class Achievements : MonoBehaviour {
 	// ==================== COIN COLLECTION ACHIEVEMENTS ======================
 
 	private int coin20Trigger = 20;
+	public bool coin20Achievement = false;
+
 	private int coin40Trigger = 40;
+	public bool coin40Achievement = false;
+
 	private int coin60Trigger = 60;
+	public bool coin60Achievement = false;
+
 	private int coin80Trigger = 80;
+	public bool coin80Achievement = false;
+
 	private int coin100Trigger = 100;
+	public bool coin100Achievement = false;
 
 	// ========================================================================
 
@@ -32,10 +41,19 @@ public class Achievements : MonoBehaviour {
 	// ===================== KEY COLLECTION ACHIEVEMENTS ======================
 
 	private int key5Trigger = 5;
+	public bool key5Achievement = false;
+
 	private int key10Trigger = 10;
+	public bool key10Achievement = false;
+
 	private int key15Trigger = 15;
+	public bool key15Achievement = false;
+
 	private int key20Trigger = 20;
+	public bool key20Achievement = false;
+
 	private int key25Trigger = 25;
+	public bool key25Achievement = false;
 
 	// ========================================================================
 
@@ -43,10 +61,19 @@ public class Achievements : MonoBehaviour {
 	// =================== POTION COLLECTION ACHIEVEMENTS =====================
 
 	private int potion5Trigger = 5;
+	public bool potion5Achievement = false;
+
 	private int potion10Trigger = 10;
+	public bool potion10Achievement = false;
+
 	private int potion15Trigger = 15;
+	public bool potion15Achievement = false;
+
 	private int potion20Trigger = 20;
+	public bool potion20Achievement = false;
+
 	private int potion25Trigger = 25;
+	public bool potion25Achievement = false;
 
 	// ========================================================================
 
@@ -54,8 +81,13 @@ public class Achievements : MonoBehaviour {
 	// ================== HEALTH UP COLLECTION ACHIEVEMENTS ===================
 
 	private int healthUp5Trigger = 5;
+	public bool healthUp5Achievement = false;
+
 	private int healthUp10Trigger = 10;
+	public bool healthUp10Achievement = false;
+
 	private int healthUp15Trigger = 15;
+	public bool healthUp15Achievement = false;
 
 	// ========================================================================
 
@@ -63,8 +95,13 @@ public class Achievements : MonoBehaviour {
 	// ================= STRENGTH UP COLLECTION ACHIEVEMENTS ==================
 
 	private int strengthUp5Trigger = 5;
+	public bool strengthUp5Achievement = false;
+
 	private int strengthUp10Trigger = 10;
+	public bool strengthUp10Achievement = false;
+
 	private int strengthUp15Trigger = 15;
+	public bool strengthUp15Achievement = false;
 
 	// ========================================================================
 
@@ -72,8 +109,13 @@ public class Achievements : MonoBehaviour {
 	// ================== AGILITY UP COLLECTION ACHIEVEMENTS ==================
 
 	private int agilityUp5Trigger = 5;
+	public bool agilityUp5Achievement = false;
+
 	private int agilityUp10Trigger = 10;
+	public bool agilityUp10Achievement = false;
+
 	private int agilityUp15Trigger = 15;
+	public bool agilityUp15Achievement = false;
 
 	// ========================================================================
 
@@ -81,8 +123,13 @@ public class Achievements : MonoBehaviour {
 	// ================= STAMINA UP COLLECTION ACHIEVEMENTS ===================
 
 	private int staminaUp5Trigger = 5;
+	public bool staminaUp5Achievement = false;
+
 	private int staminaUp10Trigger = 10;
+	public bool staminaUp10Achievement = false;
+
 	private int staminaUp15Trigger = 15;
+	public bool staminaUp15Achievement = false;
 
 	// ========================================================================
 
@@ -90,8 +137,13 @@ public class Achievements : MonoBehaviour {
 	// =================== POISON COLLECTION ACHIEVEMENTS =====================
 
 	private int poison2Trigger = 2;
+	public bool poison2Achievement = false;
+
 	private int poison5Trigger = 5;
+	public bool poison5Achievement = false;
+
 	private int poison10Trigger = 10;
+	public bool poison10Achievement = false;
 
 	// ========================================================================
 
@@ -99,15 +151,34 @@ public class Achievements : MonoBehaviour {
 	// ====================== TOTAL KILLS ACHIEVEMENTS ========================
 
 	private int kills5Trigger = 5;
+	public bool kills5Achievement = false;
+
 	private int kills10Trigger = 10;
+	public bool kills10Achievement = false;
+
 	private int kills15Trigger = 15;
+	public bool kills15Achievement = false;
+
 	private int kills20Trigger = 20;
+	public bool kills20Achievement = false;
+
 	private int kills25Trigger = 25;
+	public bool kills25Achievement = false;
+
 	private int kills30Trigger = 30;
+	public bool kills30Achievement = false;
+
 	private int kills35Trigger = 35;
+	public bool kills35Achievement = false;
+
 	private int kills40Trigger = 40;
+	public bool kills40Achievement = false;
+
 	private int kills45Trigger = 45;
+	public bool kills45Achievement = false;
+
 	private int kills50Trigger = 50;
+	public bool kills50Achievement = false;
 
 	// ========================================================================
 
@@ -115,42 +186,47 @@ public class Achievements : MonoBehaviour {
 
 		// ================= COIN COLLECTION ACHIEVEMENTS =====================
 
-		if(!AchievementCollection.coin20Achievement || !AchievementCollection.coin40Achievement || !AchievementCollection.coin60Achievement ||
-			!AchievementCollection.coin80Achievement || !AchievementCollection.coin100Achievement) {
+		if(!coin20Achievement || !coin40Achievement || !coin60Achievement ||
+			!coin80Achievement || !coin100Achievement) {
 
-			if(AchievementCollection.coinCollection >= coin20Trigger && !AchievementCollection.coin20Achievement) {
+			if(AchievementCollection.coinCollection >= coin20Trigger && !coin20Achievement) {
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 20 coins";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.coin20Achievement = true;
+				coin20Achievement = true;
 			}
 
-			if(AchievementCollection.coinCollection >= coin40Trigger && !AchievementCollection.coin40Achievement) {
+			if(AchievementCollection.coinCollection >= coin40Trigger && !coin40Achievement) {
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 40 coins";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.coin40Achievement = true;
+				coin40Achievement = true;
 			}
 
-			if(AchievementCollection.coinCollection >= coin60Trigger && !AchievementCollection.coin60Achievement) {
+			if(AchievementCollection.coinCollection >= coin60Trigger && !coin60Achievement) {
+				achievementDescription.GetComponent<TextMeshProUGUI>().text = 
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 60 coins";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.coin60Achievement = true;
+				coin60Achievement = true;
 			}
 
-			if(AchievementCollection.coinCollection >= coin80Trigger && !AchievementCollection.coin80Achievement) {
+			if(AchievementCollection.coinCollection >= coin80Trigger && !coin80Achievement) {
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 80 coins";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.coin80Achievement = true;
+				coin80Achievement = true;
 			}
 
-			if(AchievementCollection.coinCollection >= coin100Trigger && !AchievementCollection.coin100Achievement) {
+			if(AchievementCollection.coinCollection >= coin100Trigger && !coin100Achievement) {
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 100 coins";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.coin100Achievement = true;
+				coin100Achievement = true;
 			}
 
 		}
@@ -160,42 +236,42 @@ public class Achievements : MonoBehaviour {
 
 		// ================== KEY COLLECTION ACHIEVEMENTS =====================
 
-		if(!AchievementCollection.key5Achievement || !AchievementCollection.key10Achievement || !AchievementCollection.key15Achievement ||
-			!AchievementCollection.key20Achievement || !AchievementCollection.key25Achievement) {
+		if(!key5Achievement || !key10Achievement || !key15Achievement ||
+			!key20Achievement || !key25Achievement) {
 
-			if(AchievementCollection.keyCollection >= key5Trigger && !AchievementCollection.key5Achievement) {
+			if(AchievementCollection.keyCollection >= key5Trigger && !key5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 keys";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.key5Achievement = true;
+				key5Achievement = true;
 			}
 
-			if(AchievementCollection.keyCollection >= key10Trigger && !AchievementCollection.key10Achievement) {
+			if(AchievementCollection.keyCollection >= key10Trigger && !key10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 keys";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.key10Achievement = true;
+				key10Achievement = true;
 			}
 
-			if(AchievementCollection.keyCollection >= key15Trigger && !AchievementCollection.key15Achievement) {
+			if(AchievementCollection.keyCollection >= key15Trigger && !key15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 keys";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.key15Achievement = true;
+				key15Achievement = true;
 			}
 
-			if(AchievementCollection.keyCollection >= key20Trigger && !AchievementCollection.key20Achievement) {
+			if(AchievementCollection.keyCollection >= key20Trigger && !key20Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 20 keys";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.key20Achievement = true;
+				key20Achievement = true;
 			}
 
-			if(AchievementCollection.keyCollection >= key25Trigger && !AchievementCollection.key25Achievement) {
+			if(AchievementCollection.keyCollection >= key25Trigger && !key25Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 25 keys";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.key25Achievement = true;
+				key25Achievement = true;
 			}
 
 		}
@@ -205,46 +281,46 @@ public class Achievements : MonoBehaviour {
 
 		// ================ POTION COLLECTION ACHIEVEMENTS ====================
 
-		if(!AchievementCollection.potion5Achievement || !AchievementCollection.potion10Achievement || !AchievementCollection.potion15Achievement ||
-			!AchievementCollection.potion20Achievement || !AchievementCollection.potion25Achievement) {
+		if(!potion5Achievement || !potion10Achievement || !potion15Achievement ||
+			!potion20Achievement || !potion25Achievement) {
 
-			if(AchievementCollection.potionCollection >= potion5Trigger && !AchievementCollection.potion5Achievement) {
+			if(AchievementCollection.potionCollection >= potion5Trigger && !potion5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 potions";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.potion5Achievement = true;
+				potion5Achievement = true;
 			}
 
-			if(AchievementCollection.potionCollection >= potion10Trigger && !AchievementCollection.potion10Achievement) {
+			if(AchievementCollection.potionCollection >= potion10Trigger && !potion10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 potions";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.potion10Achievement = true;
+				potion10Achievement = true;
 			}
 
-			if(AchievementCollection.potionCollection >= potion15Trigger && !AchievementCollection.potion15Achievement) {
+			if(AchievementCollection.potionCollection >= potion15Trigger && !potion15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 potions";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.potion15Achievement = true;
+				potion15Achievement = true;
 			}
 
-			if(AchievementCollection.potionCollection >= potion20Trigger && !AchievementCollection.potion20Achievement) {
+			if(AchievementCollection.potionCollection >= potion20Trigger && !potion20Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 20 potions";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.potion20Achievement = true;
+				potion20Achievement = true;
 			}
 
-			if(AchievementCollection.potionCollection >= potion25Trigger && !AchievementCollection.potion25Achievement) {
+			if(AchievementCollection.potionCollection >= potion25Trigger && !potion25Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 25 potions";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.potion25Achievement = true;
+				potion25Achievement = true;
 			}
 
 		}
@@ -254,27 +330,27 @@ public class Achievements : MonoBehaviour {
 
 		// ================ HEALTH UP COLLECTION ACHIEVEMENTS =================
 
-		if(!AchievementCollection.healthUp5Achievement || !AchievementCollection.healthUp10Achievement || !AchievementCollection.healthUp15Achievement) {
+		if(!healthUp5Achievement || !healthUp10Achievement || !healthUp15Achievement) {
 		
-			if(AchievementCollection.healthUpCollection >= healthUp5Trigger && !AchievementCollection.healthUp5Achievement) {
+			if(AchievementCollection.healthUpCollection >= healthUp5Trigger && !healthUp5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 health ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.healthUp5Achievement = true;
+				healthUp5Achievement = true;
 			}
 
-			if(AchievementCollection.healthUpCollection >= healthUp10Trigger && !AchievementCollection.healthUp10Achievement) {
+			if(AchievementCollection.healthUpCollection >= healthUp10Trigger && !healthUp10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 health ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.healthUp10Achievement = true;
+				healthUp10Achievement = true;
 			}
 
-			if(AchievementCollection.healthUpCollection >= healthUp15Trigger && !AchievementCollection.healthUp15Achievement) {
+			if(AchievementCollection.healthUpCollection >= healthUp15Trigger && !healthUp15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 health ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.healthUp15Achievement = true;
+				healthUp15Achievement = true;
 			}
 		}
 
@@ -283,27 +359,27 @@ public class Achievements : MonoBehaviour {
 
 		// =============== STRENGTH UP COLLECTION ACHIEVEMENTS ================
 
-		if(!AchievementCollection.strengthUp5Achievement || !AchievementCollection.strengthUp10Achievement || !AchievementCollection.strengthUp15Achievement) {
+		if(!strengthUp5Achievement || !strengthUp10Achievement || !strengthUp15Achievement) {
 
-			if(AchievementCollection.strengthUpCollection >= strengthUp5Trigger && !AchievementCollection.strengthUp5Achievement) {
+			if(AchievementCollection.strengthUpCollection >= strengthUp5Trigger && !strengthUp5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 strength ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.strengthUp5Achievement = true;
+				strengthUp5Achievement = true;
 			}
 
-			if(AchievementCollection.strengthUpCollection >= strengthUp10Trigger && !AchievementCollection.strengthUp10Achievement) {
+			if(AchievementCollection.strengthUpCollection >= strengthUp10Trigger && !strengthUp10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 strength ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.strengthUp10Achievement = true;
+				strengthUp10Achievement = true;
 			}
 
-			if(AchievementCollection.strengthUpCollection >= strengthUp15Trigger && !AchievementCollection.strengthUp15Achievement) {
+			if(AchievementCollection.strengthUpCollection >= strengthUp15Trigger && !strengthUp15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 strength ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.strengthUp15Achievement = true;
+				strengthUp15Achievement = true;
 			}
 
 		}
@@ -313,27 +389,27 @@ public class Achievements : MonoBehaviour {
 
 		// ================ AGILITY UP COLLECTION ACHIEVEMENTS ================
 
-		if(!AchievementCollection.agilityUp5Achievement || !AchievementCollection.agilityUp10Achievement || !AchievementCollection.agilityUp15Achievement) {
+		if(!agilityUp5Achievement || !agilityUp10Achievement || !agilityUp15Achievement) {
 
-			if(AchievementCollection.agilityUpCollection >= agilityUp5Trigger && !AchievementCollection.agilityUp5Achievement) {
+			if(AchievementCollection.agilityUpCollection >= agilityUp5Trigger && !agilityUp5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 agility ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.agilityUp5Achievement = true;
+				agilityUp5Achievement = true;
 			}
 
-			if(AchievementCollection.agilityUpCollection >= agilityUp10Trigger && !AchievementCollection.agilityUp10Achievement) {
+			if(AchievementCollection.agilityUpCollection >= agilityUp10Trigger && !agilityUp10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 agility ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.agilityUp10Achievement = true;
+				agilityUp10Achievement = true;
 			}
 
-			if(AchievementCollection.agilityUpCollection >= agilityUp15Trigger && !AchievementCollection.agilityUp15Achievement) {
+			if(AchievementCollection.agilityUpCollection >= agilityUp15Trigger && !agilityUp15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 agility ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.agilityUp15Achievement = true;
+				agilityUp15Achievement = true;
 			}
 		}
 
@@ -342,27 +418,27 @@ public class Achievements : MonoBehaviour {
 
 		// =============== STAMINA UP COLLECTION ACHIEVEMENTS =================
 
-		if(!AchievementCollection.staminaUp5Achievement || !AchievementCollection.staminaUp10Achievement || !AchievementCollection.staminaUp15Achievement) {
+		if(!staminaUp5Achievement || !staminaUp10Achievement || !staminaUp15Achievement) {
 
-			if(AchievementCollection.staminaUpCollection >= staminaUp5Trigger && !AchievementCollection.staminaUp5Achievement) {
+			if(AchievementCollection.staminaUpCollection >= staminaUp5Trigger && !staminaUp5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 5 stamina ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.staminaUp5Achievement = true;
+				staminaUp5Achievement = true;
 			}
 
-			if(AchievementCollection.staminaUpCollection >= staminaUp10Trigger && !AchievementCollection.staminaUp10Achievement) {
+			if(AchievementCollection.staminaUpCollection >= staminaUp10Trigger && !staminaUp10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 10 stamina ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.staminaUp10Achievement = true;
+				staminaUp10Achievement = true;
 			}
 
-			if(AchievementCollection.staminaUpCollection >= staminaUp15Trigger && !AchievementCollection.staminaUp15Achievement) {
+			if(AchievementCollection.staminaUpCollection >= staminaUp15Trigger && !staminaUp15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Collected 15 stamina ups";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.staminaUp15Achievement = true;
+				staminaUp15Achievement = true;
 			}
 		}
 
@@ -371,27 +447,27 @@ public class Achievements : MonoBehaviour {
 
 		// ================= POISON COLLECTION ACHIEVEMENTS ===================
 
-		if(!AchievementCollection.poison2Achievement || !AchievementCollection.poison5Achievement || !AchievementCollection.poison10Achievement) {
+		if(!poison2Achievement || !poison5Achievement || !poison10Achievement) {
 
-			if(AchievementCollection.poisonCollection >= poison2Trigger && !AchievementCollection.poison2Achievement) {
+			if(AchievementCollection.poisonCollection >= poison2Trigger && !poison2Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Picked up 2 poisons";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.poison2Achievement = true;
+				poison2Achievement = true;
 			}
 
-			if(AchievementCollection.poisonCollection >= poison5Trigger && !AchievementCollection.poison5Achievement) {
+			if(AchievementCollection.poisonCollection >= poison5Trigger && !poison5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Picked up 5 poisons";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.poison5Achievement = true;
+				poison5Achievement = true;
 			}
 
-			if(AchievementCollection.poisonCollection >= poison10Trigger && !AchievementCollection.poison10Achievement) {
+			if(AchievementCollection.poisonCollection >= poison10Trigger && !poison10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Picked up 10 poisons";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.poison10Achievement = true;
+				poison10Achievement = true;
 			}
 		}
 
@@ -400,79 +476,79 @@ public class Achievements : MonoBehaviour {
 
 		// ==================== TOTAL KILLS ACHIEVEMENTS ======================
 
-		if(!AchievementCollection.kills5Achievement || !AchievementCollection.kills10Achievement || !AchievementCollection.kills15Achievement || 
-			!AchievementCollection.kills20Achievement || !AchievementCollection.kills25Achievement || !AchievementCollection.kills30Achievement || 
-			!AchievementCollection.kills35Achievement|| !AchievementCollection.kills40Achievement|| !AchievementCollection.kills45Achievement ||
-			!AchievementCollection.kills50Achievement) {
+		if(!kills5Achievement || !kills10Achievement || !kills15Achievement || 
+			!kills20Achievement || !kills25Achievement || !kills30Achievement || 
+			!kills35Achievement|| !kills40Achievement|| !kills45Achievement ||
+			!kills50Achievement) {
 
-			if(AchievementCollection.killCollection >= kills5Trigger && !AchievementCollection.kills5Achievement) {
+			if(AchievementCollection.killCollection >= kills5Trigger && !kills5Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 5 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills5Achievement = true;
+				kills5Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills10Trigger && !AchievementCollection.kills10Achievement) {
+			if(AchievementCollection.killCollection >= kills10Trigger && !kills10Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 10 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills10Achievement = true;
+				kills10Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills15Trigger && !AchievementCollection.kills15Achievement) {
+			if(AchievementCollection.killCollection >= kills15Trigger && !kills15Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 15 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills15Achievement = true;
+				kills15Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills20Trigger && !AchievementCollection.kills20Achievement) {
+			if(AchievementCollection.killCollection >= kills20Trigger && !kills20Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 20 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills20Achievement = true;
+				kills20Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills25Trigger && !AchievementCollection.kills25Achievement) {
+			if(AchievementCollection.killCollection >= kills25Trigger && !kills25Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 25 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills25Achievement = true;
+				kills25Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills30Trigger && !AchievementCollection.kills30Achievement) {
+			if(AchievementCollection.killCollection >= kills30Trigger && !kills30Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 30 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills30Achievement = true;
+				kills30Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills35Trigger && !AchievementCollection.kills35Achievement) {
+			if(AchievementCollection.killCollection >= kills35Trigger && !kills35Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 35 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills35Achievement = true;
+				kills35Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills40Trigger && !AchievementCollection.kills40Achievement) {
+			if(AchievementCollection.killCollection >= kills40Trigger && !kills40Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 40 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills40Achievement = true;
+				kills40Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills45Trigger && !AchievementCollection.kills45Achievement) {
+			if(AchievementCollection.killCollection >= kills45Trigger && !kills45Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 45 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills45Achievement = true;
+				kills45Achievement = true;
 			}
 
-			if(AchievementCollection.killCollection >= kills50Trigger && !AchievementCollection.kills50Achievement) {
+			if(AchievementCollection.killCollection >= kills50Trigger && !kills50Achievement) {
 				achievementDescription.GetComponent<TextMeshProUGUI>().text =
 					"Killed 50 enemies";
 				StartCoroutine(AchievementPanelRoutine());
-				AchievementCollection.kills50Achievement = true;
+				kills50Achievement = true;
 			}
 		}
 
