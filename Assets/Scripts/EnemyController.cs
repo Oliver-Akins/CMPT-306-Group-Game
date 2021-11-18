@@ -24,9 +24,13 @@ public class EnemyController : MonoBehaviour {
 
 	public float waitTime;
 
-	// public GameObject lootDrop;
-
 	public List<GameObject> items = new List<GameObject>();
+
+	private Achievements achievements;
+
+	void Awake() {
+		achievements = FindObjectOfType<Achievements>();
+	}
 
 	// Start is called before the first frame update
 	void Start() {
@@ -74,6 +78,12 @@ public class EnemyController : MonoBehaviour {
 		myAnim.SetBool("IsDead", true);
 		// disable enemy script and collider
 		GetComponent<Collider2D>().enabled = false;
+
+		AchievementCollection.killCollection += 1;
+		AchievementCollection.killStreak += 1;
+
+		achievements.checkAchievements();
+
 		Invoke("DestroyEnemy", waitTime);
 	}
 

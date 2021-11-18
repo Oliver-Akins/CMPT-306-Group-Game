@@ -11,8 +11,11 @@ public class Object : MonoBehaviour {
 	// player reference
 	private Player player;
 
+	private Achievements achievements;
+
 	void Awake() {
 		player = FindObjectOfType<Player>();
+		achievements = FindObjectOfType<Achievements>();
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
@@ -56,7 +59,7 @@ public class Object : MonoBehaviour {
 
 				case ItemTypes.ItemType.POISON: {
 					if(player.currentHealth > 0)
-						player.TakeDamage(value);
+						player.PickUpPoison(value);
 					break;
 				}
 
@@ -66,12 +69,14 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.HEALTHUP: {
-					player.IncreaseMaxHealth(value);
+					player.PickUpHealthUp(value);
 					break;
 				}
 			}
 			
 			Destroy(gameObject);
+
+			achievements.checkAchievements();
 		}
 	}
 }
