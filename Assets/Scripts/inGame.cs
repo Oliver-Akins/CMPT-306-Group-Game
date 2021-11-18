@@ -12,7 +12,6 @@ public class inGame : MonoBehaviour {
 	void Start() {
 		if (GM.gameState == GameState.IN_GAME) {
 			GameObject p = GameObject.Find("Player");
-			DontDestroyOnLoad(p);
 			GM.player = p.GetComponent<Player>();
 		}
 	}
