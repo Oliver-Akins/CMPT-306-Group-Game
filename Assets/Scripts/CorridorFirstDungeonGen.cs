@@ -14,8 +14,18 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	private float roomPercent = 1.0f;
 
 	[SerializeField]
-	private int numberOfRooms = 12; //if using a room percent < 1 this is the max number of rooms 
+	private int numberOfRooms = 12; //if using a room percent < 1 this is the max number of rooms
 
+	// Expose the final level map so that the enemies can use it for pathfinding
+	private HashSet<Vector2Int> _finalLevel = null;
+	public HashSet<Vector2Int> finalLevel {
+		get {
+			return this._finalLevel;
+		}
+		private set {
+			this._finalLevel = value;
+		}
+	}
 
 	private void Start() {
 		GenerateDungeon();
@@ -41,6 +51,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
+		this.finalLevel = floorPositions;
 	}
 
 	private void CreatRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors) {
