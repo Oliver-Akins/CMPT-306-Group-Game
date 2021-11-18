@@ -56,16 +56,12 @@ public class Melee_Attack : MonoBehaviour {
 		// detect enemies in range/hit, they need to be on the enemy layer btw
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
 			meleeAttackPoint.position, attackRange, enemyLayers);
-
-		// base attack damage is modified by strength
-		// each point of strength is a 10 percent increase in base damage
-		float attackMod = attackDamage * ( ((float)player.strength)/10);
-
+		
 		// detect enemies hit, this allows for clustered enemies to all get hit
 		// with a wider range like a sweeping sword attack
 		foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
-			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + Mathf.RoundToInt(attackMod));
+			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + player.strength);
 		}
 	}
 
