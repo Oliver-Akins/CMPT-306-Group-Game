@@ -43,9 +43,6 @@ public class Player : MonoBehaviour {
     //player skill coins
     public int skillCoins;
 
-    // current number of kills
-    public int kills;
-
     // number of keys acquired
     public int keys;
     
@@ -60,16 +57,16 @@ public class Player : MonoBehaviour {
     private bool healEffectRunning = false;
 
     // achievement variables
-    public int coinsCollected = 0;
-    public int keysCollected = 0;
-    public int potionsCollected = 0;
-    public int healthUpCollected = 0;
-    public int strengthUpCollected = 0;
-    public int agilityUpCollected = 0;
-    public int staminaUpCollected = 0;
-    public int allStatsUpCollected = 0;
-    public int poisonCollected = 0;
-    public int totalKills = 0;
+    public int coinCollection = 0;
+    public int keyCollection = 0;
+    public int potionCollection = 0;
+    public int healthUpCollection = 0;
+    public int strengthUpCollection = 0;
+    public int agilityUpCollection = 0;
+    public int staminaUpCollection = 0;
+    public int poisonCollection = 0;
+    public int killCollection = 0;
+    public int killStreak = 0;
 
     
     public Dictionary<string, int> GetStats() {
@@ -116,25 +113,22 @@ public class Player : MonoBehaviour {
 
         // ========= keyboard inputs for testing - delete if needed ===========
     
-        if(Input.GetKeyDown(KeyCode.Space))
-            if(currentHealth > 0)
-                TakeDamage(100);
-
         if(Input.GetKeyDown(KeyCode.H))
             if(currentHealth < maxHealth)
-                HealPlayer(100);
+                PickUpPotion(100);
+
+        if(Input.GetKeyDown(KeyCode.J))
+            if(currentHealth > 0)
+                PickUpPoison(100);
 
         if(Input.GetKeyDown(KeyCode.N))
-            DecreaseMaxHealth(100);
-
-        if(Input.GetKeyDown(KeyCode.M))
-            IncreaseMaxHealth(100);
-
-        if(Input.GetKeyDown(KeyCode.K))
             AddKey(1);
 
-        if(Input.GetKeyDown(KeyCode.C))
-            AddCoin(1);
+        if(Input.GetKeyDown(KeyCode.M))
+            UseKey(1);
+
+        if(Input.GetKeyDown(KeyCode.V))
+            AddKill();
         
         // ====================================================================
     }
@@ -232,7 +226,7 @@ public class Player : MonoBehaviour {
 
     public void AddCoin(int numCoins) {
         skillCoins += numCoins;
-        coinsCollected += numCoins;
+        coinCollection += numCoins;
     }
 
     public void UseCoins(int numCoins) {
@@ -241,7 +235,7 @@ public class Player : MonoBehaviour {
 
     public void AddKey(int numKey) {
         keys += numKey;
-        keysCollected += numKey;
+        keyCollection += numKey;
     }
 
     public void UseKey(int numKey) {
@@ -250,21 +244,41 @@ public class Player : MonoBehaviour {
 
     public void IncreaseStrength(int strengthUp) {
         strength += strengthUp;
-        strengthUpCollected += 1;
+        strengthUpCollection += 1;
     }
 
     public void IncreaseAgility(int agilityUp) {
         agility += agilityUp;
-        agilityUpCollected += 1;
+        agilityUpCollection += 1;
     }
 
     public void IncreaseStamina(int staminaUp) {
         stamina += staminaUp;
-        staminaUpCollected += 1;
+        staminaUpCollection += 1;
     }
 
-    public void AddKill(int numKill) {
-        kills += numKill;
-        totalKills += numKill;
+    public void PickUpHealthUp(int healthUp) {
+        IncreaseMaxHealth(healthUp);
+        healthUpCollection += 1;
+    }
+
+    public void PickUpPotion(int potionValue) {
+        HealPlayer(potionValue);
+        potionCollection += 1;
+    }
+
+    public void PickUpPoison(int poisonValue) {
+        TakeDamage(poisonValue);
+        poisonCollection += 1;
+    }
+
+    public void AddKill() {
+        killCollection += 1;
+        killStreak += 1;
+    }
+
+    // call when player dies
+    public void ResetKillStreak() {
+        killStreak = 0;
     }
 }

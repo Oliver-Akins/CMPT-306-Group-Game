@@ -60,18 +60,18 @@ public class Object : MonoBehaviour {
 
 				case ObjectType.POISON: {
 					if(player.currentHealth > 0)
-						player.TakeDamage(value);
+						player.PickUpPoison(value);
 					break;
 				}
 
 				case ObjectType.POTION: {
 					if(player.currentHealth < player.maxHealth)
-						player.HealPlayer(value);
+						player.PickUpPotion(value);
 					break;
 				}
 
 				case ObjectType.HEALTHUP: {
-					player.IncreaseMaxHealth(value);
+					player.PickUpHealthUp(value);
 					break;
 				}
 			}
