@@ -89,6 +89,18 @@ PrefabInstance:
       value: Tile Map Visualizer
       objectReference: {fileID: 0}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallTop
+      value: 
+      objectReference: {fileID: 11400000, guid: d2c37f582e770fd4c8e9944e3f0e00fb, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallFull
+      value: 
+      objectReference: {fileID: 11400000, guid: dbf35b2fb0bae184ebe8ea7396164629, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallBottom
+      value: 
+      objectReference: {fileID: 11400000, guid: 5bb3d46abb6851c4fa113b322899ac7b, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallTilemap
       value: 
       objectReference: {fileID: 4815062150611519256}
@@ -96,6 +108,42 @@ PrefabInstance:
       propertyPath: floorTilemap
       value: 
       objectReference: {fileID: 4815062151208017278}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallSideLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 30e8ba43b1308aa40999acf48c0c646d, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wllSideRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 410e77279fe0d534da9c106aa2a55b75, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallSideRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 410e77279fe0d534da9c106aa2a55b75, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallInnerDownLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: 1537310af6c6cf344acb72246d8cb69d, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallDiagonalUpLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: a7f9581a3221dbc4088da0e34d47c3c8, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallInnerDownRight
+      value: 
+      objectReference: {fileID: 11400000, guid: d79ebb347f555944394885ddf830ce98, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallDiagonalUpRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 7fc83cbe2eb0ef44cbf7cbf779421864, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallDiagonalDownLeft
+      value: 
+      objectReference: {fileID: 11400000, guid: e02891758afd2594fb4006b27775d843, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: wallDiagonalDownRight
+      value: 
+      objectReference: {fileID: 11400000, guid: 16a7a9650799e1c4f8847d0c8ea9e9f4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
 --- !u!4 &5001643488843360294 stripped
