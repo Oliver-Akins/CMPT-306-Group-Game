@@ -9,8 +9,7 @@ public class EnemyController : MonoBehaviour {
 	// To keep track of the player
 	private Transform target;
 
-	[SerializeField]
-	private float speed;
+	public float speed;
 
 	// variables to restrict the range of enemies can be modified here.
 	public float maxRange = 4f;
