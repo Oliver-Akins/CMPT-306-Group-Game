@@ -197,31 +197,41 @@ public class Achievements : MonoBehaviour {
 			!coin40Achievement || !coin50Achievement) {
 
 			if(player.coinCollection >= coin10Trigger && !coin10Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 10 coins";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 10 coins";
 				StartCoroutine(AchievementPanelRoutine());
 				coin10Achievement = true;
 			}
 
 			if(player.coinCollection >= coin20Trigger && !coin20Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 20 coins";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 20 coins";
 				StartCoroutine(AchievementPanelRoutine());
 				coin20Achievement = true;
 			}
 
 			if(player.coinCollection >= coin30Trigger && !coin30Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 30 coins";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text = 
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 30 coins";
 				StartCoroutine(AchievementPanelRoutine());
 				coin30Achievement = true;
 			}
 
 			if(player.coinCollection >= coin40Trigger && !coin40Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 40 coins";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 40 coins";
 				StartCoroutine(AchievementPanelRoutine());
 				coin40Achievement = true;
 			}
 
 			if(player.coinCollection >= coin50Trigger && !coin50Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 50 coins";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 50 coins";
 				StartCoroutine(AchievementPanelRoutine());
 				coin50Achievement = true;
 			}
@@ -237,31 +247,41 @@ public class Achievements : MonoBehaviour {
 			!key20Achievement || !key25Achievement) {
 
 			if(player.keyCollection >= key5Trigger && !key5Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 5 keys";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 5 keys";
 				StartCoroutine(AchievementPanelRoutine());
 				key5Achievement = true;
 			}
 
 			if(player.keyCollection >= key10Trigger && !key10Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 10 keys";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 10 keys";
 				StartCoroutine(AchievementPanelRoutine());
 				key10Achievement = true;
 			}
 
 			if(player.keyCollection >= key15Trigger && !key15Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 15 keys";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 15 keys";
 				StartCoroutine(AchievementPanelRoutine());
 				key15Achievement = true;
 			}
 
 			if(player.keyCollection >= key20Trigger && !key20Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 20 keys";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 20 keys";
 				StartCoroutine(AchievementPanelRoutine());
 				key20Achievement = true;
 			}
 
 			if(player.keyCollection >= key25Trigger && !key25Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 25 keys";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 25 keys";
 				StartCoroutine(AchievementPanelRoutine());
 				key25Achievement = true;
 			}
@@ -277,31 +297,40 @@ public class Achievements : MonoBehaviour {
 			!potion20Achievement || !potion25Achievement) {
 
 			if(player.potionCollection >= potion5Trigger && !potion5Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 5 potions";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 5 potions";
 				StartCoroutine(AchievementPanelRoutine());
 				potion5Achievement = true;
 			}
 
 			if(player.potionCollection >= potion10Trigger && !potion10Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 10 potions";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 10 potions";
 				StartCoroutine(AchievementPanelRoutine());
 				potion10Achievement = true;
 			}
 
 			if(player.potionCollection >= potion15Trigger && !potion15Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 15 potions";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 15 potions";
 				StartCoroutine(AchievementPanelRoutine());
 				potion15Achievement = true;
 			}
 
 			if(player.potionCollection >= potion20Trigger && !potion20Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 20 potions";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 20 potions";
 				StartCoroutine(AchievementPanelRoutine());
 				potion20Achievement = true;
 			}
 
 			if(player.potionCollection >= potion25Trigger && !potion25Achievement) {
-				achievementDescription.GetComponent<TextMeshProUGUI>().text = "Collected 25 potions";
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+				achievementDescription.GetComponent<TextMeshProUGUI>().text =
+					"Collected 25 potions";
 				StartCoroutine(AchievementPanelRoutine());
 				potion25Achievement = true;
 			}

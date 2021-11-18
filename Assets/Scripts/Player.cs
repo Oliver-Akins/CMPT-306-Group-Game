@@ -177,11 +177,6 @@ public class Player : MonoBehaviour {
 		healthBar.SetCurrentHealth(currentHealth);
 	}
 
-
-	public void AddPotion( ItemTypes.ItemType type, int value){
-			inventory.AddItem(type, value);
-			UIinventory.RefreshInventoryItems();
-	}
 	public void HealPlayer(int healValue) {
 		currentHealth += healValue;
 		HealEffectOverlay();
@@ -250,9 +245,18 @@ public class Player : MonoBehaviour {
 		healEffectRunning = false;
 	}
 
+	public void AddPotion( ItemTypes.ItemType type, int value){
+			inventory.AddItem(type, value);
+			UIinventory.RefreshInventoryItems();
+
+			potionCollection += 1;
+	}
+
 	public void AddCoin( ItemTypes.ItemType type, int numCoins) {
 		inventory.AddItem(type, numCoins);
 		UIinventory.RefreshInventoryItems();
+
+		coinCollection += numCoins;
 	}
 
 	public void UseCoins(int numCoins) {
@@ -262,6 +266,8 @@ public class Player : MonoBehaviour {
     public void AddKey( ItemTypes.ItemType type, int numKey) {
 		inventory.AddItem(type, numKey);
 		UIinventory.RefreshInventoryItems();
+
+		keyCollection += numKey;
 	}
 
     public void UseKey(int numKey) {
@@ -286,11 +292,6 @@ public class Player : MonoBehaviour {
     public void PickUpHealthUp(int healthUp) {
         IncreaseMaxHealth(healthUp);
         healthUpCollection += 1;
-    }
-
-    public void PickUpPotion(int potionValue) {
-        HealPlayer(potionValue);
-        potionCollection += 1;
     }
 
     public void PickUpPoison(int poisonValue) {

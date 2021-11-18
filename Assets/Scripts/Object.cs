@@ -66,7 +66,7 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.HEALTHUP: {
-					player.IncreaseMaxHealth(value);
+					player.PickUpHealthUp(value);
 					break;
 				}
 			}
