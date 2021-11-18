@@ -45,39 +45,49 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private UI_Inventory UIinventory;
 
-    //player skill coins
-    public int skillCoins;
 
-    // number of keys acquired
-    public int keys;
-    
-    // screen damage effect overlay
-    public GameObject damageEffectOverlay;
-    private Coroutine damageEffectOverlayRoutine;
-    private bool damageEffectRunning = false;
+	//player skill coins
+	public int skillCoins;
 
-    // screen heal effect overlay
-    public GameObject healEffectOverlay;
-    private Coroutine healEffectOverlayRoutine;
-    private bool healEffectRunning = false;
+	// current number of kills
+	public int kills;
 
-    
-    public Dictionary<string, int> GetStats() {
-        Dictionary<string, int> stats = new Dictionary<string, int>();
-        stats.Add("maxHealth", this.maxHealth);
-        stats.Add("strength", this.strength);
-        stats.Add("agility", this.agility);
-        stats.Add("stamina", this.stamina);
-        stats.Add("skillCoins", this.skillCoins);
-        return stats;
-    }
-    public void SetStats(Dictionary<string, int> stats) {
-        this.maxHealth = stats["maxHealth"];
-        this.strength = stats["strength"];
-        this.agility = stats["agility"];
-        this.stamina = stats["stamina"];
-        this.skillCoins = stats["skillCoins"];
-    }
+	// number of keys acquired
+	public int keys;
+
+	// screen damage effect overlay
+	public GameObject damageEffectOverlay;
+	private Coroutine damageEffectOverlayRoutine;
+	private bool damageEffectRunning = false;
+
+	// screen heal effect overlay
+	public GameObject healEffectOverlay;
+	private Coroutine healEffectOverlayRoutine;
+	private bool healEffectRunning = false;
+
+	public Dictionary<string, int> GetStats() {
+		Dictionary<string, int> stats = new Dictionary<string, int>();
+		stats.Add("strength", this.strength);
+		stats.Add("agility", this.agility);
+		stats.Add("stamina", this.stamina);
+
+		// Find the amount of coins that the player has
+		foreach (var item in this.inventory.GetItemList()) {
+			if (item.type == ItemTypes.ItemType.COIN) {
+				stats.Add("skillCoins", item.amount);
+			};
+		};
+
+		return stats;
+	}
+
+	public void SetStats(Dictionary<string, int> stats) {
+		this.strength = stats["strength"];
+		this.agility = stats["agility"];
+		this.stamina = stats["stamina"];
+		// TODO: Update the player's skillCoins value so that they don't get more
+		// skill coins than they should actually have
+	}
 
 	private void Awake() {
 		/**
