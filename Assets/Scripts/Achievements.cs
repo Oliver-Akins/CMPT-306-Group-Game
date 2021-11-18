@@ -185,6 +185,9 @@ public class Achievements : MonoBehaviour {
 
 	// ========================================================================
 
+	void Awake() {
+		player = FindObjectOfType<Player>();
+	}
 
 	void FixedUpdate() {
 
