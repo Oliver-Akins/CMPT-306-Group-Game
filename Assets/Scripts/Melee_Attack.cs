@@ -17,16 +17,25 @@ public class Melee_Attack : MonoBehaviour {
 	// attack damage, will change based on weap and strength
 	public int attackDamage;
 	// Update is called once per frame
+
+	public Player player;
 	void Update() {
-		if (timeBetweenAttacks <= 0){
-			if (Input.GetButtonDown("Fire1")){
-				Attack();
-				timeBetweenAttacks = startTimeBetweenAttacks;
-			}
-		} else {
+		if (startTimeBetweenAttacks > 0){
+			float agiMod = startTimeBetweenAttacks * (( (float)player.agility /2)/ 10);
+			if ( timeBetweenAttacks <= 0){
+				if (Input.GetButtonDown("Fire1")){
+					Attack();
+					timeBetweenAttacks = startTimeBetweenAttacks - agiMod;
+					if (agiMod > startTimeBetweenAttacks){
+						startTimeBetweenAttacks = 0;
+					}
+				}
+			} else {
 				timeBetweenAttacks -= Time.deltaTime;
 			}
-		
+		} else if (Input.GetButtonDown("Fire1") && startTimeBetweenAttacks <= 0) {
+			Attack();
+		}
 	}
 
 	void Attack(){
@@ -47,12 +56,12 @@ public class Melee_Attack : MonoBehaviour {
 		// detect enemies in range/hit, they need to be on the enemy layer btw
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
 			meleeAttackPoint.position, attackRange, enemyLayers);
-
+		
 		// detect enemies hit, this allows for clustered enemies to all get hit
 		// with a wider range like a sweeping sword attack
 		foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
-			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
+			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + player.strength);
 		}
 	}
 

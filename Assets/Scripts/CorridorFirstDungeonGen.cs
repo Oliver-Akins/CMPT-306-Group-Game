@@ -14,7 +14,92 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	private float roomPercent = 1.0f;
 
 	[SerializeField]
-	private int numberOfRooms = 12; //if using a room percent < 1 this is the max number of rooms
+	private int numberOfRooms = 11; //if using a room percent < 1 this is the max number of rooms
+
+	[SerializeField]
+	private GameObject nextLevelHole;
+
+
+	[SerializeField]
+	private GameObject coin;
+	[SerializeField]
+	[Range(0.0001f, 0.1f)]
+	private float coinPercent = 0.05f;
+
+	[SerializeField]
+	private GameObject coinStack;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float coinStackPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject potion;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float potionPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject poison;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float poisonPercent = 0.001f;
+
+	[SerializeField]
+	private GameObject allStatUp;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float allStatUpPercent = 0.0001f;
+
+	[SerializeField]
+	private GameObject agilityUp;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float agilityUpPercent = 0.0005f;
+
+
+	[SerializeField]
+	private GameObject healthUp;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float healthUpPercent = 0.0005f;
+
+	[SerializeField]
+	private GameObject strenghtUp;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float strenghtUpPercent = 0.0005f;
+
+	[SerializeField]
+	private GameObject staminaUp;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float staminaUpPercent = 0.0005f;
+
+	[SerializeField]
+	private GameObject key;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float keyPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject zombie;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float zombiePercent = 0.005f;
+
+	[SerializeField]
+	private GameObject skeleton;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float skeletonPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject vampire;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float vampirePercent = 0.001f;
+
+
 
 	// Expose the final level map so that the enemies can use it for pathfinding
 	private HashSet<Vector2Int> _finalLevel = null;
@@ -46,13 +131,50 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
 
 		CreatRoomsAtDeadEnds(deadEnds, roomPositions);
+		HashSet<Vector2Int> posibleItemPositions = new HashSet<Vector2Int>(roomPositions);
+		HashSet<Vector2Int> posibleEnimiePositions = new HashSet<Vector2Int>(roomPositions);
+
 
 		floorPositions.UnionWith(roomPositions);
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
+
+		AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
+		AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
+		AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
+
+
+		AddItemRandomly(coinStack, coinStackPercent, posibleItemPositions);
+		AddItemRandomly(key, keyPercent, posibleItemPositions);
+		AddItemRandomly(potion, potionPercent, posibleItemPositions);
+		AddItemRandomly(poison, poisonPercent, posibleItemPositions);
+
+		AddItemRandomly(strenghtUp, strenghtUpPercent, posibleItemPositions);
+		AddItemRandomly(healthUp, healthUpPercent, posibleItemPositions);
+		AddItemRandomly(staminaUp, staminaUpPercent, posibleItemPositions);
+		AddItemRandomly(agilityUp, agilityUpPercent, posibleItemPositions);
+
+		AddItemRandomly(coin, coinPercent, posibleItemPositions);
+		AddItemRandomly(allStatUp, allStatUpPercent, posibleItemPositions);
+
+
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
 		this.finalLevel = floorPositions;
 	}
+
+	private void AddItemRandomly(GameObject item, float chancePerTile, HashSet<Vector2Int> positions){
+		HashSet<Vector2Int> usedPositions = new HashSet<Vector2Int>();
+		foreach(Vector2Int position in positions){
+			if(UnityEngine.Random.value < chancePerTile){
+				tilemapVisualizer.AddItem(position, item);
+				usedPositions.Add(position);
+			}
+		}
+		foreach(Vector2Int position in usedPositions){
+			positions.Remove(position);
+		}
+	}
+
 
 	private void CreatRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors) {
 		foreach (var position in deadEnds) {
@@ -98,12 +220,15 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		var currentPos = startPos;
 		potentialRoomPositions.Add(currentPos);
 
-		//for (int i = 0; i < corridorCount; i++)
+
 		while (potentialRoomPositions.Count < numberOfRooms) {
 			var corridor = PCG.RandomWalkCorridor(currentPos, corridorLength);
 			currentPos = corridor[corridor.Count - 1];
 			potentialRoomPositions.Add(currentPos);
 			floorPositions.UnionWith(corridor);
 		}
+
+		tilemapVisualizer.AddItem(currentPos, nextLevelHole);
+
 	}
 }

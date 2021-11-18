@@ -11,19 +11,26 @@ public class RangedAttack : MonoBehaviour
     // limit the fire rate for the player
     private float timeBetweenShots;
     public float startTimeBetweenShots;
+    public Player player;
 
     // Update is called once per frame
     void Update(){
-
-        if (timeBetweenShots <= 0){
-            if(Input.GetButtonDown("Fire2")){
-                RangeAttack();
-                timeBetweenShots = startTimeBetweenShots;
+        if (startTimeBetweenShots > 0){     
+            float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
+            if (timeBetweenShots <= 0){
+                if(Input.GetButtonDown("Fire2")){
+                    RangeAttack();
+                    timeBetweenShots = startTimeBetweenShots - agiMod;
+                    if (agiMod > startTimeBetweenShots){
+                        startTimeBetweenShots = 0;
+                    }
+                }
+            } else {
+                timeBetweenShots -= Time.deltaTime;
             }
-        } else {
-            timeBetweenShots -= Time.deltaTime;
+        } else if (Input.GetButtonDown("Fire2") && startTimeBetweenShots <= 0 ){
+            RangeAttack();
         }
-   
     }
 
     void RangeAttack(){

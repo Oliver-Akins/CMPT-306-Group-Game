@@ -9,11 +9,23 @@ public class inGame : MonoBehaviour {
 		GM = GameStateManager.Instance;
 	}
 
-	void Start() {
-		if (GM.gameState == GameState.IN_GAME) {
-			GameObject p = GameObject.Find("Player");
-			DontDestroyOnLoad(p);
-			GM.player = p.GetComponent<Player>();
-		}
+	void OnEnable() {
+		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+		if (GM.gameState == GameState.IN_GAME) {
+			Player p = GameObject.Find("Player").GetComponent<Player>();
+			GM.player = p;
+			if (GM.playerStats != null) {
+				p.SetStats(GM.playerStats);
+			};
+		};
+	}
+
+	void OnDisable() {
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	void Start() {}
 };
