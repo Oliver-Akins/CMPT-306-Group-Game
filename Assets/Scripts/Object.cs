@@ -11,7 +11,7 @@ public class Object : MonoBehaviour {
 	// player reference
 	private Player player;
 
-	private Achievements achievements;
+	public Achievements achievements;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
@@ -73,10 +73,10 @@ public class Object : MonoBehaviour {
 					break;
 				}
 			}
-			
-			Destroy(gameObject);
 
 			achievements.checkAchievements();
+			
+			Destroy(gameObject);
 		}
 	}
 }
