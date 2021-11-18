@@ -44,7 +44,8 @@ public class GameStateManager {
 	}
 
 	// Sets the state of the game
-	public void SetGameState(GameState state, bool changeScene = true){
+	public void SetGameState(GameState state, bool changeScene = true) {
+
 		this.gameState = state;
 
 		// Check if the caller is wanting to change the scene as well
