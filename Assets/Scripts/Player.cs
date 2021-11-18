@@ -67,7 +67,6 @@ public class Player : MonoBehaviour {
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
-		stats.Add("maxHealth", this.maxHealth);
 		stats.Add("strength", this.strength);
 		stats.Add("agility", this.agility);
 		stats.Add("stamina", this.stamina);
@@ -81,8 +80,8 @@ public class Player : MonoBehaviour {
 
 		return stats;
 	}
+
 	public void SetStats(Dictionary<string, int> stats) {
-		this.maxHealth = stats["maxHealth"];
 		this.strength = stats["strength"];
 		this.agility = stats["agility"];
 		this.stamina = stats["stamina"];
