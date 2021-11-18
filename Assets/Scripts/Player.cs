@@ -6,12 +6,12 @@ public class Player : MonoBehaviour {
 
 	// Player movement // can change as needed
 	// move speed baseline
-    public float moveSpeed = 5f;
+	public float moveSpeed = 5f;
 
-    // used to manipluate the driver/rigid body
-    public Rigidbody2D rb;
+	// used to manipluate the driver/rigid body
+	public Rigidbody2D rb;
 
-    public Rigidbody2D firePointRb;
+	public Rigidbody2D firePointRb;
 
 	// for animations this can be used with the blend tree
     public Animator animator;
@@ -39,6 +39,11 @@ public class Player : MonoBehaviour {
 
     //player stamina
     public int stamina;
+
+	//inventory
+	private Inventory inventory;
+	[SerializeField]
+	private UI_Inventory UIinventory;
 
     //player skill coins
     public int skillCoins;
@@ -86,6 +91,16 @@ public class Player : MonoBehaviour {
         this.skillCoins = stats["skillCoins"];
     }
 
+	private void Awake() {
+		/**
+			this needs to be updatd with the overloaded constructor as the
+			inbetween levels will delete the player and the player needs to be
+			reinstantiated with the old inventory and the inventory items
+		*/
+		inventory = new Inventory(UseItem);
+		UIinventory.SetInventory(inventory);
+	}
+
 
     // Start() is called when script is enabled
     void Start() {
@@ -96,147 +111,158 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     // not good for physics D: but great for inputs
-    void Update() {
-        // gives a value between -1 and 1 depending on which key left or right,
+	void Update() {
+		// gives a value between -1 and 1 depending on which key left or right,
 		// but if no move in this direction will return 0
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+		movement.x = Input.GetAxisRaw("Horizontal");
+		movement.y = Input.GetAxisRaw("Vertical");
 
-        mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+		mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
 		// Sets the animation when we need it
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        // more optimized with square root magnitude as we won't need to calculate it on the vector
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+		animator.SetFloat("Horizontal", movement.x);
+		animator.SetFloat("Vertical", movement.y);
+		// more optimized with square root magnitude as we won't need to calculate it on the vector
+		animator.SetFloat("Speed", movement.sqrMagnitude);
+
+		// keyboard inputs for testing - delete if needed
+		if(Input.GetKeyDown(KeyCode.Space))
+			if(currentHealth > 0)
+				TakeDamage(100);
+
+		if(Input.GetKeyDown(KeyCode.H))
+			if(currentHealth < maxHealth)
+				HealPlayer(100);
+
+		if(Input.GetKeyDown(KeyCode.N))
+			DecreaseMaxHealth(100);
+
+		if(Input.GetKeyDown(KeyCode.M))
+			IncreaseMaxHealth(100);
+
+		if(Input.GetKeyDown(KeyCode.K))
+			AddKill();
+	}
+
+	// works the same way, but executed on a fixed timer and stuck to the frame rate
+	// approx 50 times a second
+	void FixedUpdate() {
+		// rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		rb.velocity = movement.normalized * moveSpeed;
+		Vector2 aimDirection = mousePosition - rb.position;
+		// calculate the angle so the firepoint can rotate to correctly shoot from the player
+		float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+		// because the original implementation was on the sprite and rotated the sprite
+		// this is instead rotating the fire point at the center of the player
+		// note this isn't perfect when we start adding colliders onto the player
+		firePointRb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		firePointRb.rotation = angle;
+	}
+
+	private void UseItem(InventoryItem item){
+		switch(item.type){
+			case ItemTypes.ItemType.POTION:
+				HealPlayer(50); // change this later lol
+				inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.POTION, amount = 1});
+				UIinventory.RefreshInventoryItems();
+				break;
+		}
+	}
+
+	public void TakeDamage(int damageValue) {
+		currentHealth -= damageValue;
+		DamageEffectOverlay();
+
+		// update health bar
+		healthBar.SetCurrentHealth(currentHealth);
+	}
 
 
-        // ========= keyboard inputs for testing - delete if needed ===========
-    
-        if(Input.GetKeyDown(KeyCode.H))
-            if(currentHealth < maxHealth)
-                PickUpPotion(100);
+	public void AddPotion( ItemTypes.ItemType type, int value){
+			inventory.AddItem(type, value);
+			UIinventory.RefreshInventoryItems();
+	}
+	public void HealPlayer(int healValue) {
+		currentHealth += healValue;
+		HealEffectOverlay();
 
-        if(Input.GetKeyDown(KeyCode.J))
-            if(currentHealth > 0)
-                PickUpPoison(100);
+		// update health bar
+		healthBar.SetCurrentHealth(currentHealth);
+	}
 
-        if(Input.GetKeyDown(KeyCode.N))
-            AddKey(1);
+	public void DecreaseMaxHealth(int healthDown) {
+		maxHealth -= healthDown;
 
-        if(Input.GetKeyDown(KeyCode.M))
-            UseKey(1);
+		// set current health to new max health if current
+		// is greater than max
+		if(currentHealth > maxHealth)
+			currentHealth = maxHealth;;
 
-        if(Input.GetKeyDown(KeyCode.V))
-            AddKill();
-        
-        // ====================================================================
-    }
+		// update health bar
+		healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
+	}
 
-    // works the same way, but executed on a fixed timer and stuck to the frame rate
-    // approx 50 times a second
-    void FixedUpdate() {
-        // rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        rb.velocity = movement.normalized * moveSpeed;
-        Vector2 aimDirection = mousePosition - rb.position;
-        // calculate the angle so the firepoint can rotate to correctly shoot from the player
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        // because the original implementation was on the sprite and rotated the sprite
-        // this is instead rotating the fire point at the center of the player
-        // note this isn't perfect when we start adding colliders onto the player
-        firePointRb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        firePointRb.rotation = angle;
-    }
+	public void IncreaseMaxHealth(int healthUp) {
+		maxHealth += healthUp;
+		currentHealth += healthUp;
 
-    public void TakeDamage(int damageValue) {
-        currentHealth -= damageValue;
-        DamageEffectOverlay();
+		// update health bar
+		healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
+	}
 
-        // update health bar
-        healthBar.SetCurrentHealth(currentHealth);
-    }
+	// call damage effect routine if currently not running
+	public void DamageEffectOverlay() {
+		if(!damageEffectRunning)
+			StartCoroutine(DamageEffectOverlayRoutine());
+	}
 
-    public void HealPlayer(int healValue) {
-        currentHealth += healValue;
-        HealEffectOverlay();
+	private IEnumerator DamageEffectOverlayRoutine() {
 
-        // update health bar
-        healthBar.SetCurrentHealth(currentHealth);
-    }
+		damageEffectRunning = true;
 
-    public void DecreaseMaxHealth(int healthDown) {
-        maxHealth -= healthDown;
+		GameObject overlay = Instantiate(damageEffectOverlay,
+			transform.position, transform.rotation) as GameObject;
 
-        // set current health to new max health if current
-        // is greater than max
-        if(currentHealth > maxHealth)
-            currentHealth = maxHealth;;
+		yield return new WaitForSeconds(1);
 
-        // update health bar
-        healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
-    }
+		Destroy(overlay);
 
-    public void IncreaseMaxHealth(int healthUp) {
-        maxHealth += healthUp;
-        currentHealth += healthUp;
+		damageEffectRunning = false;
+	}
 
-        // update health bar
-        healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
-    }
+	// call heal effect routine if currently not running
+	public void HealEffectOverlay() {
+		if(!healEffectRunning)
+			StartCoroutine(HealEffectOverlayRoutine());
+	}
 
-    // call damage effect routine if currently not running
-    public void DamageEffectOverlay() {
-        if(!damageEffectRunning)
-            StartCoroutine(DamageEffectOverlayRoutine());
-    }
+	private IEnumerator HealEffectOverlayRoutine() {
 
-    private IEnumerator DamageEffectOverlayRoutine() {
+		healEffectRunning = true;
 
-        damageEffectRunning = true;
+		GameObject overlay = Instantiate(healEffectOverlay,
+			transform.position, transform.rotation) as GameObject;
 
-        GameObject overlay = Instantiate(damageEffectOverlay,
-            transform.position, transform.rotation) as GameObject;
+		yield return new WaitForSeconds(1);
 
-        yield return new WaitForSeconds(1);
+		Destroy(overlay);
 
-        Destroy(overlay);
-        
-        damageEffectRunning = false;
-    }
+		healEffectRunning = false;
+	}
 
-    // call heal effect routine if currently not running
-    public void HealEffectOverlay() {
-        if(!healEffectRunning)
-            StartCoroutine(HealEffectOverlayRoutine());
-    }
+	public void AddCoin( ItemTypes.ItemType type, int numCoins) {
+		inventory.AddItem(type, numCoins);
+		UIinventory.RefreshInventoryItems();
+	}
 
-    private IEnumerator HealEffectOverlayRoutine() {
+	public void UseCoins(int numCoins) {
+		skillCoins -= numCoins;
+	}
 
-        healEffectRunning = true;
-
-        GameObject overlay = Instantiate(healEffectOverlay,
-            transform.position, transform.rotation) as GameObject;
-
-        yield return new WaitForSeconds(1);
-
-        Destroy(overlay);
-        
-        healEffectRunning = false;
-    }
-
-    public void AddCoin(int numCoins) {
-        skillCoins += numCoins;
-        coinCollection += numCoins;
-    }
-
-    public void UseCoins(int numCoins) {
-        skillCoins -= numCoins;
-    }
-
-    public void AddKey(int numKey) {
-        keys += numKey;
-        keyCollection += numKey;
-    }
+    public void AddKey( ItemTypes.ItemType type, int numKey) {
+		inventory.AddItem(type, numKey);
+		UIinventory.RefreshInventoryItems();
+	}
 
     public void UseKey(int numKey) {
         keys -= numKey;
@@ -281,4 +307,5 @@ public class Player : MonoBehaviour {
     public void ResetKillStreak() {
         killStreak = 0;
     }
+	
 }

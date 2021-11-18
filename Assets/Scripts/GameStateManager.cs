@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -43,11 +44,42 @@ public class GameStateManager {
 	}
 
 	// Sets the state of the game
-	public void SetGameState(GameState state){
+	public void SetGameState(GameState state, bool changeScene = true){
 		this.gameState = state;
 
-		// Call all of the event listeners that exist
-		OnStateChange();
+		// Check if the caller is wanting to change the scene as well
+		if (changeScene) {
+
+			// Load the scene that is associated with that game state
+			switch (state) {
+				case GameState.IN_GAME:
+					SceneManager.LoadScene("inGame");
+
+					// Update the player's stats from the betweenLevels scene
+					if (this._playerStats != null && this._player != null) {
+						this._player.SetStats(this._playerStats);
+					};
+
+					break;
+				case GameState.BETWEEN_LEVEL:
+					// Get the player's stats before the gameobject gets destroyed
+					if (this._player) {
+						this._playerStats = this._player.GetStats();
+					};
+
+					SceneManager.LoadScene("betweenLevels");
+					break;
+				default:
+					SceneManager.LoadScene("mainMenu");
+					break;
+			};
+		};
+
+
+		// Call all of the event listeners if any exist
+		if (OnStateChange != null) {
+			OnStateChange();
+		};
 	}
 
 	// When quitting the application, make sure to purge the singleton so that
@@ -77,12 +109,13 @@ public class GameStateManager {
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated
+	private Dictionary<string, int> _playerStats = null;
 	public Dictionary<string, int> playerStats {
 		get {
-			return this._player.GetStats();
+			return this._playerStats;
 		}
 		set {
-			this._player.SetStats(value);
+			this._playerStats = value;
 		}
 	}
 }
