@@ -38,29 +38,7 @@ public class EnemyController : MonoBehaviour {
 		healthBar.SetMaxHealth(maxHealth);
 	}
 
-	// Update is called once per frame
-	void Update() {
-		// To use the follow mechanics to catch the player.
-		if ((Vector3.Distance(target.position, transform.position) <= maxRange)
-		&& (Vector3.Distance(target.position, transform.position) >= minRange)) {
-			FollowMechanics();
-		}
-	}
-
-	// Follow mechanics to catch the player.
-	void FollowMechanics(){
-		//myAnim.SetBool("WithinRange",true);
-
-		// some math equations to calculate the relative position of player and enemy.
-		//myAnim.SetFloat("Horizontal",(target.position.x - transform.position.x));
-		//myAnim.SetFloat("Vertical",(target.position.y - transform.position.y));
-
-		// used to move towards the player
-		//transform.position = Vector3.MoveTowards(transform.position,target.transform.position,speed*Time.fixedDeltaTime);
-
-	}
-
-	 public void TakeDamage(int damageValue) {
+	public void TakeDamage(int damageValue) {
 		currentHealth -= damageValue;
 		myAnim.SetTrigger("Hurt");
 		if (currentHealth <= 0){
