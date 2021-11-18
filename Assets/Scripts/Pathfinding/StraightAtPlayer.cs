@@ -33,7 +33,7 @@ public class StraightAtPlayer : MonoBehaviour {
 	}
 
 	private void pathfind() {
-		myAnim.SetBool("WithinRange", true);
+		// myAnim.SetBool("WithinRange", true);
 
 		// myAnim.SetFloat(
 		// 	"Horizontal",
