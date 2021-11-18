@@ -14,83 +14,72 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D firePointRb;
 
 	// for animations this can be used with the blend tree
-	public Animator animator;
+    public Animator animator;
 
-	// Camera reference to handle aiming weapon attacks
-	public Camera cam;
+    // Camera reference to handle aiming weapon attacks
+    public Camera cam;
 
-	Vector2 movement;
-	Vector2 mousePosition;
+    Vector2 movement;
+    Vector2 mousePosition;
 
 	// player max health
 	// notes this is the base and gets modified by the stamina the player has
 	// at start and whenever the stamina increases
 	public int maxHealth;
 
-	// player current health - initializes to max health at start
-	public int currentHealth;
+    // player current health - initializes to max health at start
+    public int currentHealth;
 
-	// player health bar
-	public HealthBar healthBar;
+    // player health bar
+    public HealthBar healthBar;
 
-	// player strength
-	public int strength;
+    // player strength
+    public int strength;
 
-	//player agility
-	public int agility;
+    //player agility
+    public int agility;
 
-	//player stamina
-	public int stamina;
+    //player stamina
+    public int stamina;
 
 	//inventory
 	private Inventory inventory;
 	[SerializeField]
 	private UI_Inventory UIinventory;
 
+    //player skill coins
+    public int skillCoins;
 
-	//player skill coins
-	public int skillCoins;
+    // number of keys acquired
+    public int keys;
+    
+    // screen damage effect overlay
+    public GameObject damageEffectOverlay;
+    private Coroutine damageEffectOverlayRoutine;
+    private bool damageEffectRunning = false;
 
-	// current number of kills
-	public int kills;
+    // screen heal effect overlay
+    public GameObject healEffectOverlay;
+    private Coroutine healEffectOverlayRoutine;
+    private bool healEffectRunning = false;
 
-	// number of keys acquired
-	public int keys;
-
-	// screen damage effect overlay
-	public GameObject damageEffectOverlay;
-	private Coroutine damageEffectOverlayRoutine;
-	private bool damageEffectRunning = false;
-
-	// screen heal effect overlay
-	public GameObject healEffectOverlay;
-	private Coroutine healEffectOverlayRoutine;
-	private bool healEffectRunning = false;
-
-	public Dictionary<string, int> GetStats() {
-		Dictionary<string, int> stats = new Dictionary<string, int>();
-		stats.Add("maxHealth", this.maxHealth);
-		stats.Add("strength", this.strength);
-		stats.Add("agility", this.agility);
-		stats.Add("stamina", this.stamina);
-
-		// Find the amount of coins that the player has
-		foreach (var item in this.inventory.GetItemList()) {
-			if (item.type == ItemTypes.ItemType.COIN) {
-				stats.Add("skillCoins", item.amount);
-			};
-		};
-
-		return stats;
-	}
-	public void SetStats(Dictionary<string, int> stats) {
-		this.maxHealth = stats["maxHealth"];
-		this.strength = stats["strength"];
-		this.agility = stats["agility"];
-		this.stamina = stats["stamina"];
-		// TODO: Update the player's skillCoins value so that they don't get more
-		// skill coins than they should actually have
-	}
+    
+    public Dictionary<string, int> GetStats() {
+        Dictionary<string, int> stats = new Dictionary<string, int>();
+        stats.Add("maxHealth", this.maxHealth);
+        stats.Add("strength", this.strength);
+        stats.Add("agility", this.agility);
+        stats.Add("stamina", this.stamina);
+        stats.Add("skillCoins", this.skillCoins);
+        return stats;
+    }
+    public void SetStats(Dictionary<string, int> stats) {
+        this.maxHealth = stats["maxHealth"];
+        this.strength = stats["strength"];
+        this.agility = stats["agility"];
+        this.stamina = stats["stamina"];
+        this.skillCoins = stats["skillCoins"];
+    }
 
 	private void Awake() {
 		/**
@@ -113,8 +102,8 @@ public class Player : MonoBehaviour {
 		healthBar.SetMaxHealth(maxHealth + stamMod);
 	}
 
-	// Update is called once per frame
-	// not good for physics D: but great for inputs
+    // Update is called once per frame
+    // not good for physics D: but great for inputs
 	void Update() {
 		// gives a value between -1 and 1 depending on which key left or right,
 		// but if no move in this direction will return 0
@@ -145,7 +134,7 @@ public class Player : MonoBehaviour {
 			IncreaseMaxHealth(100);
 
 		if(Input.GetKeyDown(KeyCode.K))
-			AddKill(1);
+			AddKill();
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -188,11 +177,6 @@ public class Player : MonoBehaviour {
 		healthBar.SetCurrentHealth(currentHealth);
 	}
 
-
-	public void AddPotion( ItemTypes.ItemType type, int value){
-			inventory.AddItem(type, value);
-			UIinventory.RefreshInventoryItems();
-	}
 	public void HealPlayer(int healValue) {
 		currentHealth += healValue;
 		HealEffectOverlay();
@@ -271,31 +255,44 @@ public class Player : MonoBehaviour {
 		healEffectRunning = false;
 	}
 
+	public void AddPotion( ItemTypes.ItemType type, int value){
+		inventory.AddItem(type, value);
+		UIinventory.RefreshInventoryItems();
+
+		AchievementCollection.potionCollection += 1;
+	}
+
 	public void AddCoin( ItemTypes.ItemType type, int numCoins) {
 		inventory.AddItem(type, numCoins);
 		UIinventory.RefreshInventoryItems();
+
+		AchievementCollection.coinCollection += numCoins;
 	}
 
 	public void UseCoins(int numCoins) {
 		skillCoins -= numCoins;
 	}
 
-	public void AddKey( ItemTypes.ItemType type, int numKey) {
+    public void AddKey( ItemTypes.ItemType type, int numKey) {
 		inventory.AddItem(type, numKey);
 		UIinventory.RefreshInventoryItems();
+
+		AchievementCollection.keyCollection += numKey;
 	}
 
-	public void UseKey(int numKey) {
-		keys -= numKey;
-	}
+    public void UseKey(int numKey) {
+        keys -= numKey;
+    }
 
-	public void IncreaseStrength(int strengthUp) {
-		strength += strengthUp;
-	}
+    public void IncreaseStrength(int strengthUp) {
+        strength += strengthUp;
+        AchievementCollection.strengthUpCollection += 1;
+    }
 
-	public void IncreaseAgility(int agilityUp) {
-		agility += agilityUp;
-	}
+    public void IncreaseAgility(int agilityUp) {
+        agility += agilityUp;
+        AchievementCollection.agilityUpCollection += 1;
+    }
 
 	/** 
 		Because this changes dynamically on item pickup
@@ -309,10 +306,28 @@ public class Player : MonoBehaviour {
 		Debug.Log(stamMod);
 		currentHealth += stamMod;
 		healthBar.IncreaseMaxHealth(currentHealth + stamMod, maxHealth + stamMod);
+		AchievementCollection.staminaUpCollection += 1;
 
 	}
 
-	public void AddKill(int numKill) {
-		kills += numKill;
-	}
+    public void PickUpHealthUp(int healthUp) {
+        IncreaseMaxHealth(healthUp);
+        AchievementCollection.healthUpCollection += 1;
+    }
+
+    public void PickUpPoison(int poisonValue) {
+        TakeDamage(poisonValue);
+        AchievementCollection.poisonCollection += 1;
+    }
+
+    public void AddKill() {
+        AchievementCollection.killCollection += 1;
+        AchievementCollection.killStreak += 1;
+    }
+
+    // call when player dies
+    public void ResetKillStreak() {
+        AchievementCollection.killStreak = 0;
+    }
+	
 }
