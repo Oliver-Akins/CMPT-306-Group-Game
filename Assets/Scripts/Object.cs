@@ -11,8 +11,11 @@ public class Object : MonoBehaviour {
 	// player reference
 	private Player player;
 
+	private Achievements achievements;
+
 	void Awake() {
 		player = FindObjectOfType<Player>();
+		achievements = FindObjectOfType<Achievements>();
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
@@ -72,6 +75,8 @@ public class Object : MonoBehaviour {
 			}
 			
 			Destroy(gameObject);
+
+			achievements.checkAchievements();
 		}
 	}
 }

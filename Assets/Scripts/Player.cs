@@ -61,18 +61,6 @@ public class Player : MonoBehaviour {
     private Coroutine healEffectOverlayRoutine;
     private bool healEffectRunning = false;
 
-    // achievement variables
-    public int coinCollection = 0;
-    public int keyCollection = 0;
-    public int potionCollection = 0;
-    public int healthUpCollection = 0;
-    public int strengthUpCollection = 0;
-    public int agilityUpCollection = 0;
-    public int staminaUpCollection = 0;
-    public int poisonCollection = 0;
-    public int killCollection = 0;
-    public int killStreak = 0;
-
     
     public Dictionary<string, int> GetStats() {
         Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -246,17 +234,17 @@ public class Player : MonoBehaviour {
 	}
 
 	public void AddPotion( ItemTypes.ItemType type, int value){
-			inventory.AddItem(type, value);
-			UIinventory.RefreshInventoryItems();
+		inventory.AddItem(type, value);
+		UIinventory.RefreshInventoryItems();
 
-			potionCollection += 1;
+		AchievementCollection.potionCollection += 1;
 	}
 
 	public void AddCoin( ItemTypes.ItemType type, int numCoins) {
 		inventory.AddItem(type, numCoins);
 		UIinventory.RefreshInventoryItems();
 
-		coinCollection += numCoins;
+		AchievementCollection.coinCollection += numCoins;
 	}
 
 	public void UseCoins(int numCoins) {
@@ -267,7 +255,7 @@ public class Player : MonoBehaviour {
 		inventory.AddItem(type, numKey);
 		UIinventory.RefreshInventoryItems();
 
-		keyCollection += numKey;
+		AchievementCollection.keyCollection += numKey;
 	}
 
     public void UseKey(int numKey) {
@@ -276,37 +264,37 @@ public class Player : MonoBehaviour {
 
     public void IncreaseStrength(int strengthUp) {
         strength += strengthUp;
-        strengthUpCollection += 1;
+        AchievementCollection.strengthUpCollection += 1;
     }
 
     public void IncreaseAgility(int agilityUp) {
         agility += agilityUp;
-        agilityUpCollection += 1;
+        AchievementCollection.agilityUpCollection += 1;
     }
 
     public void IncreaseStamina(int staminaUp) {
         stamina += staminaUp;
-        staminaUpCollection += 1;
+        AchievementCollection.staminaUpCollection += 1;
     }
 
     public void PickUpHealthUp(int healthUp) {
         IncreaseMaxHealth(healthUp);
-        healthUpCollection += 1;
+        AchievementCollection.healthUpCollection += 1;
     }
 
     public void PickUpPoison(int poisonValue) {
         TakeDamage(poisonValue);
-        poisonCollection += 1;
+        AchievementCollection.poisonCollection += 1;
     }
 
     public void AddKill() {
-        killCollection += 1;
-        killStreak += 1;
+        AchievementCollection.killCollection += 1;
+        AchievementCollection.killStreak += 1;
     }
 
     // call when player dies
     public void ResetKillStreak() {
-        killStreak = 0;
+        AchievementCollection.killStreak = 0;
     }
 	
 }
