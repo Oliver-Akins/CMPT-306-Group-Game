@@ -148,3 +148,4 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  player: {fileID: 8765913521880903165, guid: 45dc0deaf266893e38592ca4425b7aae, type: 3}

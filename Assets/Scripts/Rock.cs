@@ -14,6 +14,8 @@ public class Rock : MonoBehaviour {
 	public int damageAmount;
 	public LayerMask enemyLayers;
 
+	public Player player;
+
 	/** only hell this is the ONLY way ive found so far to ensure that the
 		player's collider doesn't interfere with the projectiles.
 		1. make sure the player sprite cannot rotate -.-
@@ -29,7 +31,8 @@ public class Rock : MonoBehaviour {
 		if (hitLayer == 7  || hitLayer == 8){
 			// we hit an enemy!
 			if (hitLayer == 8){
-				collisionInfo.GetComponent<EnemyController>().TakeDamage(damageAmount);
+				float modDam = damageAmount * ( ((float)player.strength)/10);
+				collisionInfo.GetComponent<EnemyController>().TakeDamage(damageAmount + Mathf.RoundToInt(modDam));
 			}
 			Destroy(gameObject);
 		}
