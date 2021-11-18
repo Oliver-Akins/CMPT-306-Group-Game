@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
-    
+
 	// a animator variable
-	public Animator myAnim; 
+	public Animator myAnim;
 	// To keep track of the player
 	private Transform target;
 
@@ -41,17 +41,17 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		// To use the follow mechanics to catch the player.
-		if ((Vector3.Distance(target.position, transform.position) <= maxRange) 
+		if ((Vector3.Distance(target.position, transform.position) <= maxRange)
 		&& (Vector3.Distance(target.position, transform.position) >= minRange)) {
 			FollowMechanics();
 		}
 	}
-	
+
 	// Follow mechanics to catch the player.
 	void FollowMechanics(){
 		//myAnim.SetBool("WithinRange",true);
-    
-	    // some math equations to calculate the relative position of player and enemy.
+
+		// some math equations to calculate the relative position of player and enemy.
 		//myAnim.SetFloat("Horizontal",(target.position.x - transform.position.x));
 		//myAnim.SetFloat("Vertical",(target.position.y - transform.position.y));
 
@@ -61,13 +61,13 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	 public void TakeDamage(int damageValue) {
-        currentHealth -= damageValue;
+		currentHealth -= damageValue;
 		myAnim.SetTrigger("Hurt");
 		if (currentHealth <= 0){
 			Die();
 		}
-        healthBar.SetCurrentHealth(currentHealth);
-    }
+		healthBar.SetCurrentHealth(currentHealth);
+	}
 
 	void Die(){
 		// Die animation
@@ -80,7 +80,7 @@ public class EnemyController : MonoBehaviour {
 	void DestroyEnemy(){
 		// can have a death effect to if we want
 		Destroy(gameObject);
-		
+
 		// Instantiate(lootDrop, transform.position, Quaternion.identity);
 		Instantiate(items[Random.Range(0, items.Count-1)], transform.position, Quaternion.identity);
 	}
