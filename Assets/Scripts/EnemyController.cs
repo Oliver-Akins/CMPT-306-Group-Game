@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour {
 
 	public List<GameObject> items = new List<GameObject>();
 
-	private Achievements achievements;
+	public Achievements achievements;
 
 	void Awake() {
 		achievements = FindObjectOfType<Achievements>();
