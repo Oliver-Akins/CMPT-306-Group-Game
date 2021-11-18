@@ -75,7 +75,30 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	[Range(0.0001f, 0.02f)]
 	private float staminaUpPercent = 0.0005f;
 
-	
+	[SerializeField]
+	private GameObject key;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float keyPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject zombie;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float zombiePercent = 0.005f;
+
+	[SerializeField]
+	private GameObject skeleton;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float skeletonPercent = 0.005f;
+
+	[SerializeField]
+	private GameObject vampire;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float vampirePercent = 0.001f;
+
 
 
 
@@ -99,13 +122,20 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		CreatRoomsAtDeadEnds(deadEnds, roomPositions);
 		HashSet<Vector2Int> posibleItemPositions = new HashSet<Vector2Int>(roomPositions);
+		HashSet<Vector2Int> posibleEnimiePositions = new HashSet<Vector2Int>(roomPositions);
+
 
 		floorPositions.UnionWith(roomPositions);
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
 
+		AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
+		AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
+		AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
+
 
 		AddItemRandomly(coinStack, coinStackPercent, posibleItemPositions);
+		AddItemRandomly(key, keyPercent, posibleItemPositions);
 		AddItemRandomly(potion, potionPercent, posibleItemPositions);
 		AddItemRandomly(poison, poisonPercent, posibleItemPositions);
 		

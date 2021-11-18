@@ -286,6 +286,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: key
+      value: 
+      objectReference: {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: poison
       value: 
       objectReference: {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
@@ -294,9 +298,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1891078279623990650, guid: eab53792e8bfd4180867ac4f1765fc7d, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: zombie
+      value: 
+      objectReference: {fileID: 5185782769756112321, guid: da4a0a7a2c71df44eb428d3530074963, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: vampire
+      value: 
+      objectReference: {fileID: 2432640830519138478, guid: 3387f0550c4463047910db9aa6b353e4, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: healthUp
       value: 
       objectReference: {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: skeleton
+      value: 
+      objectReference: {fileID: 5683581141178383958, guid: a7470efe03e9a564885c45e408fb3f5f, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: agilityUp
       value: 
