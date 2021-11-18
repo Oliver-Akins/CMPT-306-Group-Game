@@ -104,12 +104,9 @@ public class Player : MonoBehaviour {
 	// Start() is called when script is enabled
 	void Start() {
 		// initialize max health to inspector value input
-		// also adds in the stamina modifier as well but does not
-		// permanently change the max health or the stamina increases
-		// will not be linear
-		int stamMod = Mathf.RoundToInt(maxHealth * (((float) stamina)/2/10));
-		currentHealth = maxHealth + stamMod;
-		healthBar.SetMaxHealth(maxHealth + stamMod);
+		// also adds the stamina mod to flatly increase the health on 1:1 basis
+		currentHealth = maxHealth + stamina;
+		healthBar.SetMaxHealth(maxHealth + stamina);
 	}
 
     // Update is called once per frame
@@ -206,11 +203,11 @@ public class Player : MonoBehaviour {
 
 		// set current health to new max health if current
 		// is greater than max
-		if(currentHealth > maxHealth)
-			currentHealth = maxHealth;;
+		if(currentHealth > maxHealth + stamina)
+			currentHealth = maxHealth + stamina;
 
 		// update health bar
-		healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
+		healthBar.DecreaseMaxHealth(currentHealth, maxHealth + stamina);
 	}
 
 	/**
@@ -222,7 +219,7 @@ public class Player : MonoBehaviour {
 		currentHealth += healthUp;
 
 		// update health bar
-		healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
+		healthBar.IncreaseMaxHealth(currentHealth, maxHealth + stamina);
 	}
 
 	// call damage effect routine if currently not running
@@ -312,10 +309,8 @@ public class Player : MonoBehaviour {
 	*/
 	public void IncreaseStamina(int staminaUp) {
 		stamina += staminaUp;
-		int stamMod = Mathf.RoundToInt(maxHealth * ((float) staminaUp/2/10));
-		Debug.Log(stamMod);
-		currentHealth += stamMod;
-		healthBar.IncreaseMaxHealth(currentHealth + stamMod, maxHealth + stamMod);
+		currentHealth += staminaUp;
+		healthBar.IncreaseMaxHealth(currentHealth + staminaUp, maxHealth + staminaUp);
 		AchievementCollection.staminaUpCollection += 1;
 
 	}

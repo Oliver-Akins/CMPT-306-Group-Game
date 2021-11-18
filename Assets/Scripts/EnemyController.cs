@@ -74,15 +74,17 @@ public class EnemyController : MonoBehaviour {
     }
 
 	void Die(){
-		// Die animation
-		myAnim.SetBool("IsDead", true);
-		// disable enemy script and collider
-		GetComponent<Collider2D>().enabled = false;
 
 		AchievementCollection.killCollection += 1;
 		AchievementCollection.killStreak += 1;
 
 		achievements.checkAchievements();
+		// Die animation
+		myAnim.SetBool("IsDead", true);
+		// disable enemy script and collider
+		GetComponent<Collider2D>().enabled = false;
+
+	
 
 		Invoke("DestroyEnemy", waitTime);
 	}

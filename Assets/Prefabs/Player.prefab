@@ -229,7 +229,7 @@ MonoBehaviour:
   firePointRb: {fileID: 8765913523455138912}
   animator: {fileID: 8765913521880903105}
   cam: {fileID: 0}
-  maxHealth: 500
+  maxHealth: 200
   currentHealth: 0
   healthBar: {fileID: 8765913523211797934}
   strength: 0
@@ -293,7 +293,7 @@ BoxCollider2D:
   m_Offset: {x: -0.12770107, y: -0.28556576}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.4, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
