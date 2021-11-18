@@ -22,8 +22,10 @@ public class Player : MonoBehaviour {
     Vector2 movement;
     Vector2 mousePosition;
 
-    // player max health
-    public int maxHealth;
+	// player max health
+	// notes this is the base and gets modified by the stamina the player has
+	// at start and whenever the stamina increases
+	public int maxHealth;
 
     // player current health - initializes to max health at start
     public int currentHealth;
@@ -99,13 +101,13 @@ public class Player : MonoBehaviour {
 		UIinventory.SetInventory(inventory);
 	}
 
-
-    // Start() is called when script is enabled
-    void Start() {
-        // initialize max health to inspector value input
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-    }
+	// Start() is called when script is enabled
+	void Start() {
+		// initialize max health to inspector value input
+		// also adds the stamina mod to flatly increase the health on 1:1 basis
+		currentHealth = maxHealth + stamina;
+		healthBar.SetMaxHealth(maxHealth + stamina);
+	}
 
     // Update is called once per frame
     // not good for physics D: but great for inputs
@@ -145,15 +147,22 @@ public class Player : MonoBehaviour {
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
 	// approx 50 times a second
 	void FixedUpdate() {
-		// rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-		rb.velocity = movement.normalized * moveSpeed;
+		/** 
+			turn the agi stat into percentage but half the value first as this stat
+			will also affect attack speed as well.
+			This assume its will be fractional increases to the player movement
+			hence the calculation to figure the speed increase from base; this is 
+			about a 5 percent increase of base speed at each level
+		*/
+		float agiModdedMoveSpeed = this.agility > 0 ? moveSpeed + (( (float)this.agility /2) / 10) : moveSpeed;
+		rb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);		
 		Vector2 aimDirection = mousePosition - rb.position;
 		// calculate the angle so the firepoint can rotate to correctly shoot from the player
 		float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
 		// because the original implementation was on the sprite and rotated the sprite
 		// this is instead rotating the fire point at the center of the player
 		// note this isn't perfect when we start adding colliders onto the player
-		firePointRb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		firePointRb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
 		firePointRb.rotation = angle;
 	}
 
@@ -183,24 +192,34 @@ public class Player : MonoBehaviour {
 		healthBar.SetCurrentHealth(currentHealth);
 	}
 
+	/** 
+		TODO logic of this needs to change so the stam mod is correctly 
+		calculating and influencing the max health. 
+		This likely not gonna be used in game but this is not great with
+		stamina affecting the player health
+	*/
 	public void DecreaseMaxHealth(int healthDown) {
 		maxHealth -= healthDown;
 
 		// set current health to new max health if current
 		// is greater than max
-		if(currentHealth > maxHealth)
-			currentHealth = maxHealth;;
+		if(currentHealth > maxHealth + stamina)
+			currentHealth = maxHealth + stamina;
 
 		// update health bar
-		healthBar.DecreaseMaxHealth(currentHealth, maxHealth);
+		healthBar.DecreaseMaxHealth(currentHealth, maxHealth + stamina);
 	}
 
+	/**
+		TODO the logic of this needs to change, I would recommend not using 
+		this at all until the logic changes or we feel we need this implemented
+	*/	
 	public void IncreaseMaxHealth(int healthUp) {
 		maxHealth += healthUp;
 		currentHealth += healthUp;
 
 		// update health bar
-		healthBar.IncreaseMaxHealth(currentHealth, maxHealth);
+		healthBar.IncreaseMaxHealth(currentHealth, maxHealth + stamina);
 	}
 
 	// call damage effect routine if currently not running
@@ -282,10 +301,19 @@ public class Player : MonoBehaviour {
         AchievementCollection.agilityUpCollection += 1;
     }
 
-    public void IncreaseStamina(int staminaUp) {
-        stamina += staminaUp;
-        AchievementCollection.staminaUpCollection += 1;
-    }
+	/** 
+		Because this changes dynamically on item pickup
+		the mod needs to be calculated on its own, without the current stamina
+		as that would double dip in the stamina increase and cause non linear
+		increases in stamina 
+	*/
+	public void IncreaseStamina(int staminaUp) {
+		stamina += staminaUp;
+		currentHealth += staminaUp;
+		healthBar.IncreaseMaxHealth(currentHealth + staminaUp, maxHealth + staminaUp);
+		AchievementCollection.staminaUpCollection += 1;
+
+	}
 
     public void PickUpHealthUp(int healthUp) {
         IncreaseMaxHealth(healthUp);

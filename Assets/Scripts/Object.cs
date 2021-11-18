@@ -73,10 +73,9 @@ public class Object : MonoBehaviour {
 					break;
 				}
 			}
-
 			achievements.checkAchievements();
-			
 			Destroy(gameObject);
+
 		}
 	}
 }
