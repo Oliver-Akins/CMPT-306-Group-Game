@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class KillStreak : MonoBehaviour {
 
-	// text mesh pro reference
-	TextMeshProUGUI text;
+	public GameObject killStreakCanvas;
 
-	void Awake() {
-		text = GetComponent<TextMeshProUGUI>();
-	}
+	// text mesh pro reference
+	public TextMeshProUGUI text;
+
 
 	void FixedUpdate() {
 
 		if(AchievementCollection.killStreak > 4) {
-			text.text = AchievementCollection.killStreak.ToString() + " KILLSTEAK!";
+			killStreakCanvas.SetActive(true);
+			text.text = AchievementCollection.killStreak.ToString() + " KILLSTREAK!";
 		} else {
-			text.text = "";
+			killStreakCanvas.SetActive(false);
 		}
 	}
 };
