@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3483835740658859232}
   - component: {fileID: 1226731712122622694}
   - component: {fileID: 1327358676452442723}
+  - component: {fileID: -6536743057551409857}
   m_Layer: 8
   m_Name: Skeleton
   m_TagString: Untagged
@@ -96,9 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
+  enemyRb: {fileID: 0}
   speed: 0.2
-  maxRange: 0
-  minRange: 0
+  maxRange: 4
+  minRange: 0.75
+  attackRange: 1
   maxHealth: 100
   currentHealth: 100
   healthBar: {fileID: 6830032365887584351}
@@ -114,6 +117,10 @@ MonoBehaviour:
   - {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
   - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
   - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
+  achievements: {fileID: 0}
+  timeBetweenAttacks: 0
+  startTimeBetweenAttacks: 2
+  attackDamage: 10
 --- !u!212 &1226731712122622694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -184,6 +191,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6536743057551409857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683581141178383958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a691e78a8b8a36900bb620d74bcc7bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5755103286268653700
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 5185782769756112323}
   - component: {fileID: 5185782769756112322}
   - component: {fileID: 5185782769756112327}
+  - component: {fileID: 7921961067725912160}
   - component: {fileID: 5185782769756112326}
   m_Layer: 8
   m_Name: Zombie
@@ -247,9 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
+  enemyRb: {fileID: 0}
   speed: 0.2
   maxRange: 4
   minRange: 0.75
+  attackRange: 1
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 3933352398390699176}
@@ -265,6 +268,22 @@ MonoBehaviour:
   - {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
   - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
   - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
+  achievements: {fileID: 0}
+  timeBetweenAttacks: 0
+  startTimeBetweenAttacks: 2.5
+  attackDamage: 15
+--- !u!114 &7921961067725912160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5185782769756112321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a691e78a8b8a36900bb620d74bcc7bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5185782769756112326
 Animator:
   serializedVersion: 3

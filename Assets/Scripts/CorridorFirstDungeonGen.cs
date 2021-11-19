@@ -101,6 +101,16 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 
 
+	// Expose the final level map so that the enemies can use it for pathfinding
+	private HashSet<Vector2Int> _finalLevel = null;
+	public HashSet<Vector2Int> finalLevel {
+		get {
+			return this._finalLevel;
+		}
+		private set {
+			this._finalLevel = value;
+		}
+	}
 
 	private void Start() {
 		GenerateDungeon();
@@ -138,7 +148,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		AddItemRandomly(key, keyPercent, posibleItemPositions);
 		AddItemRandomly(potion, potionPercent, posibleItemPositions);
 		AddItemRandomly(poison, poisonPercent, posibleItemPositions);
-		
+
 		AddItemRandomly(strenghtUp, strenghtUpPercent, posibleItemPositions);
 		AddItemRandomly(healthUp, healthUpPercent, posibleItemPositions);
 		AddItemRandomly(staminaUp, staminaUpPercent, posibleItemPositions);
@@ -146,9 +156,10 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		AddItemRandomly(coin, coinPercent, posibleItemPositions);
 		AddItemRandomly(allStatUp, allStatUpPercent, posibleItemPositions);
-		
-		
+
+
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
+		this.finalLevel = floorPositions;
 	}
 
 	private void AddItemRandomly(GameObject item, float chancePerTile, HashSet<Vector2Int> positions){
@@ -209,7 +220,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		var currentPos = startPos;
 		potentialRoomPositions.Add(currentPos);
 
-		
+
 		while (potentialRoomPositions.Count < numberOfRooms) {
 			var corridor = PCG.RandomWalkCorridor(currentPos, corridorLength);
 			currentPos = corridor[corridor.Count - 1];
