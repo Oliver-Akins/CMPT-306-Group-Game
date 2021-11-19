@@ -67,6 +67,8 @@ public class EnemyController : MonoBehaviour {
 		// disable enemy script and collider
 		GetComponent<Collider2D>().enabled = false;
 
+		Destroy(GetComponent<StraightAtPlayer>());
+
 		Invoke("DestroyEnemy", waitTime);
 	}
 
