@@ -29,7 +29,8 @@ public class Rock : MonoBehaviour {
 		if (hitLayer == 7  || hitLayer == 8){
 			// we hit an enemy!
 			if (hitLayer == 8){
-				collisionInfo.GetComponent<EnemyController>().TakeDamage(damageAmount);
+				Player p = GameObject.Find("Player").GetComponent<Player>();
+				collisionInfo.GetComponent<EnemyController>().TakeDamage( damageAmount + p.strength);
 			}
 			Destroy(gameObject);
 		}

@@ -229,12 +229,13 @@ MonoBehaviour:
   firePointRb: {fileID: 8765913523455138912}
   animator: {fileID: 8765913521880903105}
   cam: {fileID: 0}
-  maxHealth: 500
+  maxHealth: 200
   currentHealth: 0
   healthBar: {fileID: 8765913523211797934}
   strength: 0
   agility: 0
   stamina: 0
+  UIinventory: {fileID: 0}
   skillCoins: 0
   kills: 0
   keys: 0
@@ -274,7 +275,8 @@ MonoBehaviour:
   firePoint: {fileID: 8765913523455138913}
   rangedWeapPrefab: {fileID: 2004395586902086213, guid: f29fde569a9a1a0428ce59e820b580d1, type: 3}
   weapForce: 20
-  startTimeBetweenShots: 0.25
+  startTimeBetweenShots: 0.4
+  player: {fileID: 8765913521880903165}
 --- !u!61 &8765913521880903111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -288,10 +290,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: -0.06}
+  m_Offset: {x: -0.12770107, y: -0.28556576}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.4, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -299,7 +301,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.67, y: 0.89}
+  m_Size: {x: 0.61459786, y: 0.51801413}
   m_EdgeRadius: 0
 --- !u!114 &8765913521880903110
 MonoBehaviour:
@@ -317,11 +319,12 @@ MonoBehaviour:
   meleeAttackPoint: {fileID: 8765913523222956945}
   cam: {fileID: 0}
   attackRange: 0.5
-  startTimeBetweenAttacks: 0.3
+  startTimeBetweenAttacks: 0.4
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
-  attackDamage: 0
+    m_Bits: 256
+  attackDamage: 25
+  player: {fileID: 8765913521880903165}
 --- !u!1 &8765913522077439527
 GameObject:
   m_ObjectHideFlags: 0
