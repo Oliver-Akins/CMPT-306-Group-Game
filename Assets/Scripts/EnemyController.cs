@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour {
 
 	public float timeBetweenAttacks;
 	public float startTimeBetweenAttacks;
-	public float attackDamage;
+	public int attackDamage;
 
 	void Awake() {
 		achievements = FindObjectOfType<Achievements>();
@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour {
 	public void Attack(){
 		myAnim.SetTrigger("Attack");
 		Player p = FindObjectOfType<Player>();
-		p.TakeDamage(10);
+		p.TakeDamage(attackDamage);
 		myAnim.SetTrigger("Attack");
 	}
 

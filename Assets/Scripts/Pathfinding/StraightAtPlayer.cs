@@ -38,15 +38,19 @@ public class StraightAtPlayer : MonoBehaviour {
 		) {
 			if (this.startedMoving == false){
 				if( this.hasToDoTransformAnim){
-					this.myAnim.SetTrigger("DoTransform");
+					this.myAnim.SetBool("DoTransform", true);
 				}
 				this.startedMoving = true;
 			}
 			this.pathfind();
-		} else {
-			this.startedMoving = false;
-			if( this.hasToDoTransformAnim){
-				this.myAnim.SetTrigger("DoTransform");
+		} else { 
+			if (this.startedMoving){
+				this.startedMoving = false;
+				if( this.hasToDoTransformAnim){
+					this.myAnim.SetBool("DoTransform", false);
+				}
+				this.myAnim.SetTrigger("Idle");
+				this.myAnim.SetFloat("Horizontal", 0);
 			}
 		}
 		if (distance <= this.controller.attackRange){
