@@ -6,16 +6,17 @@ public class EnemyController : MonoBehaviour {
 
 	// a animator variable
 	public Animator myAnim;
+	public Rigidbody2D enemyRb;
 	// To keep track of the player
 	private Transform target;
 
 	public float speed;
 
 	// variables to restrict the range of enemies can be modified here.
-	public float maxRange = 4f;
+	public float maxRange;
 
-	public float minRange = 0.75f;
-
+	public float minRange;
+	public float attackRange;
 	// enemies max and current health
 	public int maxHealth;
 	public int currentHealth;
@@ -27,6 +28,10 @@ public class EnemyController : MonoBehaviour {
 
 	public Achievements achievements;
 
+	public float timeBetweenAttacks;
+	public float startTimeBetweenAttacks;
+	public float attackDamage;
+
 	void Awake() {
 		achievements = FindObjectOfType<Achievements>();
 	}
@@ -36,6 +41,7 @@ public class EnemyController : MonoBehaviour {
 		// getting an animator and player object to operate onto.
 		myAnim = GetComponent<Animator>();
 		target = FindObjectOfType<Player>().transform;
+		enemyRb = GetComponent<Rigidbody2D>();
 		// setup enemy health
 		currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
@@ -61,8 +67,6 @@ public class EnemyController : MonoBehaviour {
 		// disable enemy script and collider
 		GetComponent<Collider2D>().enabled = false;
 
-	
-
 		Invoke("DestroyEnemy", waitTime);
 	}
 
@@ -74,5 +78,11 @@ public class EnemyController : MonoBehaviour {
 		Instantiate(items[Random.Range(0, items.Count-1)], transform.position, Quaternion.identity);
 	}
 
+	public void Attack(){
+		myAnim.SetTrigger("Attack");
+		Player p = FindObjectOfType<Player>();
+		p.TakeDamage(10);
+		myAnim.SetTrigger("Attack");
+	}
 
 }

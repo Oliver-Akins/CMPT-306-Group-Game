@@ -248,9 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
+  enemyRb: {fileID: 0}
   speed: 0.2
   maxRange: 4
   minRange: 0.75
+  attackRange: 1
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 3933352398390699176}
@@ -267,6 +269,9 @@ MonoBehaviour:
   - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
   - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
   achievements: {fileID: 0}
+  timeBetweenAttacks: 0
+  startTimeBetweenAttacks: 2.5
+  attackDamage: 15
 --- !u!114 &7921961067725912160
 MonoBehaviour:
   m_ObjectHideFlags: 0

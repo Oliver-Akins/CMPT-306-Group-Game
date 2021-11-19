@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3981603266262538860}
-  - component: {fileID: 2345064862054748028}
   - component: {fileID: 5312286221540516356}
   - component: {fileID: 834205561951042860}
   - component: {fileID: 6817122160473052521}
   - component: {fileID: -6948050281237135702}
+  - component: {fileID: 2345064862054748028}
+  - component: {fileID: 6251381708400243318}
   m_Layer: 8
   m_Name: Vampire
   m_TagString: Untagged
@@ -36,37 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2345064862054748028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432640830519138478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7d6445e1f02904f91d82d2f93e4bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myAnim: {fileID: 0}
-  speed: 0.2
-  maxRange: 0
-  minRange: 0
-  maxHealth: 100
-  currentHealth: 100
-  healthBar: {fileID: 264293339798222592}
-  waitTime: 1.5
-  items:
-  - {fileID: 5869400407592566631, guid: 096db07e9e9d14a478bc46fc0038cad5, type: 3}
-  - {fileID: 6052031072712018367, guid: dc7227a1a17134c89a15dc7f2db7ad98, type: 3}
-  - {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
-  - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
-  - {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
-  - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
-  - {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
-  - {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
-  - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
-  - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
 --- !u!50 &5312286221540516356
 Rigidbody2D:
   serializedVersion: 4
@@ -184,6 +154,55 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2345064862054748028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432640830519138478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7d6445e1f02904f91d82d2f93e4bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAnim: {fileID: 0}
+  enemyRb: {fileID: 0}
+  speed: 0.2
+  maxRange: 4
+  minRange: 1
+  attackRange: 0
+  maxHealth: 100
+  currentHealth: 100
+  healthBar: {fileID: 264293339798222592}
+  waitTime: 1.5
+  items:
+  - {fileID: 5869400407592566631, guid: 096db07e9e9d14a478bc46fc0038cad5, type: 3}
+  - {fileID: 6052031072712018367, guid: dc7227a1a17134c89a15dc7f2db7ad98, type: 3}
+  - {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
+  - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
+  - {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
+  - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
+  - {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
+  - {fileID: 6305357130083596284, guid: 849671931601144778cae885dd01ec09, type: 3}
+  - {fileID: 993792001049148862, guid: a4d3cc1b6c8eb4ca2b6441466e9a4cb1, type: 3}
+  - {fileID: 2011030004798698933, guid: bc5260a64eb6e4b5f8726ea8b5c241b0, type: 3}
+  achievements: {fileID: 0}
+  timeBetweenAttacks: 0
+  startTimeBetweenAttacks: 1
+  attackDamage: 20
+--- !u!114 &6251381708400243318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432640830519138478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a691e78a8b8a36900bb620d74bcc7bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8653265443764718557
 GameObject:
   m_ObjectHideFlags: 0
