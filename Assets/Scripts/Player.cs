@@ -182,6 +182,8 @@ public class Player : MonoBehaviour {
 
 		// update health bar
 		healthBar.SetCurrentHealth(currentHealth);
+
+		ResetKillStreak();
 	}
 
 	public void HealPlayer(int healValue) {
