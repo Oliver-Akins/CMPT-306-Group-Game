@@ -127,21 +127,29 @@ public class Player : MonoBehaviour {
 
 		// keyboard inputs for testing - delete if needed
 		if(Input.GetKeyDown(KeyCode.Space))
-			if(currentHealth > 0)
+			if(currentHealth > 0){
 				TakeDamage(100);
+			}
 
-		if(Input.GetKeyDown(KeyCode.H))
-			if(currentHealth < maxHealth)
-				HealPlayer(100);
+		if(Input.GetKeyDown(KeyCode.H)){
+			if(currentHealth < maxHealth + stamina){
+				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
+				if (foundItem != null && foundItem.amount > 0){
+					UseItem(foundItem);
+				}
+			}
+		}
+	
 
-		if(Input.GetKeyDown(KeyCode.N))
-			DecreaseMaxHealth(100);
+		// un-comment these when testing; should not be in the main build
+		// if(Input.GetKeyDown(KeyCode.N))
+		// 	DecreaseMaxHealth(100);
 
-		if(Input.GetKeyDown(KeyCode.M))
-			IncreaseMaxHealth(100);
+		// if(Input.GetKeyDown(KeyCode.M))
+		// 	IncreaseMaxHealth(100);
 
-		if(Input.GetKeyDown(KeyCode.K))
-			AddKill();
+		// if(Input.GetKeyDown(KeyCode.K))
+		// 	AddKill();
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate

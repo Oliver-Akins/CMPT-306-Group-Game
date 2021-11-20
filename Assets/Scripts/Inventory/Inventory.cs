@@ -74,4 +74,13 @@ public class Inventory {
 			itemList.Remove(item);
 		}
 	}
+
+	public InventoryItem FindItem(ItemTypes.ItemType itemType){
+		foreach(InventoryItem item in itemList){
+			if ( item.type == itemType){
+				return item;
+			}
+		} 
+		return null;
+	}
 };
