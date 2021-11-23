@@ -68,6 +68,8 @@ public class GameStateManager {
 						this._playerStats = this._player.GetStats();
 					};
 
+					this._level++;
+
 					SceneManager.LoadScene("betweenLevels");
 					break;
 				default:
@@ -89,6 +91,16 @@ public class GameStateManager {
 		GameStateManager.instance = null;
 	}
 
+
+	//=======================================================================\\
+	// Generic game-data
+
+	private int _level = 0;
+	public int level {
+		get {
+			return this._level;
+		}
+	}
 
 	//=======================================================================\\
 	// Methods relating to the player data
