@@ -6,7 +6,7 @@ public class Inventory {
 	private List<InventoryItem> itemList;
 
 	/**
-		Action is just a void delegate; allows this to call the method the 
+		Action is just a void delegate; allows this to call the method the
 		player object without a direct reference to the player
 	*/
 	private Action<InventoryItem> useInventoryItemAction;
@@ -20,7 +20,7 @@ public class Inventory {
 		Overloaded constructor to allow the inventory to instantiate with
 		an already existing item list (aka changing scenes)
 	*/
-	public Inventory(Action<InventoryItem> useInventoryItemAction, 
+	public Inventory(Action<InventoryItem> useInventoryItemAction,
 		List<InventoryItem> alreadyExistingItems){
 			this.useInventoryItemAction = useInventoryItemAction;
 			itemList = alreadyExistingItems;
@@ -28,11 +28,11 @@ public class Inventory {
 
 	public void AddItem( ItemTypes.ItemType itemType, int value){
 		// create the item
-		InventoryItem item = new InventoryItem { type = itemType, amount = value}; 
+		InventoryItem item = new InventoryItem { type = itemType, amount = value};
 		if (item.IsStackable()){
 			bool itemAlreadyAdded = false;
 			// find the matching item. Should be fine with smol inventory
-			// but maybe a dictionary would be better? 
+			// but maybe a dictionary would be better?
 			foreach (InventoryItem inventoryitem in itemList){
 				if (item.type == inventoryitem.type){
 					inventoryitem.amount += item.amount;
@@ -61,7 +61,7 @@ public class Inventory {
 
 	public void RemoveItem( InventoryItem item){
 		if (item.IsStackable()){
-			InventoryItem itemInInventory = null; 
+			InventoryItem itemInInventory = null;
 			foreach (InventoryItem inventoryitem in itemList){
 				if (item.type == inventoryitem.type){
 					inventoryitem.amount -= item.amount;
@@ -80,7 +80,7 @@ public class Inventory {
 			if ( item.type == itemType){
 				return item;
 			}
-		} 
+		}
 		return null;
 	}
 };
