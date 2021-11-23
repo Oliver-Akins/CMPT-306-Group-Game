@@ -15,33 +15,33 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D firePointRb;
 
 	// for animations this can be used with the blend tree
-    public Animator animator;
+	public Animator animator;
 
-    // Camera reference to handle aiming weapon attacks
-    public Camera cam;
+	// Camera reference to handle aiming weapon attacks
+	public Camera cam;
 
-    Vector2 movement;
-    Vector2 mousePosition;
+	Vector2 movement;
+	Vector2 mousePosition;
 
 	// player max health
 	// notes this is the base and gets modified by the stamina the player has
 	// at start and whenever the stamina increases
 	public int maxHealth;
 
-    // player current health - initializes to max health at start
-    public int currentHealth;
+	// player current health - initializes to max health at start
+	public int currentHealth;
 
-    // player health bar
-    public HealthBar healthBar;
+	// player health bar
+	public HealthBar healthBar;
 
-    // player strength
-    public int strength;
+	// player strength
+	public int strength;
 
-    //player agility
-    public int agility;
+	//player agility
+	public int agility;
 
-    //player stamina
-    public int stamina;
+	//player stamina
+	public int stamina;
 
 	//inventory
 	private Inventory inventory;
@@ -127,8 +127,8 @@ public class Player : MonoBehaviour {
 		healthBar.SetMaxHealth(maxHealth + stamina);
 	}
 
-    // Update is called once per frame
-    // not good for physics D: but great for inputs
+	// Update is called once per frame
+	// not good for physics D: but great for inputs
 	void Update() {
 		// gives a value between -1 and 1 depending on which key left or right,
 		// but if no move in this direction will return 0
@@ -308,26 +308,26 @@ public class Player : MonoBehaviour {
 		skillCoins -= numCoins;
 	}
 
-    public void AddKey( ItemTypes.ItemType type, int numKey) {
+	public void AddKey( ItemTypes.ItemType type, int numKey) {
 		inventory.AddItem(type, numKey);
 		UIinventory.RefreshInventoryItems();
 
 		AchievementCollection.keyCollection += numKey;
 	}
 
-    public void UseKey(int numKey) {
-        keys -= numKey;
-    }
+	public void UseKey(int numKey) {
+		keys -= numKey;
+	}
 
-    public void IncreaseStrength(int strengthUp) {
-        strength += strengthUp;
-        AchievementCollection.strengthUpCollection += 1;
-    }
+	public void IncreaseStrength(int strengthUp) {
+		strength += strengthUp;
+		AchievementCollection.strengthUpCollection += 1;
+	}
 
-    public void IncreaseAgility(int agilityUp) {
-        agility += agilityUp;
-        AchievementCollection.agilityUpCollection += 1;
-    }
+	public void IncreaseAgility(int agilityUp) {
+		agility += agilityUp;
+		AchievementCollection.agilityUpCollection += 1;
+	}
 
 	/**
 		Because this changes dynamically on item pickup
@@ -343,24 +343,24 @@ public class Player : MonoBehaviour {
 
 	}
 
-    public void PickUpHealthUp(int healthUp) {
-        IncreaseMaxHealth(healthUp);
-        AchievementCollection.healthUpCollection += 1;
-    }
+	public void PickUpHealthUp(int healthUp) {
+		IncreaseMaxHealth(healthUp);
+		AchievementCollection.healthUpCollection += 1;
+	}
 
-    public void PickUpPoison(int poisonValue) {
-        TakeDamage(poisonValue);
-        AchievementCollection.poisonCollection += 1;
-    }
+	public void PickUpPoison(int poisonValue) {
+		TakeDamage(poisonValue);
+		AchievementCollection.poisonCollection += 1;
+	}
 
-    public void AddKill() {
-        AchievementCollection.killCollection += 1;
-        AchievementCollection.killStreak += 1;
-    }
+	public void AddKill() {
+		AchievementCollection.killCollection += 1;
+		AchievementCollection.killStreak += 1;
+	}
 
-    // call when player dies
-    public void ResetKillStreak() {
-        AchievementCollection.killStreak = 0;
-    }
+	// call when player dies
+	public void ResetKillStreak() {
+		AchievementCollection.killStreak = 0;
+	}
 
 }
