@@ -63,9 +63,12 @@ public class GameStateManager {
 						this.inventory = this._player.GetInventoryItems();
 					};
 
+					this._level++;
+
 					SceneManager.LoadScene("betweenLevels");
 					break;
 				default:
+					this._level = 1;
 					SceneManager.LoadScene("mainMenu");
 					break;
 			};
@@ -84,6 +87,16 @@ public class GameStateManager {
 		GameStateManager.instance = null;
 	}
 
+
+	//=======================================================================\\
+	// Generic game-data
+
+	private int _level = 1;
+	public int level {
+		get {
+			return this._level;
+		}
+	}
 
 	//=======================================================================\\
 	// Methods relating to the player data
