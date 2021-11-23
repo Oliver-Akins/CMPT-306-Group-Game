@@ -96,7 +96,7 @@ public class GameStateManager {
 	//=======================================================================\\
 	// Generic game-data
 
-	private int _level = 0;
+	private int _level = 1;
 	public int level {
 		get {
 			return this._level;
