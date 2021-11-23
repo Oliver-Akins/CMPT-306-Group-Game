@@ -73,6 +73,7 @@ public class GameStateManager {
 					SceneManager.LoadScene("betweenLevels");
 					break;
 				default:
+					this._level = 1;
 					SceneManager.LoadScene("mainMenu");
 					break;
 			};
