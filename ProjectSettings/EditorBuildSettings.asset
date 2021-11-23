@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/inGame.unity
     guid: 43202e828609f38eead3a635a9b15186
   - enabled: 1
-    path: Assets/Scenes/devScene.unity
-    guid: aa30d778b8afc064f82abe8f313bc6b6
-  - enabled: 1
     path: Assets/Scenes/betweenLevels.unity
     guid: c2921410f86904ff2a6d80d113574c44
   m_configObjects: {}
