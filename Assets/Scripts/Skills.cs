@@ -51,44 +51,44 @@ public class Skills : MonoBehaviour
 
     // Values that are called by button presses, updates variables and ensures user cannot set a value that is out of bounds
     public void addStrength(){
-      if(skillCoins != 0) {
+      if(skillCoins > 4) {
         strength ++;
-        skillCoins --;
+        skillCoins -= 5;
       }
     }
 
     public void subtractStrength(){
       if(strength > 0) {
         strength --;
-        skillCoins ++;
+        skillCoins += 5;
       }
     }
 
     public void addAgility(){
-      if(skillCoins != 0) {
+      if(skillCoins > 4) {
         agility ++;
-        skillCoins --;
+        skillCoins -= 5;
       }
     }
 
     public void subtractAgility(){
       if(agility > 0) {
         agility --;
-        skillCoins ++;
+        skillCoins += 5;
       }
     }
 
     public void addStamina(){
-      if(skillCoins != 0) {
+      if(skillCoins > 4) {
         stamina ++;
-        skillCoins --;
+        skillCoins -= 5;
       }
     }
 
     public void subtractStamina(){
       if(stamina > 0) {
         stamina --;
-        skillCoins ++;
+        skillCoins += 5;
       }
     }
 
