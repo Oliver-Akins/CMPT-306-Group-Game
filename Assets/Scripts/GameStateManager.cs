@@ -55,12 +55,6 @@ public class GameStateManager {
 			switch (state) {
 				case GameState.IN_GAME:
 					SceneManager.LoadScene("inGame");
-
-					// Update the player's stats from the betweenLevels scene
-					if (this._playerStats != null && this._player != null) {
-						this._player.SetStats(this._playerStats);
-					};
-
 					break;
 				case GameState.BETWEEN_LEVEL:
 					// Get the player's stats before the gameobject gets destroyed
