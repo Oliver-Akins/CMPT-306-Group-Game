@@ -57,9 +57,10 @@ public class GameStateManager {
 					SceneManager.LoadScene("inGame");
 					break;
 				case GameState.BETWEEN_LEVEL:
-					// Get the player's stats before the gameobject gets destroyed
+					// Get the player info before the gameobject gets destroyed
 					if (this._player) {
 						this._playerStats = this._player.GetStats();
+						this.inventory = this._player.GetInventoryItems();
 					};
 
 					SceneManager.LoadScene("betweenLevels");
@@ -101,6 +102,9 @@ public class GameStateManager {
 			}
 		}
 	}
+
+	// The player's inventory, allowing them to save their items between levels
+	public List<InventoryItem> inventory = null;
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated
