@@ -16,6 +16,12 @@ public class InventoryItem {
 			case ItemTypes.ItemType.COIN: return ItemAssets.Instance.coinSprite;
 			case ItemTypes.ItemType.KEY: return ItemAssets.Instance.keySprite;
 			case ItemTypes.ItemType.POTION: return ItemAssets.Instance.healthPotionSprite;
+			case ItemTypes.ItemType.ARROW: return ItemAssets.Instance.arrow;
+			case ItemTypes.ItemType.ROCK: return ItemAssets.Instance.rock;
+			case ItemTypes.ItemType.FIREBALL: return ItemAssets.Instance.fireball;
+			case ItemTypes.ItemType.SWORD: return ItemAssets.Instance.sword;
+			case ItemTypes.ItemType.FLAIL: return ItemAssets.Instance.flail;
+			case ItemTypes.ItemType.SCYTHE: return ItemAssets.Instance.scythe;
 		}
 	}
 
@@ -27,6 +33,8 @@ public class InventoryItem {
 			case ItemTypes.ItemType.KEY:
 				return true;
 			case ItemTypes.ItemType.SWORD:
+			case ItemTypes.ItemType.FLAIL:
+			case ItemTypes.ItemType.SCYTHE:
 			case ItemTypes.ItemType.ROCK:
 			case ItemTypes.ItemType.ARROW:
 			case ItemTypes.ItemType.FIREBALL:
@@ -42,6 +50,42 @@ public class InventoryItem {
 			case ItemTypes.ItemType.KEY:
 				return false;
 			case ItemTypes.ItemType.SWORD:
+			case ItemTypes.ItemType.FLAIL:
+			case ItemTypes.ItemType.SCYTHE:
+			case ItemTypes.ItemType.ROCK:
+			case ItemTypes.ItemType.ARROW:
+			case ItemTypes.ItemType.FIREBALL:
+				return true;
+		}
+	}
+
+	public bool isMeleeWeap(){
+		switch(type){
+			default:
+			case ItemTypes.ItemType.COIN:
+			case ItemTypes.ItemType.POTION:
+			case ItemTypes.ItemType.KEY:
+			case ItemTypes.ItemType.ROCK:
+			case ItemTypes.ItemType.ARROW:
+			case ItemTypes.ItemType.FIREBALL:
+				return false;
+			case ItemTypes.ItemType.SWORD:
+			case ItemTypes.ItemType.FLAIL:
+			case ItemTypes.ItemType.SCYTHE:
+				return true;
+		}
+	}
+	
+	public bool isRangeWeap(){
+			switch(type){
+			default:
+			case ItemTypes.ItemType.COIN:
+			case ItemTypes.ItemType.POTION:
+			case ItemTypes.ItemType.KEY:
+			case ItemTypes.ItemType.SWORD:
+			case ItemTypes.ItemType.FLAIL:
+			case ItemTypes.ItemType.SCYTHE:
+				return false;
 			case ItemTypes.ItemType.ROCK:
 			case ItemTypes.ItemType.ARROW:
 			case ItemTypes.ItemType.FIREBALL:
@@ -63,6 +107,8 @@ public class InventoryItem {
 			case ItemTypes.ItemType.COIN:
 			case ItemTypes.ItemType.KEY:
 			case ItemTypes.ItemType.SWORD:
+			case ItemTypes.ItemType.FLAIL:
+			case ItemTypes.ItemType.SCYTHE:
 			case ItemTypes.ItemType.ROCK:
 			case ItemTypes.ItemType.ARROW:
 			case ItemTypes.ItemType.FIREBALL:

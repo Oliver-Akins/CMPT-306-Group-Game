@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Inventory {
 	// The item list!
 	private List<InventoryItem> itemList;
+	private Dictionary<string, InventoryItem> equippedItems;
 
 	/**
 		Action is just a void delegate; allows this to call the method the 
@@ -14,6 +17,11 @@ public class Inventory {
 	public Inventory(Action<InventoryItem> useInventoryItemAction ){
 		this.useInventoryItemAction = useInventoryItemAction;
 		itemList = new List<InventoryItem>();
+		equippedItems = new Dictionary<string, InventoryItem>();
+		equippedItems.Add( "equippedMelee", 
+			new InventoryItem{ type = ItemTypes.ItemType.SWORD, amount = 1});
+		equippedItems.Add( "equippedRange", 
+			new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 	}
 
 	/**
@@ -44,10 +52,15 @@ public class Inventory {
 		} else {
 			itemList.Add(item);
 		}
+
 	}
 
 	public List<InventoryItem> GetItemList(){
 		return itemList;
+	}
+
+	public Dictionary<string, InventoryItem> GetEquipped(){
+		return equippedItems;
 	}
 
 	public bool IsEmpty(){
@@ -74,4 +87,13 @@ public class Inventory {
 			itemList.Remove(item);
 		}
 	}
+
+	public void EquipMeleeWeap( InventoryItem item){
+		equippedItems["equippedMelee"] = item;
+	}
+
+	public void EquipRangeWeap( InventoryItem item){
+		equippedItems["equippedRange"] = item;
+	}
+
 };

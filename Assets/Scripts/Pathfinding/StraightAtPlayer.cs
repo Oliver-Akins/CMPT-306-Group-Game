@@ -18,7 +18,6 @@ public class StraightAtPlayer : MonoBehaviour {
 		this.target = FindObjectOfType<Player>().transform; 
 		foreach( AnimatorControllerParameter param in myAnim.parameters ){
 			if( param.name == "DoTransform" ){
-				Debug.Log(true);
 				this.hasToDoTransformAnim = true;
 			}		
 		}

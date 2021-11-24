@@ -12,7 +12,12 @@ public class ItemAssets : MonoBehaviour {
 		Instance = this;
 	}
 
-	public Sprite swordSprite;
+	public Sprite sword;
+	public Sprite scythe;
+	public Sprite flail;
+	public Sprite rock;
+	public Sprite arrow;
+	public Sprite fireball;
 	public Sprite healthPotionSprite;
 	public Sprite coinSprite;
 	public Sprite keySprite;

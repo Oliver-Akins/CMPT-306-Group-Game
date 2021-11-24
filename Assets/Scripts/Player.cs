@@ -293,6 +293,13 @@ public class Player : MonoBehaviour {
         keys -= numKey;
     }
 
+	// this needs to be updated to do things based on the weapon!
+	public void AddWeapon(ItemTypes.ItemType type){
+		inventory.AddItem(type, 1);
+		
+		UIinventory.RefreshInventoryItems();
+	}
+
     public void IncreaseStrength(int strengthUp) {
         strength += strengthUp;
         AchievementCollection.strengthUpCollection += 1;

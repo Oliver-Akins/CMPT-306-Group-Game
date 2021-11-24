@@ -19,7 +19,6 @@ public class Object : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-
 		if(col.CompareTag("Player")) {
 			
 			// call corresponding method depending on object type
@@ -72,6 +71,17 @@ public class Object : MonoBehaviour {
 					player.PickUpHealthUp(value);
 					break;
 				}
+				
+				case ItemTypes.ItemType.SCYTHE:
+				case ItemTypes.ItemType.SWORD:
+				case ItemTypes.ItemType.FLAIL:
+				case ItemTypes.ItemType.ROCK:
+				case ItemTypes.ItemType.ARROW:
+				case ItemTypes.ItemType.FIREBALL:{
+					player.AddWeapon(type);
+					break;
+				}
+					
 			}
 			achievements.checkAchievements();
 			Destroy(gameObject);

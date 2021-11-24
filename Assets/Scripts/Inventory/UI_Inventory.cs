@@ -10,8 +10,14 @@ public class UI_Inventory : MonoBehaviour {
 	private Transform itemSlotContainer;
 	private Transform itemSlotTemplate;
 
+	private Transform meleeWeapSlot;
+
+	private Transform rangeWeapSlot;
+
 	private void Awake() {
 		itemSlotContainer = transform.Find("ItemSlotContainer");
+		meleeWeapSlot = transform.Find("MeleeWeap");
+		rangeWeapSlot = transform.Find("RangeWeap");
 		itemSlotTemplate = itemSlotContainer.Find("ItemSlotTemplate");
 	}
 	public void SetInventory(Inventory inventory){
@@ -46,9 +52,22 @@ public class UI_Inventory : MonoBehaviour {
 			itemSlotRectTransform.gameObject.SetActive(true);
 			// if the item is equipable, equip with left click
 			if (item.IsEquipable()){
-				itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
-					// equip things!
-				};
+				// if melee equip in melee slot
+				if (item.isMeleeWeap()){
+					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
+						inventory.EquipMeleeWeap(item);
+						RefreshEquippedItems();
+					};
+				}
+
+				// if ranged equip in range slot
+				if (item.isRangeWeap()){
+					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
+						inventory.EquipRangeWeap(item);
+						RefreshEquippedItems();
+					};
+				}
+			
 			} else if (item.IsConsumable()){ // If the item is consumable, use on left click
 				itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
 					InventoryItem dupitem = new InventoryItem{type = item.type, amount = item.amount};
@@ -56,7 +75,7 @@ public class UI_Inventory : MonoBehaviour {
 				};
 			}
 			// otherwise do nothing with button ui stuffs
-		
+
 			// whacky x and y coords, reminds me of cmpt 140
 			itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize,
 				 -y * itemSlotCellSize);
@@ -72,4 +91,15 @@ public class UI_Inventory : MonoBehaviour {
 			}
 		}
 	}
-};
+
+	public void RefreshEquippedItems(){
+		Dictionary<string, InventoryItem> equippedItems = inventory.GetEquipped();
+
+		Image meleeWeapImg = meleeWeapSlot.Find("ItemImage").GetComponent<Image>();
+		meleeWeapImg.sprite = equippedItems["equippedMelee"].GetSprite();
+
+		Image rangeWeapImg = rangeWeapSlot.Find("ItemImage").GetComponent<Image>();
+		rangeWeapImg.sprite = equippedItems["equippedRange"].GetSprite();
+	}
+
+}
