@@ -17,6 +17,9 @@ public class Melee_Attack : MonoBehaviour {
 	// attack damage, will change based on weap and strength
 	public int attackDamage;
 	// Update is called once per frame
+	public AudioSource source;
+
+	public AudioClip swing;
 
 	public Player player;
 	void Update() {
@@ -64,6 +67,7 @@ public class Melee_Attack : MonoBehaviour {
 			// get access to the controller script and access the public methods
 			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + player.strength);
 		}
+		source.PlayOneShot(swing);
 	}
 
 	// used for testing and visually seeing the melee attack point. 
