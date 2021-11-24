@@ -84,7 +84,6 @@ public class EnemyController : MonoBehaviour {
 		myAnim.SetTrigger("Attack");
 		Player p = FindObjectOfType<Player>();
 		p.TakeDamage(attackDamage);
-		myAnim.SetTrigger("Attack");
 	}
 
 }

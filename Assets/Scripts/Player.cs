@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,33 +15,33 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D firePointRb;
 
 	// for animations this can be used with the blend tree
-    public Animator animator;
+	public Animator animator;
 
-    // Camera reference to handle aiming weapon attacks
-    public Camera cam;
+	// Camera reference to handle aiming weapon attacks
+	public Camera cam;
 
-    Vector2 movement;
-    Vector2 mousePosition;
+	Vector2 movement;
+	Vector2 mousePosition;
 
 	// player max health
 	// notes this is the base and gets modified by the stamina the player has
 	// at start and whenever the stamina increases
 	public int maxHealth;
 
-    // player current health - initializes to max health at start
-    public int currentHealth;
+	// player current health - initializes to max health at start
+	public int currentHealth;
 
-    // player health bar
-    public HealthBar healthBar;
+	// player health bar
+	public HealthBar healthBar;
 
-    // player strength
-    public int strength;
+	// player strength
+	public int strength;
 
-    //player agility
-    public int agility;
+	//player agility
+	public int agility;
 
-    //player stamina
-    public int stamina;
+	//player stamina
+	public int stamina;
 
 	//inventory
 	private Inventory inventory;
@@ -87,8 +88,25 @@ public class Player : MonoBehaviour {
 		this.strength = stats["strength"];
 		this.agility = stats["agility"];
 		this.stamina = stats["stamina"];
-		// TODO: Update the player's skillCoins value so that they don't get more
-		// skill coins than they should actually have
+
+		// Re-add the skill coins to the player's inventory
+		this.inventory.AddItem(
+			ItemTypes.ItemType.COIN,
+			stats["skillCoins"]
+		);
+		UIinventory.RefreshInventoryItems();
+	}
+
+	public List<InventoryItem> GetInventoryItems() {
+		return this.inventory.GetItemList();
+	}
+
+	public void SetInventoryItems(List<InventoryItem> items) {
+		this.inventory = new Inventory(
+			UseItem,
+			items.Where(item => item.type != ItemTypes.ItemType.COIN).ToList()
+		);
+		UIinventory.SetInventory(inventory);
 	}
 
 	private void Awake() {
@@ -109,8 +127,8 @@ public class Player : MonoBehaviour {
 		healthBar.SetMaxHealth(maxHealth + stamina);
 	}
 
-    // Update is called once per frame
-    // not good for physics D: but great for inputs
+	// Update is called once per frame
+	// not good for physics D: but great for inputs
 	void Update() {
 		// gives a value between -1 and 1 depending on which key left or right,
 		// but if no move in this direction will return 0
@@ -127,35 +145,43 @@ public class Player : MonoBehaviour {
 
 		// keyboard inputs for testing - delete if needed
 		if(Input.GetKeyDown(KeyCode.Space))
-			if(currentHealth > 0)
+			if(currentHealth > 0){
 				TakeDamage(100);
+			}
 
-		if(Input.GetKeyDown(KeyCode.H))
-			if(currentHealth < maxHealth)
-				HealPlayer(100);
+		if(Input.GetKeyDown(KeyCode.H)){
+			if(currentHealth < maxHealth + stamina){
+				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
+				if (foundItem != null && foundItem.amount > 0){
+					UseItem(foundItem);
+				}
+			}
+		}
 
-		if(Input.GetKeyDown(KeyCode.N))
-			DecreaseMaxHealth(100);
 
-		if(Input.GetKeyDown(KeyCode.M))
-			IncreaseMaxHealth(100);
+		// un-comment these when testing; should not be in the main build
+		// if(Input.GetKeyDown(KeyCode.N))
+		// 	DecreaseMaxHealth(100);
 
-		if(Input.GetKeyDown(KeyCode.K))
-			AddKill();
+		// if(Input.GetKeyDown(KeyCode.M))
+		// 	IncreaseMaxHealth(100);
+
+		// if(Input.GetKeyDown(KeyCode.K))
+		// 	AddKill();
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
 	// approx 50 times a second
 	void FixedUpdate() {
-		/** 
+		/**
 			turn the agi stat into percentage but half the value first as this stat
 			will also affect attack speed as well.
 			This assume its will be fractional increases to the player movement
-			hence the calculation to figure the speed increase from base; this is 
+			hence the calculation to figure the speed increase from base; this is
 			about a 5 percent increase of base speed at each level
 		*/
 		float agiModdedMoveSpeed = this.agility > 0 ? moveSpeed + (( (float)this.agility /2) / 10) : moveSpeed;
-		rb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);		
+		rb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
 		Vector2 aimDirection = mousePosition - rb.position;
 		// calculate the angle so the firepoint can rotate to correctly shoot from the player
 		float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
@@ -194,9 +220,9 @@ public class Player : MonoBehaviour {
 		healthBar.SetCurrentHealth(currentHealth);
 	}
 
-	/** 
-		TODO logic of this needs to change so the stam mod is correctly 
-		calculating and influencing the max health. 
+	/**
+		TODO logic of this needs to change so the stam mod is correctly
+		calculating and influencing the max health.
 		This likely not gonna be used in game but this is not great with
 		stamina affecting the player health
 	*/
@@ -213,9 +239,9 @@ public class Player : MonoBehaviour {
 	}
 
 	/**
-		TODO the logic of this needs to change, I would recommend not using 
+		TODO the logic of this needs to change, I would recommend not using
 		this at all until the logic changes or we feel we need this implemented
-	*/	
+	*/
 	public void IncreaseMaxHealth(int healthUp) {
 		maxHealth += healthUp;
 		currentHealth += healthUp;
@@ -282,32 +308,32 @@ public class Player : MonoBehaviour {
 		skillCoins -= numCoins;
 	}
 
-    public void AddKey( ItemTypes.ItemType type, int numKey) {
+	public void AddKey( ItemTypes.ItemType type, int numKey) {
 		inventory.AddItem(type, numKey);
 		UIinventory.RefreshInventoryItems();
 
 		AchievementCollection.keyCollection += numKey;
 	}
 
-    public void UseKey(int numKey) {
-        keys -= numKey;
-    }
+	public void UseKey(int numKey) {
+		keys -= numKey;
+	}
 
-    public void IncreaseStrength(int strengthUp) {
-        strength += strengthUp;
-        AchievementCollection.strengthUpCollection += 1;
-    }
+	public void IncreaseStrength(int strengthUp) {
+		strength += strengthUp;
+		AchievementCollection.strengthUpCollection += 1;
+	}
 
-    public void IncreaseAgility(int agilityUp) {
-        agility += agilityUp;
-        AchievementCollection.agilityUpCollection += 1;
-    }
+	public void IncreaseAgility(int agilityUp) {
+		agility += agilityUp;
+		AchievementCollection.agilityUpCollection += 1;
+	}
 
-	/** 
+	/**
 		Because this changes dynamically on item pickup
 		the mod needs to be calculated on its own, without the current stamina
 		as that would double dip in the stamina increase and cause non linear
-		increases in stamina 
+		increases in stamina
 	*/
 	public void IncreaseStamina(int staminaUp) {
 		stamina += staminaUp;
@@ -317,24 +343,24 @@ public class Player : MonoBehaviour {
 
 	}
 
-    public void PickUpHealthUp(int healthUp) {
-        IncreaseMaxHealth(healthUp);
-        AchievementCollection.healthUpCollection += 1;
-    }
+	public void PickUpHealthUp(int healthUp) {
+		IncreaseMaxHealth(healthUp);
+		AchievementCollection.healthUpCollection += 1;
+	}
 
-    public void PickUpPoison(int poisonValue) {
-        TakeDamage(poisonValue);
-        AchievementCollection.poisonCollection += 1;
-    }
+	public void PickUpPoison(int poisonValue) {
+		TakeDamage(poisonValue);
+		AchievementCollection.poisonCollection += 1;
+	}
 
-    public void AddKill() {
-        AchievementCollection.killCollection += 1;
-        AchievementCollection.killStreak += 1;
-    }
+	public void AddKill() {
+		AchievementCollection.killCollection += 1;
+		AchievementCollection.killStreak += 1;
+	}
 
-    // call when player dies
-    public void ResetKillStreak() {
-        AchievementCollection.killStreak = 0;
-    }
-	
+	// call when player dies
+	public void ResetKillStreak() {
+		AchievementCollection.killStreak = 0;
+	}
+
 }
