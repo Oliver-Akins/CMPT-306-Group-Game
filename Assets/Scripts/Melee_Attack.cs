@@ -18,8 +18,10 @@ public class Melee_Attack : MonoBehaviour {
 	public int attackDamage;
 	// Update is called once per frame
 	public AudioSource source;
+	// initialize audio source
 
 	public AudioClip swing;
+	//swing sound
 
 	public Player player;
 	void Update() {

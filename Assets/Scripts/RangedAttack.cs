@@ -12,6 +12,9 @@ public class RangedAttack : MonoBehaviour
     private float timeBetweenShots;
     public float startTimeBetweenShots;
     public Player player;
+    public AudioSource source;
+
+	public AudioClip rockThrow;
 
     // Update is called once per frame
     void Update(){
@@ -37,5 +40,8 @@ public class RangedAttack : MonoBehaviour
        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
        Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
        rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+
+        source.PlayOneShot(rockThrow);
+
     }
 }
