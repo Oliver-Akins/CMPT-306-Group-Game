@@ -20,10 +20,12 @@ public class UI_Inventory : MonoBehaviour {
 		rangeWeapSlot = transform.Find("RangeWeap");
 		itemSlotTemplate = itemSlotContainer.Find("ItemSlotTemplate");
 	}
+
 	public void SetInventory(Inventory inventory){
 		this.inventory = inventory;
 		if (!this.inventory.IsEmpty()){
 			RefreshInventoryItems();
+			RefreshEquippedItems();
 		}
 	}
 
@@ -35,6 +37,9 @@ public class UI_Inventory : MonoBehaviour {
 			consumable). It keeps the complexity low as we never have to check
 			where an item already is in the container.
 		*/
+		// if (itemSlotContainer == null){
+		// 	itemSlotContainer = transform.Find("ItemSlotContainer");
+		// }
 		foreach (Transform child in itemSlotContainer){
 			if (child == itemSlotTemplate) continue;
 			else Destroy(child.gameObject);
@@ -46,13 +51,13 @@ public class UI_Inventory : MonoBehaviour {
 		float itemSlotCellSize = 62f; 
 		foreach(InventoryItem item in inventory.GetItemList()){
 			// use the template to create a slot item; the template is always there
-			// just hidden
+			// just hidden/inactive
 			RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate,
 				itemSlotContainer).GetComponent<RectTransform>();
 			itemSlotRectTransform.gameObject.SetActive(true);
 			// if the item is equipable, equip with left click
 			if (item.IsEquipable()){
-				// if melee equip in melee slot
+				// if melee weap equip in melee slot
 				if (item.isMeleeWeap()){
 					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
 						inventory.EquipMeleeWeap(item);
@@ -60,7 +65,7 @@ public class UI_Inventory : MonoBehaviour {
 					};
 				}
 
-				// if ranged equip in range slot
+				// if ranged weap equip in range slot
 				if (item.isRangeWeap()){
 					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
 						inventory.EquipRangeWeap(item);
@@ -85,6 +90,7 @@ public class UI_Inventory : MonoBehaviour {
 			uiText.text = item.amount.ToString();
 			// :)
 			x++;
+			// if the row is for columns (slots) wide, start on a new row
 			if (x > 4){
 				x = 0;
 				y++;
@@ -92,6 +98,8 @@ public class UI_Inventory : MonoBehaviour {
 		}
 	}
 
+	// Instead of checking the equipment every time the user picks something up
+	// this lets it be called purposefully; like when the user equips something
 	public void RefreshEquippedItems(){
 		Dictionary<string, InventoryItem> equippedItems = inventory.GetEquipped();
 

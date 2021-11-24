@@ -101,19 +101,24 @@ public class Player : MonoBehaviour {
 		return this.inventory.GetItemList();
 	}
 
-	public void SetInventoryItems(List<InventoryItem> items) {
+	public Dictionary<string, InventoryItem> GetEquippedWeaps(){
+		return this.inventory.GetEquipped();
+	}
+
+	public void SetInventoryItems(List<InventoryItem> items,
+		Dictionary<string, InventoryItem> previouslyEquipped) {
 		this.inventory = new Inventory(
 			UseItem,
-			items.Where(item => item.type != ItemTypes.ItemType.COIN).ToList()
+			items.Where(item => item.type != ItemTypes.ItemType.COIN).ToList(),
+			previouslyEquipped
 		);
 		UIinventory.SetInventory(inventory);
 	}
 
 	private void Awake() {
 		/**
-			this needs to be updatd with the overloaded constructor as the
-			inbetween levels will delete the player and the player needs to be
-			reinstantiated with the old inventory and the inventory items
+			After the first level this gets overriden by the players
+			previous items and equipped weaps
 		*/
 		inventory = new Inventory(UseItem);
 		UIinventory.SetInventory(inventory);
@@ -121,6 +126,16 @@ public class Player : MonoBehaviour {
 
 	// Start() is called when script is enabled
 	void Start() {
+		//Start the player with some equipped weapons and with them in the inventory
+		// if it is empty and equip it
+		if (inventory.IsEmpty()){
+			inventory.EquipMeleeWeap(new InventoryItem{ type = ItemTypes.ItemType.SWORD, amount = 1});
+			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
+			inventory.EquipRangeWeap( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
+			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
+			UIinventory.RefreshInventoryItems();
+		}
+
 		// initialize max health to inspector value input
 		// also adds the stamina mod to flatly increase the health on 1:1 basis
 		currentHealth = maxHealth + stamina;
@@ -143,12 +158,6 @@ public class Player : MonoBehaviour {
 		// more optimized with square root magnitude as we won't need to calculate it on the vector
 		animator.SetFloat("Speed", movement.sqrMagnitude);
 
-		// keyboard inputs for testing - delete if needed
-		if(Input.GetKeyDown(KeyCode.Space))
-			if(currentHealth > 0){
-				TakeDamage(100);
-			}
-
 		if(Input.GetKeyDown(KeyCode.H)){
 			if(currentHealth < maxHealth + stamina){
 				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
@@ -157,17 +166,26 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
-
-
+		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
-		// if(Input.GetKeyDown(KeyCode.N))
+
+		// if(Input.GetKeyDown(KeyCode.Space)){
+		// 	if(currentHealth > 0){
+		// 		TakeDamage(100);
+		// 	}
+		// }
+
+		// if(Input.GetKeyDown(KeyCode.N)){
 		// 	DecreaseMaxHealth(100);
+		// }
 
-		// if(Input.GetKeyDown(KeyCode.M))
+		// if(Input.GetKeyDown(KeyCode.M)){
 		// 	IncreaseMaxHealth(100);
+		// }
 
-		// if(Input.GetKeyDown(KeyCode.K))
+		// if(Input.GetKeyDown(KeyCode.K)){
 		// 	AddKill();
+		// }
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -198,6 +216,18 @@ public class Player : MonoBehaviour {
 				HealPlayer(50); // change this later lol
 				inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.POTION, amount = 1});
 				UIinventory.RefreshInventoryItems();
+				break;
+			case ItemTypes.ItemType.ROCK:
+				break;
+			case ItemTypes.ItemType.ARROW:
+				break;
+			case ItemTypes.ItemType.FIREBALL:
+				break;
+			case ItemTypes.ItemType.SWORD:
+				break;
+			case ItemTypes.ItemType.FLAIL:
+				break;
+			case ItemTypes.ItemType.SCYTHE:
 				break;
 		}
 	}
@@ -322,7 +352,6 @@ public class Player : MonoBehaviour {
 	// this needs to be updated to do things based on the weapon!
 	public void AddWeapon(ItemTypes.ItemType type){
 		inventory.AddItem(type, 1);
-		
 		UIinventory.RefreshInventoryItems();
 	}
 

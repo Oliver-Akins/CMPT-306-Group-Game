@@ -14,14 +14,10 @@ public class Inventory {
 	*/
 	private Action<InventoryItem> useInventoryItemAction;
 
-	public Inventory(Action<InventoryItem> useInventoryItemAction ){
+	public Inventory(Action<InventoryItem> useInventoryItemAction){
 		this.useInventoryItemAction = useInventoryItemAction;
 		itemList = new List<InventoryItem>();
 		equippedItems = new Dictionary<string, InventoryItem>();
-		equippedItems.Add( "equippedMelee", 
-			new InventoryItem{ type = ItemTypes.ItemType.SWORD, amount = 1});
-		equippedItems.Add( "equippedRange", 
-			new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 	}
 
 	/**
@@ -29,9 +25,11 @@ public class Inventory {
 		an already existing item list (aka changing scenes)
 	*/
 	public Inventory(Action<InventoryItem> useInventoryItemAction,
-		List<InventoryItem> alreadyExistingItems){
+		List<InventoryItem> alreadyExistingItems,
+		Dictionary<string, InventoryItem> prevEquippedItems){
 			this.useInventoryItemAction = useInventoryItemAction;
 			itemList = alreadyExistingItems;
+			equippedItems = prevEquippedItems;
 	}
 
 	public void AddItem( ItemTypes.ItemType itemType, int value){
@@ -67,7 +65,7 @@ public class Inventory {
 		return itemList.Count <= 0;
 	}
 
-	// this uses the void delegate to use consumable items
+	// this uses the void delegate to use all consumable and equippable items
 	public void UseItem(InventoryItem item){
 		useInventoryItemAction(item);
 	}
@@ -89,11 +87,23 @@ public class Inventory {
 	}
 
 	public void EquipMeleeWeap( InventoryItem item){
-		equippedItems["equippedMelee"] = item;
+		string key = "equippedMelee";
+		if (equippedItems.ContainsKey(key)){
+			equippedItems[key] = item;
+		} else {
+			equippedItems.Add(key, item);
+		}
+		// UseItem(item);
 	}
 
 	public void EquipRangeWeap( InventoryItem item){
-		equippedItems["equippedRange"] = item;
+		string key = "equippedRange";
+		if (equippedItems.ContainsKey(key)){
+			equippedItems[key] = item;
+		} else {
+			equippedItems.Add(key, item);
+		}
+		// UseItem(item);
 	}
 
 	public InventoryItem FindItem(ItemTypes.ItemType itemType){
