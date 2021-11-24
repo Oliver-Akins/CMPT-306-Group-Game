@@ -51,6 +51,7 @@ public class Melee_Attack : MonoBehaviour {
 		// attack animation trigger (in animator this is the trigger param)
 		// wondering how we can set this to be more fluid and play other animations
 		animator.SetTrigger("Attack");
+		animator.SetFloat("AttackDirection", attackPosition.x - transform.position.x);
 
 		meleeAttackPoint.SetPositionAndRotation(attackPosition, meleeAttackPoint.rotation);
 		// detect enemies in range/hit, they need to be on the enemy layer btw
