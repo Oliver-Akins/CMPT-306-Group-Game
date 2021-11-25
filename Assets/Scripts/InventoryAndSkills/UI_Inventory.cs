@@ -75,6 +75,7 @@ public class UI_Inventory : MonoBehaviour {
 			
 			} else if (item.IsConsumable()){ // If the item is consumable, use on left click
 				itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
+					SoundAssets.Instance.playUseSound(item.type);
 					InventoryItem dupitem = new InventoryItem{type = item.type, amount = item.amount};
 					inventory.UseItem(dupitem);
 				};

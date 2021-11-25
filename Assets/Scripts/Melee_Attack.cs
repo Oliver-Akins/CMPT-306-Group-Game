@@ -14,6 +14,11 @@ public class Melee_Attack : MonoBehaviour {
 	// The enemy layer used to check hits
 	public LayerMask enemyLayers;
 	// Update is called once per frame
+	public AudioSource source;
+	// initialize audio source
+
+	public AudioClip swing;
+	//swing sound
 
 	public Player player;
 	void Update() {
@@ -60,6 +65,7 @@ public class Melee_Attack : MonoBehaviour {
 			// get access to the controller script and access the public methods
 			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() + player.strength);
 		}
+		source.PlayOneShot(swing);
 	}
 
 	// used for testing and visually seeing the melee attack point. 

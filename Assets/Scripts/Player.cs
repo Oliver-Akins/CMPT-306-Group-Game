@@ -186,6 +186,7 @@ public class Player : MonoBehaviour {
 				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
 				if (foundItem != null && foundItem.amount > 0){
 					UseItem(foundItem);
+					SoundAssets.Instance.playUseSound(foundItem.type);
 				}
 			}
 		}
@@ -277,7 +278,6 @@ public class Player : MonoBehaviour {
 	// also yay for integer division?
 	public int getRangeDamage(){
 		int rangeDam = this.rangeDamage + strength/3;
-		Debug.Log(rangeDam);
 		return rangeDam;
 	}
 

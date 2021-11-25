@@ -25,6 +25,7 @@ public class Object : MonoBehaviour {
 			switch(type) {
 
 				case ItemTypes.ItemType.COIN: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.COIN);
 					player.AddCoin(ItemTypes.ItemType.COIN, value);
 					break;
 				}
@@ -63,6 +64,7 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.POTION: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.POTION);
 					player.AddPotion(type, value);
 					break;
 				}
