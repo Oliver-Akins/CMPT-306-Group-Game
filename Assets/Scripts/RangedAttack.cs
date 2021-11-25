@@ -34,11 +34,20 @@ public class RangedAttack : MonoBehaviour
     }
 
     void RangeAttack(){
-        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = player.GetEquippedWeaps()["equippedRange"].GetSprite();
+        InventoryItem item = player.GetEquippedWeaps()["equippedRange"];
+        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
         GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
-        var hashQualities = new Hashtable();
-        hashQualities.Add("damageAmount", player.getRangeDamage());
-        ammo.GetComponent<RangeWeap>().setQualities(hashQualities);
+        var projectileQualities = new Hashtable();
+        projectileQualities.Add("damageAmount", player.getRangeDamage());
+        if (item.type == ItemTypes.ItemType.ARROW){
+            projectileQualities["bleedTicks"] = 5;
+            projectileQualities["bleedTickDamage"] = 5 + player.strength/3;
+        }
+        else if (item.type == ItemTypes.ItemType.FIREBALL){
+            projectileQualities["burnTicks"] = 8;
+            projectileQualities["burnTickDamage"] = 8 + player.strength/2;
+        }
+        ammo.GetComponent<RangeWeap>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
     }

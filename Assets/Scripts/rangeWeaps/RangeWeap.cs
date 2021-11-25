@@ -11,8 +11,14 @@ public class RangeWeap : MonoBehaviour {
 	*/
 	// public GameObject hitEffect;
 	
-	public int damageAmount;
+	private int damageAmount;
+	private int burnTicks = 0;
+	private int burnTickDamage = 0;
+	private int bleedTicks = 0;
+	private int bleedTickDamage = 0;
 	public LayerMask enemyLayers;
+
+	StatusManager manager;
 
 	/** only hell this is the ONLY way ive found so far to ensure that the
 		player's collider doesn't interfere with the projectiles.
@@ -29,8 +35,15 @@ public class RangeWeap : MonoBehaviour {
 		if (hitLayer == 7  || hitLayer == 8){
 			// we hit an enemy!
 			if (hitLayer == 8){
-				Player p = GameObject.Find("Player").GetComponent<Player>();
-				collisionInfo.GetComponent<EnemyController>().TakeDamage( damageAmount + p.strength);
+				EnemyController controller = collisionInfo.GetComponent<EnemyController>();
+				StatusManager manager = controller.GetComponent<StatusManager>();
+				controller.TakeDamage( damageAmount);
+				if (burnTicks > 0 && burnTickDamage > 0){
+					manager.ApplyBurn(burnTicks, burnTickDamage);
+				}
+				if (bleedTicks > 0 && bleedTickDamage > 0){
+					manager.ApplyBleed(bleedTicks, bleedTickDamage);
+				}
 			}
 			Destroy(gameObject);
 		}
@@ -38,5 +51,13 @@ public class RangeWeap : MonoBehaviour {
 
 	public void setQualities(Hashtable qualities){
 		this.damageAmount = (int) qualities["damageAmount"];
+		if (qualities.Contains("burnTicks")){
+			this.burnTicks = (int) qualities["burnTicks"];
+			this.burnTickDamage = (int) qualities["burnTickDamage"];
+		}
+		else if (qualities.Contains("bleedTicks")){
+			this.bleedTicks = (int) qualities["bleedTicks"];
+			this.bleedTickDamage = (int) qualities["bleedTickDamage"];
+		}
 	}
 };

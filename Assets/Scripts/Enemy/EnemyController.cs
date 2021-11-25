@@ -85,5 +85,4 @@ public class EnemyController : MonoBehaviour {
 		Player p = FindObjectOfType<Player>();
 		p.TakeDamage(attackDamage);
 	}
-
 }
