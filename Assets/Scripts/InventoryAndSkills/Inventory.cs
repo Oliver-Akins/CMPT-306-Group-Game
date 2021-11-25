@@ -80,6 +80,7 @@ public class Inventory {
 				}
 			} if (itemInInventory != null && itemInInventory.amount <= 0){ // adds the first instance of stackable items
 				itemList.Remove(itemInInventory);
+				Tooltip.HideTooltip_Static();
 			}
 		} else {
 			itemList.Remove(item);
