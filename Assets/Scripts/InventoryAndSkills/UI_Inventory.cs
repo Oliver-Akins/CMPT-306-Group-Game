@@ -60,7 +60,7 @@ public class UI_Inventory : MonoBehaviour {
 				// if melee weap equip in melee slot
 				if (item.isMeleeWeap()){
 					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
-						inventory.EquipMeleeWeap(item);
+						inventory.UseItem(item);
 						RefreshEquippedItems();
 					};
 				}
@@ -68,7 +68,7 @@ public class UI_Inventory : MonoBehaviour {
 				// if ranged weap equip in range slot
 				if (item.isRangeWeap()){
 					itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>{
-						inventory.EquipRangeWeap(item);
+						inventory.UseItem(item);
 						RefreshEquippedItems();
 					};
 				}

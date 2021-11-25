@@ -23,7 +23,7 @@ public class InventoryItem {
 			case ItemTypes.ItemType.SWORD:
 				return "Sword, slash multiple enemies" + weapText;
 			case ItemTypes.ItemType.FLAIL:
-				return "Flail, crush your enemy, while just outside their reach" + weapText;
+				return "Flail, crush your enemy from outside their reach" + weapText;
 			case ItemTypes.ItemType.SCYTHE:
 				return "Scythe, reap your enemies within a large area" + weapText;
 			case ItemTypes.ItemType.ROCK:

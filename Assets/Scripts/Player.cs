@@ -68,6 +68,10 @@ public class Player : MonoBehaviour {
 	private Coroutine healEffectOverlayRoutine;
 	private bool healEffectRunning = false;
 
+	private float attackRange;
+	private float attackOffset;
+	private float meleeDamage;
+
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
 		stats.Add("strength", this.strength);
@@ -129,13 +133,30 @@ public class Player : MonoBehaviour {
 		//Start the player with some equipped weapons and with them in the inventory
 		// if it is empty and equip it
 		if (inventory.IsEmpty()){
-			inventory.EquipMeleeWeap(new InventoryItem{ type = ItemTypes.ItemType.SWORD, amount = 1});
+			// remove this section for final release:
+			UseItem( new InventoryItem{type = ItemTypes.ItemType.SCYTHE, amount = 1});
+			inventory.AddItem(ItemTypes.ItemType.SCYTHE, 1);
+			UseItem( new InventoryItem {type = ItemTypes.ItemType.FLAIL, amount = 1});
+			inventory.AddItem(ItemTypes.ItemType.FLAIL, 1);
+			UseItem( new InventoryItem{type = ItemTypes.ItemType.ARROW});
+			inventory.AddItem(ItemTypes.ItemType.ARROW, 1);
+			UseItem( new InventoryItem{type = ItemTypes.ItemType.FIREBALL, amount = 1});
+			inventory.AddItem(ItemTypes.ItemType.FIREBALL, 1);
+
+			// this is the default items for the player to have weaps!
+			// if we get the tutorial level working this can change.
+			UseItem(new InventoryItem{ type = ItemTypes.ItemType.SWORD, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
-			inventory.EquipRangeWeap( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
+			UseItem( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
 			UIinventory.RefreshInventoryItems();
+		} else {
+			// always need to ensure the player is equipped
+			Dictionary<string, InventoryItem> equippedItems = inventory.GetEquipped();
+			UseItem(equippedItems["equippedRange"]);
+			UseItem(equippedItems["equippedMelee"]);
 		}
-
+	
 		// initialize max health to inspector value input
 		// also adds the stamina mod to flatly increase the health on 1:1 basis
 		currentHealth = maxHealth + stamina;
@@ -211,6 +232,12 @@ public class Player : MonoBehaviour {
 	}
 
 	private void UseItem(InventoryItem item){
+		if (item.isMeleeWeap()){
+			inventory.EquipMeleeWeap(item);
+		}
+		else if (item.isRangeWeap()){
+			inventory.EquipRangeWeap(item);
+		}
 		switch(item.type){
 			case ItemTypes.ItemType.POTION:
 				HealPlayer(50); // change this later lol
@@ -224,12 +251,26 @@ public class Player : MonoBehaviour {
 			case ItemTypes.ItemType.FIREBALL:
 				break;
 			case ItemTypes.ItemType.SWORD:
+				this.attackOffset = 1.5f;
+				this.attackRange = .6f;
 				break;
 			case ItemTypes.ItemType.FLAIL:
+				this.attackOffset = 2.5f;
+				this.attackRange = .4f;
 				break;
 			case ItemTypes.ItemType.SCYTHE:
+				this.attackOffset = 1.1f;
+				this.attackRange = .9f;
 				break;
 		}
+	}
+
+	public float getAttackOffset(){
+		return this.attackOffset;
+	}
+
+	public float getAttackRange(){
+		return this.attackRange;
 	}
 
 	public void TakeDamage(int damageValue) {

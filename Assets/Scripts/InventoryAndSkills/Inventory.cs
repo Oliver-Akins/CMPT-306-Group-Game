@@ -93,7 +93,6 @@ public class Inventory {
 		} else {
 			equippedItems.Add(key, item);
 		}
-		// UseItem(item);
 	}
 
 	public void EquipRangeWeap( InventoryItem item){
@@ -103,7 +102,6 @@ public class Inventory {
 		} else {
 			equippedItems.Add(key, item);
 		}
-		// UseItem(item);
 	}
 
 	public InventoryItem FindItem(ItemTypes.ItemType itemType){
