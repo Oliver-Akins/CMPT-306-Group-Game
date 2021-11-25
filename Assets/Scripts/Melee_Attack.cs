@@ -13,8 +13,6 @@ public class Melee_Attack : MonoBehaviour {
 	public float startTimeBetweenAttacks;
 	// The enemy layer used to check hits
 	public LayerMask enemyLayers;
-	// attack damage, will change based on weap and strength
-	public int attackDamage;
 	// Update is called once per frame
 
 	public Player player;
@@ -60,7 +58,7 @@ public class Melee_Attack : MonoBehaviour {
 		// with a wider range like a sweeping sword attack
 		foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
-			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + player.strength);
+			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() + player.strength);
 		}
 	}
 

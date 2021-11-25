@@ -70,7 +70,9 @@ public class Player : MonoBehaviour {
 
 	private float attackRange;
 	private float attackOffset;
-	private float meleeDamage;
+	private int meleeDamage;
+
+	private int rangeDamage;
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -245,24 +247,38 @@ public class Player : MonoBehaviour {
 				UIinventory.RefreshInventoryItems();
 				break;
 			case ItemTypes.ItemType.ROCK:
+				this.rangeDamage = 15;
 				break;
 			case ItemTypes.ItemType.ARROW:
+				this.rangeDamage = 10;
 				break;
 			case ItemTypes.ItemType.FIREBALL:
+				this.rangeDamage = 5;
 				break;
 			case ItemTypes.ItemType.SWORD:
 				this.attackOffset = 1.5f;
 				this.attackRange = .6f;
+				this.meleeDamage = 30;
 				break;
 			case ItemTypes.ItemType.FLAIL:
 				this.attackOffset = 2.5f;
 				this.attackRange = .4f;
+				this.meleeDamage = 25;
 				break;
 			case ItemTypes.ItemType.SCYTHE:
 				this.attackOffset = 1.1f;
 				this.attackRange = .9f;
+				this.meleeDamage = 35;
 				break;
 		}
+	}
+
+	// wanted strength to affect ranged weaps but less strongly
+	// also yay for integer division?
+	public int getRangeDamage(){
+		int rangeDam = this.rangeDamage + strength/3;
+		Debug.Log(rangeDam);
+		return rangeDam;
 	}
 
 	public float getAttackOffset(){
@@ -271,6 +287,10 @@ public class Player : MonoBehaviour {
 
 	public float getAttackRange(){
 		return this.attackRange;
+	}
+
+	public int getMeleeAttackDamage(){
+		return this.meleeDamage;
 	}
 
 	public void TakeDamage(int damageValue) {

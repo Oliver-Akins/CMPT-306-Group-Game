@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour {
+public class RangeWeap : MonoBehaviour {
 
 	/** This contains code that can create an effect when the rock hits something
 	 I do not have the animation for hit in the game so it will need to be done
@@ -34,5 +34,9 @@ public class Rock : MonoBehaviour {
 			}
 			Destroy(gameObject);
 		}
+	}
+
+	public void setQualities(Hashtable qualities){
+		this.damageAmount = (int) qualities["damageAmount"];
 	}
 };

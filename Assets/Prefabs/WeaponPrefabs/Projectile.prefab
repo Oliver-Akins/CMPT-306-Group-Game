@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2004395586902086214}
   - component: {fileID: 2004395586902086215}
   - component: {fileID: 1373860951403121745}
-  - component: {fileID: -4407291022470542503}
+  - component: {fileID: 8919420232766293346}
   m_Layer: 0
-  m_Name: RockWeap
+  m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4407291022470542503
+--- !u!114 &8919420232766293346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4bab0512410c640958c55cd713b8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 15
+  damageAmount: 0
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
