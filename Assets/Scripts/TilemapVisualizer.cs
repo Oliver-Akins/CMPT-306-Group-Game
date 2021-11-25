@@ -114,7 +114,7 @@ public class TilemapVisualizer : MonoBehaviour {
 					case 13: clutterTile = brushClutter2; break;
 					case 14: clutterTile = brushClutter3; break;
 					case 15: clutterTile = brushClutter4; break;
-					default: Debug.Log("error: not a case"); break;
+					default: Debug.Log("error: tilenumber for clutter out of range"); break;
 				}
 
 				PaintSingleTile(tilemap, clutterTile, position);
