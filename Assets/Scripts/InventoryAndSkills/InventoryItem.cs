@@ -10,6 +10,31 @@ public class InventoryItem {
 	public ItemTypes.ItemType type;
 	public int amount;
 	
+	public string GetTooltipText(){
+		string weapText = "\nLeft click to equip";
+		switch(type){
+			default:
+			case ItemTypes.ItemType.COIN:
+				return "Coins are used to buy stat upgrades and skills";
+			case ItemTypes.ItemType.POTION:
+				return "Potions, heal you can be used by clicking the potion or hitting H key";
+			case ItemTypes.ItemType.KEY:
+				return "Keys are used to automatically open chests";
+			case ItemTypes.ItemType.SWORD:
+				return "Sword, slash multiple enemies" + weapText;
+			case ItemTypes.ItemType.FLAIL:
+				return "Flail, crush your enemy, while just outside their reach" + weapText;
+			case ItemTypes.ItemType.SCYTHE:
+				return "Scythe, reap your enemies within a large area" + weapText;
+			case ItemTypes.ItemType.ROCK:
+				return "Rock, throw dirty snowballs at your enemies" + weapText;
+			case ItemTypes.ItemType.ARROW:
+				return "Arrow, leave your enemies bleeding" + weapText;
+			case ItemTypes.ItemType.FIREBALL:
+				return "Fireball, essentially a smol projectile sun to burn enemies" + weapText;
+		}
+	}
+
 	public Sprite GetSprite(){
 		switch (type){
 			default:

@@ -79,6 +79,12 @@ public class UI_Inventory : MonoBehaviour {
 					inventory.UseItem(dupitem);
 				};
 			}
+			itemSlotRectTransform.GetComponent<Button_UI>().MouseOverOnceFunc = () =>{
+				Tooltip.ShowTooltip_Static(item.GetTooltipText());	
+			};
+			itemSlotRectTransform.GetComponent<Button_UI>().MouseOutOnceFunc = () => {
+				Tooltip.HideTooltip_Static();
+			};
 			// otherwise do nothing with button ui stuffs
 
 			// whacky x and y coords, reminds me of cmpt 140
