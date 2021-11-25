@@ -51,6 +51,9 @@ public class EnemyController : MonoBehaviour {
 		currentHealth -= damageValue;
 		myAnim.SetTrigger("Hurt");
 		if (currentHealth <= 0){
+			// this needs to be removed here so that the dots don't keep ticking 
+			// when the enemy is dead
+			Destroy(GetComponent<StatusManager>());
 			Die();
 		}
 		healthBar.SetCurrentHealth(currentHealth);
