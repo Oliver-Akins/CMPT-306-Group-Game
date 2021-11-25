@@ -13,13 +13,13 @@ public class Tooltip : MonoBehaviour {
 	
 	[SerializeField]
 	private RectTransform canvasRectTransform;
-	// private RectTransform backgroundRectTransform;
+	private RectTransform backgroundRectTransform;
 
 	private System.Func<string> getTooltipTextFunc;
 
 	void Awake() {
 		Instance = this;
-		// backgroundRectTransform = transform.Find("Background").GetComponent<RectTransform>();
+		backgroundRectTransform = transform.Find("Background").GetComponent<RectTransform>();
 		tooltipText = transform.Find("TooltipText").GetComponent<TextMeshProUGUI>();
 		rectTransform = transform.GetComponent<RectTransform>();
 		HideTooltip();
@@ -29,7 +29,8 @@ public class Tooltip : MonoBehaviour {
 		tooltipText.SetText(tooltipstring);
 		tooltipText.ForceMeshUpdate();
 		Vector2 textSize = tooltipText.GetRenderedValues(false);
-		// backgroundRectTransform.sizeDelta = textSize;
+		Vector2 paddingSize = new Vector2(8, 8);
+		backgroundRectTransform.sizeDelta = textSize + paddingSize;
 	}
 
 	// Move it with mouse!
