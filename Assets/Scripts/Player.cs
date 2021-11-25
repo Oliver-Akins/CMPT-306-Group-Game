@@ -154,6 +154,7 @@ public class Player : MonoBehaviour {
 				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
 				if (foundItem != null && foundItem.amount > 0){
 					UseItem(foundItem);
+					SoundAssets.Instance.playUseSound(foundItem.type);
 				}
 			}
 		}
