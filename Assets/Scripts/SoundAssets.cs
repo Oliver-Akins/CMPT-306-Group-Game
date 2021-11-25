@@ -16,8 +16,26 @@ public class SoundAssets : MonoBehaviour {
 			case ItemTypes.ItemType.COIN:
 				source.PlayOneShot(coinPickupSound);
 				return;
+			case ItemTypes.ItemType.KEY:
+				source.PlayOneShot(keyPickupSound);
+				return;
 			case ItemTypes.ItemType.POTION:
 				source.PlayOneShot(potionPickupSound);
+				return;
+			case ItemTypes.ItemType.STRENGTHUP:
+				source.PlayOneShot(statUpSound);
+				return;
+			case ItemTypes.ItemType.AGILITYUP:
+				source.PlayOneShot(statUpSound);
+				return;
+			case ItemTypes.ItemType.STAMINAUP:
+				source.PlayOneShot(statUpSound);
+				return;
+			case ItemTypes.ItemType.STATSUP:
+				source.PlayOneShot(statUpSound);
+				return;
+			case ItemTypes.ItemType.POISON:
+				source.PlayOneShot(poisinPickup);
 				return;
 		}
 	}
@@ -34,7 +52,10 @@ public class SoundAssets : MonoBehaviour {
 	public AudioSource source;
 
 	public AudioClip coinPickupSound;
+	public AudioClip keyPickupSound;
 	public AudioClip potionPickupSound;
 	public AudioClip potionUseSound;
+	public AudioClip statUpSound;
+	public AudioClip poisinPickup;
 
 };
