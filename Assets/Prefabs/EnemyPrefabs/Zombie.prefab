@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
   enemyRb: {fileID: 0}
-  speed: 0.2
+  speed: 0.5
   maxRange: 4
   minRange: 0.75
   attackRange: 1
