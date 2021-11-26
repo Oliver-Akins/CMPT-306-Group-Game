@@ -314,7 +314,7 @@ MonoBehaviour:
   fill: {fileID: 8169963889383382260}
   healthDivPrefab: {fileID: 6199391945314486471, guid: 63912c177fc074645b3385c813ffbbad, type: 3}
   healthDivLayout: {fileID: 8169963887289093680}
-  valuePerDivider: 25
+  valuePerDivider: 50
 --- !u!1 &8169963889383382262
 GameObject:
   m_ObjectHideFlags: 0

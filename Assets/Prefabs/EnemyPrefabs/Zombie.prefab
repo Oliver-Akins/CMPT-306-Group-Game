@@ -408,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889015049719, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: valuePerDivider
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_AnchorMax.x
