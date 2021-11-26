@@ -25,6 +25,10 @@ public class HealthBar : MonoBehaviour {
     // flash routine for health bar damage effect
     private Coroutine flashRoutine;
 
+    // health amount per divider
+    [SerializeField]
+    private int healthPerDivider;
+
     public void SetMaxHealth(int maxHealth) {
 
         slider.maxValue = maxHealth;
@@ -37,15 +41,7 @@ public class HealthBar : MonoBehaviour {
         healthDivList = new List<GameObject>();
         healthDivList.Clear();
 
-        // value per health bar divider
-        int healthDivider = maxHealth / 100;
-
-        // initialize health dividers
-        for (int i = 0; i < healthDivider; i++) {
-            GameObject new_health = Instantiate(healthDivPrefab);
-            new_health.transform.SetParent(healthDivLayout.transform, false);
-            healthDivList.Add(new_health);
-        }
+        UpdateDivider(maxHealth);
     }
 
     public void SetCurrentHealth(int currentHealth) {
@@ -94,5 +90,17 @@ public class HealthBar : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
+    }
+
+    private void UpdateDivider(int maxHealth) {
+        // value per health bar divider
+        int healthDivider = maxHealth / healthPerDivider;
+
+        // initialize health dividers
+        for (int i = 0; i < healthDivider; i++) {
+            GameObject new_health = Instantiate(healthDivPrefab);
+            new_health.transform.SetParent(healthDivLayout.transform, false);
+            healthDivList.Add(new_health);
+        }
     }
 }
