@@ -296,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d57ad87bae90946828e8c12d94dbc594, type: 2}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: clutterChance
-      value: 0.025
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: stoneClutter1
