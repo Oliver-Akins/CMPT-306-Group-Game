@@ -76,8 +76,21 @@ public class EnemyController : MonoBehaviour {
 		// can have a death effect to if we want
 		Destroy(gameObject);
 
-		// Instantiate(lootDrop, transform.position, Quaternion.identity);
-		Instantiate(items[Random.Range(0, items.Count-1)], transform.position, Quaternion.identity);
+		if(AchievementCollection.killStreak > 4) {
+			int coins = Random.Range(2, 5);
+
+			for(int i = 0; i < coins; i++) {
+				Instantiate(items[0], transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0), Quaternion.identity);
+			}
+
+			Instantiate(items[Random.Range(1, items.Count-1)], transform.position, Quaternion.identity);
+
+		} else {
+			Instantiate(items[Random.Range(0, items.Count-1)], transform.position, Quaternion.identity);
+		}
+
+		
+	
 	}
 
 	public void Attack(){
