@@ -16,9 +16,22 @@ public class RangedAttack : MonoBehaviour
 
 	public AudioClip rockThrow;
 
+    public Camera cam;
+
     // Update is called once per frame
     void Update(){
+        
         if (startTimeBetweenShots > 0){     
+
+            // the current mouse position in world coordinates
+            Vector3 mouseposition = cam.ScreenToWorldPoint(Input.mousePosition);
+            // the direction the mouse is relative to the player
+            Vector3 mouseDirection = (mouseposition - transform.position).normalized;
+            // the offset to move the fire position, this moves the fire point outwards
+            // can be tweaked as needed, 1f may be enough.
+            Vector3 attackPosition = transform.position + mouseDirection * 2f;
+            firePoint.SetPositionAndRotation(attackPosition, firePoint.rotation);
+
             float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
             if (timeBetweenShots <= 0){
                 if(Input.GetButtonDown("Fire2")){
@@ -50,7 +63,7 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTicks"] = 8;
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
-        ammo.GetComponent<RangeWeap>().setQualities(projectileQualities);
+        ammo.GetComponent<Projectile>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
 

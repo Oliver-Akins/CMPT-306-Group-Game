@@ -277,6 +277,8 @@ MonoBehaviour:
   weapForce: 20
   startTimeBetweenShots: 0.4
   player: {fileID: 8765913521880903165}
+  source: {fileID: 0}
+  rockThrow: {fileID: 0}
 --- !u!61 &8765913521880903111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -293,7 +295,7 @@ BoxCollider2D:
   m_Offset: {x: -0.12770107, y: -0.28556576}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4, y: 0.5}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -318,12 +320,12 @@ MonoBehaviour:
   animator: {fileID: 8765913521880903105}
   meleeAttackPoint: {fileID: 8765913523222956945}
   cam: {fileID: 0}
-  attackRange: 0.5
   startTimeBetweenAttacks: 0.4
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attackDamage: 25
+  source: {fileID: 0}
+  swing: {fileID: 0}
   player: {fileID: 8765913521880903165}
 --- !u!1 &8765913522077439527
 GameObject:
@@ -742,7 +744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765913523455138914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.288, y: -0.147, z: 0}
+  m_LocalPosition: {x: 0.27, y: -0.35, z: 0}
   m_LocalScale: {x: 2.54, y: 2.31, z: 0.45}
   m_Children: []
   m_Father: {fileID: 8765913521880903106}

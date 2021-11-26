@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeWeap : MonoBehaviour {
+public class Projectile : MonoBehaviour {
 
 	/** This contains code that can create an effect when the rock hits something
 	 I do not have the animation for hit in the game so it will need to be done
@@ -10,13 +10,31 @@ public class RangeWeap : MonoBehaviour {
 	 effects per upgrade. 
 	*/
 	// public GameObject hitEffect;
-	
+
+	public Rigidbody2D rb; 
+	public LayerMask enemyLayers;
+
 	private int damageAmount;
+	
+	// Burn from fireball projectiles
 	private int burnTicks = 0;
 	private int burnTickDamage = 0;
+
+	// bleed from arrows
 	private int bleedTicks = 0;
 	private int bleedTickDamage = 0;
-	public LayerMask enemyLayers;
+
+	// bouncy from player skills
+	public bool isBouncy = true;
+	public int maxBounces = 30;
+	// track how many bounces have happened
+	public int howManyBounces = 0;
+
+	// peircing from player skills
+	public bool isPeircing = true;
+	public int maxPeirces = 2;
+	// track how many enemies the projectile has peirced
+	public int howManyPeirces;
 
 	StatusManager manager;
 
@@ -28,14 +46,24 @@ public class RangeWeap : MonoBehaviour {
 		4. do things in trigger and check the layers even though its set
 		TO NOT INTERACT but really the rock doesn't know what its hitting... unless it checks :)
 	*/
-	void OnTriggerEnter2D(Collider2D collisionInfo){
+	void OnCollisionEnter2D(Collision2D collisionInfo){
 		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 		// Destroy(effect, 5f);	
 		int hitLayer = collisionInfo.gameObject.layer;
 		if (hitLayer == 7  || hitLayer == 8){
+			if (hitLayer == 7){
+				Vector2 wallNormal = collisionInfo.contacts[0].normal;
+				Vector2 moveDirection = Vector2.Reflect(rb.velocity, wallNormal).normalized;
+				rb.velocity = moveDirection * 20f;
+				this.howManyBounces++;
+				if (this.howManyBounces > this.maxBounces){
+					Destroy(gameObject);
+				}
+			}
+
 			// we hit an enemy!
 			if (hitLayer == 8){
-				EnemyController controller = collisionInfo.GetComponent<EnemyController>();
+				EnemyController controller = collisionInfo.gameObject.GetComponent<EnemyController>();
 				StatusManager manager = controller.GetComponent<StatusManager>();
 				controller.TakeDamage( damageAmount);
 				if (burnTicks > 0 && burnTickDamage > 0){
@@ -44,8 +72,12 @@ public class RangeWeap : MonoBehaviour {
 				if (bleedTicks > 0 && bleedTickDamage > 0){
 					manager.ApplyBleed(bleedTicks, bleedTickDamage);
 				}
+				this.
+				if (){
+
+				}
+				Destroy(gameObject);
 			}
-			Destroy(gameObject);
 		}
 	}
 
