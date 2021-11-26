@@ -20,7 +20,8 @@ public class TilemapVisualizer : MonoBehaviour {
 	private TileBase lavaClutter1, lavaClutter2, lavaClutter3, lavaClutter4, 
 	stoneClutter1, stoneClutter2, stoneClutter3, stoneClutter4, 
 	coalClutter1, coalClutter2, coalClutter3, coalClutter4,
-	brushClutter1, brushClutter2, brushClutter3, brushClutter4;
+	brushClutter1, brushClutter2, brushClutter3, brushClutter4, 
+	boneClutter1, boneClutter2;
 
 	public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions) {
 		PaintTiles(floorPositions, floorTilemap, floorTile);
@@ -94,7 +95,7 @@ public class TilemapVisualizer : MonoBehaviour {
 
 		foreach (var position in positions) {
 			if (UnityEngine.Random.value < chancePerTile){
-				int tileNumber = UnityEngine.Random.Range(0, 16);
+				int tileNumber = UnityEngine.Random.Range(0, 18);
 				TileBase clutterTile = lavaClutter1;
 				switch (tileNumber)
 				{
@@ -114,6 +115,8 @@ public class TilemapVisualizer : MonoBehaviour {
 					case 13: clutterTile = brushClutter2; break;
 					case 14: clutterTile = brushClutter3; break;
 					case 15: clutterTile = brushClutter4; break;
+					case 16: clutterTile = boneClutter1; break;
+					case 17: clutterTile = boneClutter2; break;
 					default: Debug.Log("error: tilenumber for clutter out of range"); break;
 				}
 

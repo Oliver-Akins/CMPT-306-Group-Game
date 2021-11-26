@@ -141,7 +141,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -707589045
-  m_SortingLayer: -2
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -227,6 +227,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4815062150611519256}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: boneClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: dd1ac2d814009754f875a56cbfeceb85, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: boneClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d08916eac8263f4eb481408eadaeda0, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: coalClutter1
       value: 
       objectReference: {fileID: 11400000, guid: a09d903b2327243e593d9feb7725b837, type: 2}
@@ -286,6 +294,10 @@ PrefabInstance:
       propertyPath: brushClutter4
       value: 
       objectReference: {fileID: 11400000, guid: d57ad87bae90946828e8c12d94dbc594, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: clutterChance
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: stoneClutter1
       value: 
