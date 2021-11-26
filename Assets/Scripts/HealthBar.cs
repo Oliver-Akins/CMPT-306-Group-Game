@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour {
         healthDivList = new List<GameObject>();
         healthDivList.Clear();
 
-        float healthDivider = Mathf.Round(maxHealth / 100);
+        float healthDivider = Mathf.Round(maxHealth / 50);
 
         for (int i = 0; i < healthDivider; i++) {
             GameObject new_health = Instantiate(healthDivPrefab);
@@ -98,9 +98,7 @@ public class HealthBar : MonoBehaviour {
         healthDivList.Clear();
 
         // value per health bar divider
-        float healthDivider = Mathf.Round(maxHealth / 100);
-        
-        Debug.Log("dividerVal " + healthDivider);
+        float healthDivider = Mathf.Round(maxHealth / 50);
 
         // initialize health dividers according to new max health value
         for (int i = 0; i < healthDivider; i++) {
