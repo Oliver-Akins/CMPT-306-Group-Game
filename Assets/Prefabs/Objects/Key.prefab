@@ -144,3 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   value: 1
+  achievements: {fileID: 0}

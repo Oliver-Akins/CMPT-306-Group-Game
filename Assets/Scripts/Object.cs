@@ -11,7 +11,7 @@ public class Object : MonoBehaviour {
 	// player reference
 	private Player player;
 
-	public Achievements achievements;
+	private Achievements achievements;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
