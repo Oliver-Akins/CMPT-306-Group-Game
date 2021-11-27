@@ -13,10 +13,9 @@ public class Object : MonoBehaviour {
 
 	private Achievements achievements;
 
-	float timeStamp;
-	bool magnetToPlayer;
-	GameObject playerObject;
-	Rigidbody2D rb;
+	private bool magnetToPlayer;
+	private GameObject playerObject;
+	private Rigidbody2D rb;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
