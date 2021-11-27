@@ -80,7 +80,7 @@ public class EnemyController : MonoBehaviour {
 			int coins = Random.Range(2, 5);
 
 			for(int i = 0; i < coins; i++) {
-				Instantiate(items[0], transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), 0), Quaternion.identity);
+				Instantiate(items[0], transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
 			}
 
 			Instantiate(items[Random.Range(1, items.Count-1)], transform.position, Quaternion.identity);
