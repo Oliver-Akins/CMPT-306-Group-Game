@@ -32,6 +32,8 @@ public class Object : MonoBehaviour {
 	}
 
 	void Update() {
+
+		// move object towards player if magnetToPlayer is true
 		if(magnetToPlayer) {
 			Vector3 playerPoint = Vector3.MoveTowards(transform.position, playerObject.transform.position, 20 * Time.deltaTime);
 			rb.MovePosition(playerPoint);
@@ -40,11 +42,19 @@ public class Object : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 
+		// if ItemMagnet collides with object, set magnetToPlayer to true
 		if(col.CompareTag("ItemMagnet")) {
-
-			timeStamp = Time.time;
 			playerObject = GameObject.Find("Player");
-			magnetToPlayer = true;
+
+			switch(type) {
+
+				case ItemTypes.ItemType.POISON:
+					break;
+
+				default:
+					magnetToPlayer = true;
+					break;
+			}
 		}
 
 		if(col.CompareTag("Player")) {
