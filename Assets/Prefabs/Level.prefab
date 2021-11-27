@@ -33,6 +33,124 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5332215341681053299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4967587195636113028}
+  - component: {fileID: 2147950177198252690}
+  - component: {fileID: 884253918449283122}
+  m_Layer: 7
+  m_Name: Clutter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4967587195636113028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332215341681053299}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4815062151489755289}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1839735485 &2147950177198252690
+Tilemap:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332215341681053299}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_TileObjectToInstantiateArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+--- !u!483693784 &884253918449283122
+TilemapRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332215341681053299}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -707589045
+  m_SortingLayer: -1
+  m_SortingOrder: 1
+  m_ChunkSize: {x: 32, y: 32, z: 32}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_MaxChunkCount: 16
+  m_MaxFrameAge: 16
+  m_SortOrder: 0
+  m_Mode: 0
+  m_DetectChunkCullingBounds: 0
+  m_MaskInteraction: 0
 --- !u!1001 &6074503454110488686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,6 +215,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: dbf35b2fb0bae184ebe8ea7396164629, type: 2}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: floorTile
+      value: 
+      objectReference: {fileID: 11400000, guid: a30838ac6031b8b4bae2a733aaa3a397, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallBottom
       value: 
       objectReference: {fileID: 11400000, guid: 5bb3d46abb6851c4fa113b322899ac7b, type: 2}
@@ -105,9 +227,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4815062150611519256}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: boneClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: dd1ac2d814009754f875a56cbfeceb85, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: boneClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d08916eac8263f4eb481408eadaeda0, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: coalClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: a09d903b2327243e593d9feb7725b837, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: coalClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: e21d238d30b014079a5b573a8bdd3709, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: coalClutter3
+      value: 
+      objectReference: {fileID: 11400000, guid: b80787c80223e40d197f38a52feee042, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: coalClutter4
+      value: 
+      objectReference: {fileID: 11400000, guid: b72036d2b8f254ede8d6fb79eb1d7749, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: floorTilemap
       value: 
       objectReference: {fileID: 4815062151208017278}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: lavaClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b15fb9874f444138a3b71a9a6b45b3c, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: lavaClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cd54aadc320340d0b9f67a835227c8b, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: lavaClutter3
+      value: 
+      objectReference: {fileID: 11400000, guid: 94d63e3a2a661499cad58ff25a3b13b5, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: lavaClutter4
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fce9c7c22e8b46de8675deba203f411, type: 2}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallSideLeft
       value: 
@@ -117,9 +279,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 410e77279fe0d534da9c106aa2a55b75, type: 2}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: brushClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: 96ea0d5bbd2174f8aa68596ae5748eed, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: brushClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: bcb404dbd685c4a9c9767845dfea3e15, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: brushClutter3
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c26830c01e4042678ef7559a2a3428c, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: brushClutter4
+      value: 
+      objectReference: {fileID: 11400000, guid: d57ad87bae90946828e8c12d94dbc594, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: clutterChance
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: stoneClutter1
+      value: 
+      objectReference: {fileID: 11400000, guid: 39de09de0af2047bc9555c1c73707237, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: stoneClutter2
+      value: 
+      objectReference: {fileID: 11400000, guid: e09c6b992b79b4be495de6a340676e2c, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: stoneClutter3
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d512175a8ab3430e9ab721ecab4d962, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: stoneClutter4
+      value: 
+      objectReference: {fileID: 11400000, guid: 195ec2827bc684c02915afb828037d44, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallSideRight
       value: 
       objectReference: {fileID: 11400000, guid: 410e77279fe0d534da9c106aa2a55b75, type: 2}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: clutterTilemap
+      value: 
+      objectReference: {fileID: 2147950177198252690}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallInnerDownLeft
       value: 
@@ -217,6 +419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1629864596148105530, guid: 2626560137b10894396a0e919896d23d, type: 3}
+      propertyPath: m_UsedByComposite
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2626560137b10894396a0e919896d23d, type: 3}
 --- !u!4 &4815062151489755289 stripped
@@ -229,11 +435,66 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 1629864595552922463, guid: 2626560137b10894396a0e919896d23d, type: 3}
   m_PrefabInstance: {fileID: 6074503454758565409}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4815062150611519255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1629864596148105526, guid: 2626560137b10894396a0e919896d23d, type: 3}
+  m_PrefabInstance: {fileID: 6074503454758565409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &4815062150611519256 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 1629864596148105529, guid: 2626560137b10894396a0e919896d23d, type: 3}
   m_PrefabInstance: {fileID: 6074503454758565409}
   m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &4815062150611519259 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1629864596148105530, guid: 2626560137b10894396a0e919896d23d, type: 3}
+  m_PrefabInstance: {fileID: 6074503454758565409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &944560355295018652
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815062150611519255}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!66 &5006367127712440602
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815062150611519255}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 4815062150611519259}
+    m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
 --- !u!1001 &6074503455027643017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 8365026459688094444, guid: 2867b28ba1b994c48902a65017c6aed1, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: numberOfRooms
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: tilemapVisualizer
