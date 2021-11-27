@@ -13,12 +13,39 @@ public class Object : MonoBehaviour {
 
 	private Achievements achievements;
 
+	float timeStamp;
+	bool magnetToPlayer;
+	GameObject playerObject;
+	Rigidbody2D rb;
+
 	void Awake() {
 		player = FindObjectOfType<Player>();
 		achievements = FindObjectOfType<Achievements>();
 	}
 
+	void Start() {
+		rb = GetComponent<Rigidbody2D>();
+
+		if(playerObject == null) {
+			playerObject = GameObject.FindWithTag("Player");
+		}
+	}
+
+	void Update() {
+		if(magnetToPlayer) {
+			Vector3 playerPoint = Vector3.MoveTowards(transform.position, playerObject.transform.position, 20 * Time.deltaTime);
+			rb.MovePosition(playerPoint);
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D col) {
+
+		if(col.CompareTag("ItemMagnet")) {
+
+			timeStamp = Time.time;
+			playerObject = GameObject.Find("Player");
+			magnetToPlayer = true;
+		}
 
 		if(col.CompareTag("Player")) {
 			
