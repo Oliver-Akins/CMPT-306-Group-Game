@@ -45,11 +45,10 @@ public class Object : MonoBehaviour {
 		if(col.CompareTag("ItemMagnet")) {
 			playerObject = GameObject.Find("Player");
 
+			// exclude poison from magnet
 			switch(type) {
-
 				case ItemTypes.ItemType.POISON:
 					break;
-
 				default:
 					magnetToPlayer = true;
 					break;
