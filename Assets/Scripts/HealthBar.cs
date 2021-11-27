@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class HealthBar : MonoBehaviour {
     
@@ -25,6 +26,10 @@ public class HealthBar : MonoBehaviour {
     // flash routine for health bar damage effect
     private Coroutine flashRoutine;
 
+    // health value per divider
+    [SerializeField]
+    private float valuePerDivider;
+
     public void SetMaxHealth(int maxHealth) {
 
         slider.maxValue = maxHealth;
@@ -37,10 +42,9 @@ public class HealthBar : MonoBehaviour {
         healthDivList = new List<GameObject>();
         healthDivList.Clear();
 
-        // value per health bar divider
-        int healthDivider = maxHealth / 100;
+        // division currently set to 50
+        float healthDivider = Mathf.Round(maxHealth / valuePerDivider);
 
-        // initialize health dividers
         for (int i = 0; i < healthDivider; i++) {
             GameObject new_health = Instantiate(healthDivPrefab);
             new_health.transform.SetParent(healthDivLayout.transform, false);
@@ -63,10 +67,7 @@ public class HealthBar : MonoBehaviour {
 
         SetCurrentHealth(currentHealth);
 
-        // remove health divider
-        GameObject toRemove = healthDivList[healthDivList.Count - 1];
-        healthDivList.Remove(toRemove);
-        Destroy(toRemove);
+        UpdateDivider(maxHealth);
     }
 
     public void IncreaseMaxHealth(int currentHealth, int maxHealth) {
@@ -74,10 +75,7 @@ public class HealthBar : MonoBehaviour {
 
         SetCurrentHealth(currentHealth);
         
-        // add health divider
-        GameObject healthDiv = Instantiate(healthDivPrefab);
-        healthDiv.transform.SetParent(healthDivLayout.transform, false);
-        healthDivList.Add(healthDiv);
+        UpdateDivider(maxHealth);
     }
 
     // flash effect for 0.1f seconds when taking damage
@@ -94,5 +92,24 @@ public class HealthBar : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
+    }
+
+    private void UpdateDivider(int maxHealth) {
+
+        foreach(GameObject div in healthDivList) {
+            Destroy(div);
+        }
+
+        healthDivList.Clear();
+
+        // division currently set to 50
+        float healthDivider = Mathf.Round(maxHealth / valuePerDivider);
+
+        // initialize health dividers according to new max health value
+        for (int i = 0; i < healthDivider; i++) {
+            GameObject new_health = Instantiate(healthDivPrefab);
+            new_health.transform.SetParent(healthDivLayout.transform, false);
+            healthDivList.Add(new_health);
+        }
     }
 }
