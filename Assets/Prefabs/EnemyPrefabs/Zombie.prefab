@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 8169963888938863599, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8169963889015049712, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Name
       value: HealthBar
@@ -405,6 +409,10 @@ PrefabInstance:
     - target: {fileID: 8169963889015049713, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963889015049719, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: valuePerDivider
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_AnchorMax.x
