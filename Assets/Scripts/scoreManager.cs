@@ -12,7 +12,13 @@ public class scoreManager : MonoBehaviour
     void Update()
     {
         scorePoint = AchievementCollection.killCollection;
-        scoreText.text = "You have killed " + scorePoint.ToString() + " Zombies!";
+        if(scorePoint < 5){
+            scoreText.text = "kills count: " + scorePoint.ToString() + " \nthat's it?";
+        }
+        else {
+            scoreText.text = "kills count: " + scorePoint.ToString() + " better luck next time";
+        }
+
 
     }
 }

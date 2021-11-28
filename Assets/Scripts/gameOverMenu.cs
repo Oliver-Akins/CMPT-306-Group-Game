@@ -10,4 +10,7 @@ public class gameOverMenu : MonoBehaviour
   public void RestartGame() {
       SceneManager.LoadScene("inGame");
   }
+  public void TakeMeToMainMenu(){
+    SceneManager.LoadScene("mainMenu");
+  }
 }
