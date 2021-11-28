@@ -68,6 +68,9 @@ public class Player : MonoBehaviour {
 	private Coroutine healEffectOverlayRoutine;
 	private bool healEffectRunning = false;
 
+	// item magnet collider reference
+	public GameObject itemMagnet;
+
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
 		stats.Add("strength", this.strength);
@@ -157,6 +160,9 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+
+		// move ItemMagnet to follow center of Player
+		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
 
 		// un-comment these when testing; should not be in the main build
