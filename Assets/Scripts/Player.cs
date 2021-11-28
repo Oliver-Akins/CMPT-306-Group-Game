@@ -73,6 +73,8 @@ public class Player : MonoBehaviour {
 	private int meleeDamage;
 
 	private int rangeDamage;
+	// item magnet collider reference
+	public GameObject itemMagnet;
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -198,6 +200,10 @@ public class Player : MonoBehaviour {
 		// 		TakeDamage(100);
 		// 	}
 		// }
+		
+		// move ItemMagnet to follow center of Player
+		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
 
 		// if(Input.GetKeyDown(KeyCode.N)){
 		// 	DecreaseMaxHealth(100);
