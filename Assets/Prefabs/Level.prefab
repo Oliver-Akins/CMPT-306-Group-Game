@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 5001643488843360293}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: candlelightPercent
-      value: 0.001
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: randomWalkParamiters
