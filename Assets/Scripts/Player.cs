@@ -145,6 +145,7 @@ public class Player : MonoBehaviour {
 			AddKill();
 		if(currentHealth <= 0){
 			SceneManager.LoadScene("gameOver");
+			Debug.Log(AchievementCollection.killCollection);
 		}
 	}
 
