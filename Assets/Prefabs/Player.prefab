@@ -241,6 +241,7 @@ MonoBehaviour:
   keys: 0
   damageEffectOverlay: {fileID: 2703339448765065643, guid: bd9afbbe817d44d908b757afbc8caee0, type: 3}
   healEffectOverlay: {fileID: 6443486655133040383, guid: 8c922d299ac9346cc83dec2bbdeed2b0, type: 3}
+  itemMagnet: {fileID: 911110045667942755, guid: 4e34f3c3bc69e4da7884c5edea069053, type: 3}
 --- !u!95 &8765913521880903105
 Animator:
   serializedVersion: 3
