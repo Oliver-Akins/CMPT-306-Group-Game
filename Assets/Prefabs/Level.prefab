@@ -122,7 +122,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -591,6 +591,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1597238722552799283, guid: 327941f16b26247c096e103bed0a22ae, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: candlelight
+      value: 
+      objectReference: {fileID: 5845454193432583167, guid: f1b713d81e88b4e3eb45854122f9ba9d, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: coinPercent
       value: 0.01
       objectReference: {fileID: 0}
@@ -606,6 +610,10 @@ PrefabInstance:
       propertyPath: tilemapVisualizer
       value: 
       objectReference: {fileID: 5001643488843360293}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: candlelightPercent
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: randomWalkParamiters
       value: 
