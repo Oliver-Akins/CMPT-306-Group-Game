@@ -48,14 +48,19 @@ public class SoundAssets : MonoBehaviour {
 		}
 	}
 
-
+	public void playWalkSound(){
+		source.PlayOneShot(footStepSound,0.5f);
+		return;
+		}
 	public AudioSource source;
-
 	public AudioClip coinPickupSound;
 	public AudioClip keyPickupSound;
 	public AudioClip potionPickupSound;
 	public AudioClip potionUseSound;
 	public AudioClip statUpSound;
 	public AudioClip poisinPickup;
+	public AudioClip footStepSound;
+
+
 
 };

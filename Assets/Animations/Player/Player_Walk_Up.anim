@@ -71,4 +71,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.22222222
+    functionName: footStepSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: footStepSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
