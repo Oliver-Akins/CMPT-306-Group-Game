@@ -61,6 +61,7 @@ public class Object : MonoBehaviour {
 			switch(type) {
 
 				case ItemTypes.ItemType.COIN: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.COIN);
 					player.AddCoin(ItemTypes.ItemType.COIN, value);
 					break;
 				}
@@ -99,6 +100,7 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.POTION: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.POTION);
 					player.AddPotion(type, value);
 					break;
 				}
@@ -107,6 +109,17 @@ public class Object : MonoBehaviour {
 					player.PickUpHealthUp(value);
 					break;
 				}
+				
+				case ItemTypes.ItemType.SCYTHE:
+				case ItemTypes.ItemType.SWORD:
+				case ItemTypes.ItemType.FLAIL:
+				case ItemTypes.ItemType.ROCK:
+				case ItemTypes.ItemType.ARROW:
+				case ItemTypes.ItemType.FIREBALL:{
+					player.AddWeapon(type);
+					break;
+				}
+					
 			}
 			achievements.checkAchievements();
 			Destroy(gameObject);
