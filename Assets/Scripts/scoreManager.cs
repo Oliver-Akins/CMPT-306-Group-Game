@@ -13,10 +13,10 @@ public class scoreManager : MonoBehaviour
     {
         scorePoint = AchievementCollection.killCollection;
         if(scorePoint < 5){
-            scoreText.text = "kills count: " + scorePoint.ToString() + " \nthat's it?";
+            scoreText.text = "Kills count: " + scorePoint.ToString() + " \nthat's it?";
         }
         else {
-            scoreText.text = "kills count: " + scorePoint.ToString() + " better luck next time";
+            scoreText.text = "Kills count: " + scorePoint.ToString() + " \nbetter luck next time";
         }
 
 

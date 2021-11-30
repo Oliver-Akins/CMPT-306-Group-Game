@@ -144,9 +144,12 @@ public class Player : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.K))
 			AddKill();
 		if(currentHealth <= 0){
-			SceneManager.LoadScene("gameOver");
-			Debug.Log(AchievementCollection.killCollection);
+			animator.SetBool("isDead", true);
+			Invoke("GameOverScene", 1f);
 		}
+	}
+	void GameOverScene() {
+		SceneManager.LoadScene("gameOver");
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
