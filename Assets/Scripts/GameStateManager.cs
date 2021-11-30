@@ -61,6 +61,7 @@ public class GameStateManager {
 					if (this._player) {
 						this._playerStats = this._player.GetStats();
 						this.inventory = this._player.GetInventoryItems();
+						this.equippedItems = this._player.GetEquippedWeaps();
 					};
 
 					this._level++;
@@ -118,6 +119,8 @@ public class GameStateManager {
 
 	// The player's inventory, allowing them to save their items between levels
 	public List<InventoryItem> inventory = null;
+
+	public Dictionary<string, InventoryItem> equippedItems = null;
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated

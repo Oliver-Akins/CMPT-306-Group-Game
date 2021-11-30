@@ -12,6 +12,9 @@ public class RangedAttack : MonoBehaviour
     private float timeBetweenShots;
     public float startTimeBetweenShots;
     public Player player;
+    public AudioSource source;
+
+	public AudioClip rockThrow;
 
     // Update is called once per frame
     void Update(){
@@ -34,8 +37,24 @@ public class RangedAttack : MonoBehaviour
     }
 
     void RangeAttack(){
-       GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
-       Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
-       rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+        InventoryItem item = player.GetEquippedWeaps()["equippedRange"];
+        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+        var projectileQualities = new Hashtable();
+        projectileQualities.Add("damageAmount", player.getRangeDamage());
+        if (item.type == ItemTypes.ItemType.ARROW){
+            projectileQualities["bleedTicks"] = 5;
+            projectileQualities["bleedTickDamage"] = 5 + player.strength/3;
+        }
+        else if (item.type == ItemTypes.ItemType.FIREBALL){
+            projectileQualities["burnTicks"] = 8;
+            projectileQualities["burnTickDamage"] = 8 + player.strength/2;
+        }
+        ammo.GetComponent<RangeWeap>().setQualities(projectileQualities);
+        Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+
+        source.PlayOneShot(rockThrow);
+
     }
 }

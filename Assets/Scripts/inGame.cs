@@ -18,13 +18,12 @@ public class inGame : MonoBehaviour {
 			Player p = GameObject.Find("Player").GetComponent<Player>();
 			GM.player = p;
 			if (GM.playerStats != null) {
-
 				// ! important:
 				// this must come before the stats are set because the coins
 				// are saved as part of the stats, separately from the inventory
 				// and this method overwrites the default-instantiated instance
 				// of the inventory with a new one.
-				p.SetInventoryItems(GM.inventory);
+				p.SetInventoryItems(GM.inventory, GM.equippedItems);
 
 				p.SetStats(GM.playerStats);
 			};
