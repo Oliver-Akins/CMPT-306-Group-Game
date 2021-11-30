@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CorridorFirstDungeonGen : RandomWalkGen
 {
+	private ArrayList rooms;
+
 	[SerializeField]
 	private int corridorLength = 30;
 
@@ -83,21 +85,12 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 	[SerializeField]
 	private GameObject zombie;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float zombiePercent = 0.005f;
-
+	
 	[SerializeField]
 	private GameObject skeleton;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float skeletonPercent = 0.005f;
-
+	
 	[SerializeField]
 	private GameObject vampire;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float vampirePercent = 0.001f;
 
 	[SerializeField]
 	private GameObject candlelight;
@@ -130,6 +123,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	private void CorridorFirstGen() {
 		HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 		HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
+		rooms = new ArrayList();
 
 		CreateCorridors(floorPositions, potentialRoomPositions);
 		HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
@@ -145,9 +139,10 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
 
-		AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
-		AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
-		AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
+		// AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
+		// AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
+		// AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
+		AddEnemys();
 
 
 		AddItemRandomly(coinStack, coinStackPercent, posibleItemPositions);
@@ -179,6 +174,37 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		}
 		foreach(Vector2Int position in usedPositions){
 			positions.Remove(position);
+		}
+	}
+
+	private void AddEnemys(){
+		foreach(HashSet<Vector2Int> room in rooms){
+			HashSet<Vector2Int> avalibleSpotsHash = new HashSet<Vector2Int>(room);
+			List<Vector2Int> avalibleSpots = avalibleSpotsHash.ToList();
+
+			int max = 3 + (GameStateManager.Instance.level / 2);
+			int min = 1 + (GameStateManager.Instance.level / 4);
+			int leftToSpawn = UnityEngine.Random.Range(min, max);
+
+			while (leftToSpawn > 0){
+				int spawnType = UnityEngine.Random.Range(0, 5);
+				GameObject enemy = zombie;
+				switch (spawnType) {
+					case 0:
+					case 1: enemy = zombie; break;
+					case 2:
+					case 3: enemy = skeleton; break;
+					case 4: enemy = vampire; break;
+					default: Debug.Log("ERROR: invaled enemy type index"); break;
+				}
+				
+				Vector2Int positon = avalibleSpots[(UnityEngine.Random.Range(0, avalibleSpots.Count))];
+				tilemapVisualizer.AddItem(positon, enemy);
+				avalibleSpots.Remove(positon);
+				leftToSpawn -= 1;
+			}
+
+
 		}
 	}
 
@@ -216,6 +242,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		foreach (var roomPosition in roomToCreate) {
 			var roomFloor = RunRandomWalk(randomWalkParamiters, roomPosition);
+			rooms.Add(roomFloor);
 			roomPositions.UnionWith(roomFloor);
 		}
 		return roomPositions;
