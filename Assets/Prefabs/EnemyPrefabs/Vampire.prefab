@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6948050281237135702}
   - component: {fileID: 2345064862054748028}
   - component: {fileID: 6251381708400243318}
+  - component: {fileID: 4172707168057615411}
   m_Layer: 8
   m_Name: Vampire
   m_TagString: Untagged
@@ -71,7 +72,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.027093306, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -82,7 +83,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.63424015, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &6817122160473052521
 SpriteRenderer:
@@ -103,7 +104,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,10 +169,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
   enemyRb: {fileID: 0}
-  speed: 0.2
-  maxRange: 4
-  minRange: 1
-  attackRange: 0
+  speed: 1.3
+  maxRange: 6
+  minRange: 0.75
+  attackRange: 1
   maxHealth: 100
   currentHealth: 100
   healthBar: {fileID: 264293339798222592}
@@ -201,6 +202,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a691e78a8b8a36900bb620d74bcc7bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4172707168057615411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432640830519138478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee7b0b7619b19143aaa05dfcb589742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8653265443764718557
@@ -312,7 +325,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8169963887289093681, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 155.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963887289093681, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 24.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963887289093681, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.5465
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963887289093681, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.11005
       objectReference: {fileID: 0}
     - target: {fileID: 8169963888938863596, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Sprite
@@ -321,6 +346,14 @@ PrefabInstance:
     - target: {fileID: 8169963888938863598, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Name
       value: VampireIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963888938863599, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963888938863599, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889015049712, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Name
@@ -414,6 +447,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8169963889015049719, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: valuePerDivider
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -423,12 +460,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 4.6745996
+      value: 9.56
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.3373032
+      value: 0.11000013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}

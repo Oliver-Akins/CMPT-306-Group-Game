@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 5185782769756112327}
   - component: {fileID: 7921961067725912160}
   - component: {fileID: 5185782769756112326}
+  - component: {fileID: 7643523674726098661}
   m_Layer: 8
   m_Name: Zombie
   m_TagString: Untagged
@@ -156,7 +157,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,7 +202,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.054931164, y: 0}
+  m_Offset: {x: -0.060997903, y: -0.12436795}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -212,7 +213,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7312708, y: 1}
+  m_Size: {x: 0.6099361, y: 0.7512641}
   m_EdgeRadius: 0
 --- !u!50 &5185782769756112322
 Rigidbody2D:
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAnim: {fileID: 0}
   enemyRb: {fileID: 0}
-  speed: 0.2
+  speed: 0.5
   maxRange: 4
   minRange: 0.75
   attackRange: 1
@@ -303,6 +304,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7643523674726098661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5185782769756112321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee7b0b7619b19143aaa05dfcb589742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnTickTimers: 
+  bleedTickTimers: 
 --- !u!1001 &5185782770433059167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -317,6 +332,10 @@ PrefabInstance:
     - target: {fileID: 8169963888938863598, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Name
       value: ZombieIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963888938863599, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.3
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889015049712, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_Name
@@ -405,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 8169963889015049713, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169963889015049719, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
+      propertyPath: valuePerDivider
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8169963889383382263, guid: ea4d25d81d078a942acb05dfccc73866, type: 3}
       propertyPath: m_AnchorMax.x

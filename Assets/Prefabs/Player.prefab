@@ -159,7 +159,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,6 +241,7 @@ MonoBehaviour:
   keys: 0
   damageEffectOverlay: {fileID: 2703339448765065643, guid: bd9afbbe817d44d908b757afbc8caee0, type: 3}
   healEffectOverlay: {fileID: 6443486655133040383, guid: 8c922d299ac9346cc83dec2bbdeed2b0, type: 3}
+  itemMagnet: {fileID: 911110045667942755, guid: 4e34f3c3bc69e4da7884c5edea069053, type: 3}
 --- !u!95 &8765913521880903105
 Animator:
   serializedVersion: 3
@@ -462,6 +463,7 @@ MonoBehaviour:
   fill: {fileID: 8765913522512543943}
   healthDivPrefab: {fileID: 6199391945314486471, guid: 63912c177fc074645b3385c813ffbbad, type: 3}
   healthDivLayout: {fileID: 8765913523749186401}
+  valuePerDivider: 50
 --- !u!1 &8765913522156689906
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,6 +975,10 @@ PrefabInstance:
     - target: {fileID: 5059037783078262567, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059037783308174887, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}
+      propertyPath: valuePerDivider
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}
