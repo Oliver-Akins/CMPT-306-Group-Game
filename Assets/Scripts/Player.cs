@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -142,6 +143,13 @@ public class Player : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.K))
 			AddKill();
+		if(currentHealth <= 0){
+			animator.SetBool("isDead", true);
+			Invoke("GameOverScene", 1f);
+		}
+	}
+	void GameOverScene() {
+		SceneManager.LoadScene("gameOver");
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
