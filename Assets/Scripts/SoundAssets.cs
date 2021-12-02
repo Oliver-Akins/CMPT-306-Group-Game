@@ -53,7 +53,13 @@ public class SoundAssets : MonoBehaviour {
 		source.PlayOneShot(footStepSound, Random.Range(0.35f,.75f));
 		// source.PlayOneShot(footStepSound, 0.75f);
 		return;
-		}
+	}
+
+		public void playDeathSound(){
+
+		source.PlayOneShot(deathSound);
+		return;
+	}
 
 	public AudioSource source;
 	public AudioClip coinPickupSound;
@@ -63,7 +69,6 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip statUpSound;
 	public AudioClip poisinPickup;
 	public AudioClip footStepSound;
-
-
+	public AudioClip deathSound;
 
 };

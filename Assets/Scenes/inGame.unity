@@ -818,6 +818,7 @@ MonoBehaviour:
   statUpSound: {fileID: 8300000, guid: fe3f81c6fa95b4cdab5a9cd7e3b1e4df, type: 3}
   poisinPickup: {fileID: 8300000, guid: c37f99821f5994184a9e7d0c875f6606, type: 3}
   footStepSound: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+  deathSound: {fileID: 8300000, guid: 3ae6501d54f84490a9b213eb991d4632, type: 3}
 --- !u!4 &1293642672
 Transform:
   m_ObjectHideFlags: 0
