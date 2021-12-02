@@ -46,6 +46,16 @@ public class SoundAssets : MonoBehaviour {
 				source.PlayOneShot(potionUseSound);
 				return;
 		}
+		switch(type){
+			case ItemTypes.ItemType.ARROW:
+				source.PlayOneShot(arrowUseSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.FIREBALL:
+				source.PlayOneShot(fireballUseSound);
+				return;
+		}
 	}
 
 	public void playWalkSound(){
@@ -70,5 +80,7 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip poisinPickup;
 	public AudioClip footStepSound;
 	public AudioClip deathSound;
+	public AudioClip arrowUseSound;
+	public AudioClip fireballUseSound;
 
 };
