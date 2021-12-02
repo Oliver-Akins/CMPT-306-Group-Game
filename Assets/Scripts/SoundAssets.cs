@@ -49,9 +49,12 @@ public class SoundAssets : MonoBehaviour {
 	}
 
 	public void playWalkSound(){
-		source.PlayOneShot(footStepSound,0.5f);
+
+		source.PlayOneShot(footStepSound, Random.Range(0.35f,.75f));
+		// source.PlayOneShot(footStepSound, 0.75f);
 		return;
 		}
+
 	public AudioSource source;
 	public AudioClip coinPickupSound;
 	public AudioClip keyPickupSound;
