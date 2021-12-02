@@ -819,6 +819,9 @@ MonoBehaviour:
   poisinPickup: {fileID: 8300000, guid: c37f99821f5994184a9e7d0c875f6606, type: 3}
   footStepSound: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
   deathSound: {fileID: 8300000, guid: 3ae6501d54f84490a9b213eb991d4632, type: 3}
+  arrowUseSound: {fileID: 8300000, guid: b93a88556e1f9426aa57003d99b8fea6, type: 3}
+  fireballUseSound: {fileID: 8300000, guid: 71f4119ad094f46819ba2c4654440aae, type: 3}
+  enemyAttack: {fileID: 8300000, guid: 4e8e71e8855f94516ae0bfee0abb9fea, type: 3}
 --- !u!4 &1293642672
 Transform:
   m_ObjectHideFlags: 0

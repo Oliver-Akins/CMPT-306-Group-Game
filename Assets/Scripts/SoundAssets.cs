@@ -65,11 +65,19 @@ public class SoundAssets : MonoBehaviour {
 		return;
 	}
 
-		public void playDeathSound(){
+	public void playDeathSound(){
 
 		source.PlayOneShot(deathSound);
 		return;
 	}
+
+	public void playEnemeyAttackSound(){
+
+		source.PlayOneShot(enemyAttack);
+		return;
+	}
+
+	
 
 	public AudioSource source;
 	public AudioClip coinPickupSound;
@@ -82,5 +90,6 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip deathSound;
 	public AudioClip arrowUseSound;
 	public AudioClip fireballUseSound;
+	public AudioClip enemyAttack;
 
 };

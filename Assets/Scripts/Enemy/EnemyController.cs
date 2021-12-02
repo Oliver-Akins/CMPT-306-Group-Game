@@ -95,6 +95,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void Attack(){
+		SoundAssets.Instance.playEnemeyAttackSound();	
 		myAnim.SetTrigger("Attack");
 		Player p = FindObjectOfType<Player>();
 		p.TakeDamage(attackDamage);
