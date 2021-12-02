@@ -8,8 +8,8 @@ public class TilemapVisualizer : MonoBehaviour {
 	[SerializeField]
 	private Tilemap floorTilemap, wallTilemap, clutterTilemap;
 	[SerializeField]
-	private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, 
-	wallFull, wallInnerDownLeft, wallInnerDownRight, wallDiagonalDownRight, 
+	private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom,
+	wallFull, wallInnerDownLeft, wallInnerDownRight, wallDiagonalDownRight,
 	wallDiagonalDownLeft, wallDiagonalUpRight, wallDiagonalUpLeft;
 
 	[SerializeField]
@@ -17,11 +17,14 @@ public class TilemapVisualizer : MonoBehaviour {
 	private float clutterChance = 0.05f;
 
 	[SerializeField]
-	private TileBase lavaClutter1, lavaClutter2, lavaClutter3, lavaClutter4, 
-	stoneClutter1, stoneClutter2, stoneClutter3, stoneClutter4, 
+	private TileBase lavaClutter1, lavaClutter2, lavaClutter3, lavaClutter4,
+	stoneClutter1, stoneClutter2, stoneClutter3, stoneClutter4,
 	coalClutter1, coalClutter2, coalClutter3, coalClutter4,
-	brushClutter1, brushClutter2, brushClutter3, brushClutter4, 
+	brushClutter1, brushClutter2, brushClutter3, brushClutter4,
 	boneClutter1, boneClutter2;
+
+	[SerializeField]
+	private GameObject navWall;
 
 	public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions) {
 		PaintTiles(floorPositions, floorTilemap, floorTile);
@@ -33,7 +36,7 @@ public class TilemapVisualizer : MonoBehaviour {
 		TileBase tile = null;
 		if(WallHelper.wallTop.Contains(typeAsInt)){
 			tile = wallTop;
-		} 
+		}
 		else if(WallHelper.wallSideRight.Contains(typeAsInt)){
 			tile = wallSideRight;
 		}
@@ -47,13 +50,20 @@ public class TilemapVisualizer : MonoBehaviour {
 			tile = wallFull;
 		}
 
-		if (tile != null) PaintSingleTile(wallTilemap, tile, position);
+		if (tile != null) {
+			Instantiate(
+				this.navWall,
+				(Vector2)position + (Vector2.one/2),
+				Quaternion.identity
+			);
+			PaintSingleTile(wallTilemap, tile, position);
+		}
 	}
 
 	internal void PaintSingleCornerWall(Vector2Int position, string binaryType) {
-		
+
 		int typeAsInt = Convert.ToInt32(binaryType, 2);
-		
+
 		TileBase tile = null;
 
 		if(WallHelper.wallInnerCornerDownLeft.Contains(typeAsInt)){
@@ -81,7 +91,14 @@ public class TilemapVisualizer : MonoBehaviour {
 			tile = wallBottom;
 		}
 
-		if (tile != null) PaintSingleTile(wallTilemap, tile, position);
+		if (tile != null) {
+			Instantiate(
+				this.navWall,
+				(Vector2)position + (Vector2.one/2),
+				Quaternion.identity
+			);
+			PaintSingleTile(wallTilemap, tile, position);
+		}
 	}
 
 	private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile) {
@@ -133,7 +150,7 @@ public class TilemapVisualizer : MonoBehaviour {
 	public void AddItem(Vector2Int position, GameObject item){
 		Vector2 adjusted = position;
 		adjusted += new Vector2(0.5f, 0.5f);
-		
+
 		Instantiate(item,(Vector3) adjusted, Quaternion.identity);
 	}
 
