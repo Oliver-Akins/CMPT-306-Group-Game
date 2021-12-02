@@ -58,6 +58,39 @@ public class SoundAssets : MonoBehaviour {
 		}
 	}
 
+	public void playHitSound(ItemTypes.ItemType type){
+		switch(type){
+			case ItemTypes.ItemType.SWORD:
+				source.PlayOneShot(swordHitSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.SCYTHE:
+				source.PlayOneShot(swordHitSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.FLAIL:
+				source.PlayOneShot(swordHitSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.ROCK:
+				source.PlayOneShot(rockHitSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.ARROW:
+				source.PlayOneShot(arrowHitSound);
+				return;
+		}
+		switch(type){
+			case ItemTypes.ItemType.FIREBALL:
+				source.PlayOneShot(fireballHitSound);
+				return;
+		}
+	}
+
 	public void playWalkSound(){
 
 		source.PlayOneShot(footStepSound, Random.Range(0.35f,.75f));
@@ -98,5 +131,9 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip fireballUseSound;
 	public AudioClip enemyAttack;
 	public AudioClip enemyDeath;
+	public AudioClip swordHitSound;
+	public AudioClip rockHitSound;
+	public AudioClip arrowHitSound;
+	public AudioClip fireballHitSound;
 
 };
