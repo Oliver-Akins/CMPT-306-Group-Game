@@ -160,6 +160,8 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		AddItemRandomly(candlelight, candlelightPercent, posibleItemPositions);
 
+		//tilemapVisualizer.AddItem(startPos, candlelight);
+
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
 		this.finalLevel = floorPositions;
 	}
@@ -177,16 +179,22 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		}
 	}
 
+
 	private void AddEnemys(){
 		foreach(HashSet<Vector2Int> room in rooms){
 			HashSet<Vector2Int> avalibleSpotsHash = new HashSet<Vector2Int>(room);
 			List<Vector2Int> avalibleSpots = avalibleSpotsHash.ToList();
+			if (avalibleSpots.Contains(Vector2Int.one)){
+				HashSet<Vector2Int> spawnArea = SquareArea(5,5, startPos);
+				avalibleSpots.RemoveAll(spawnArea.Contains);
+				Debug.Log("removed spawn area");
+			}
 
-			int max = 3 + (GameStateManager.Instance.level / 2);
-			int min = 1 + (GameStateManager.Instance.level / 4);
+			int max = 5 + (GameStateManager.Instance.level / 2);
+			int min = 2 + (GameStateManager.Instance.level / 4);
 			int leftToSpawn = UnityEngine.Random.Range(min, max);
 
-			while (leftToSpawn > 0){
+			while (leftToSpawn > 0 && avalibleSpots.Count() > 0){
 				int spawnType = UnityEngine.Random.Range(0, 5);
 				GameObject enemy = zombie;
 				switch (spawnType) {
@@ -203,9 +211,24 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 				avalibleSpots.Remove(positon);
 				leftToSpawn -= 1;
 			}
-
-
 		}
+	}
+
+	private HashSet<Vector2Int> SquareArea(int xRadius, int yRadius, Vector2Int startPosition){
+		HashSet<Vector2Int> area = new HashSet<Vector2Int>();
+		for (int x = -xRadius; x <= xRadius; x++){
+			for (int y = -yRadius; y <= yRadius; y++){
+				area.Add(startPosition + new Vector2Int(x,y));
+			}
+		}
+
+		return area;
+	}
+
+
+
+	public void spawnLights(){
+		
 	}
 
 
@@ -242,6 +265,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		foreach (var roomPosition in roomToCreate) {
 			var roomFloor = RunRandomWalk(randomWalkParamiters, roomPosition);
+			roomFloor.Remove(roomPosition);
 			rooms.Add(roomFloor);
 			roomPositions.UnionWith(roomFloor);
 		}
