@@ -76,6 +76,9 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void DestroyEnemy(){
+
+		SoundAssets.Instance.playEnemeyDeathSound();	
+
 		// can have a death effect to if we want
 		Destroy(gameObject);
 

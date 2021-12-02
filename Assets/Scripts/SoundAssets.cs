@@ -77,6 +77,12 @@ public class SoundAssets : MonoBehaviour {
 		return;
 	}
 
+		public void playEnemeyDeathSound(){
+
+		source.PlayOneShot(enemyDeath);
+		return;
+	}
+
 	
 
 	public AudioSource source;
@@ -91,5 +97,6 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip arrowUseSound;
 	public AudioClip fireballUseSound;
 	public AudioClip enemyAttack;
+	public AudioClip enemyDeath;
 
 };

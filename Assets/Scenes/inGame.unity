@@ -822,6 +822,7 @@ MonoBehaviour:
   arrowUseSound: {fileID: 8300000, guid: b93a88556e1f9426aa57003d99b8fea6, type: 3}
   fireballUseSound: {fileID: 8300000, guid: 71f4119ad094f46819ba2c4654440aae, type: 3}
   enemyAttack: {fileID: 8300000, guid: 4e8e71e8855f94516ae0bfee0abb9fea, type: 3}
+  enemyDeath: {fileID: 8300000, guid: 14189c9bcdf1d4351b933a9a41813999, type: 3}
 --- !u!4 &1293642672
 Transform:
   m_ObjectHideFlags: 0
