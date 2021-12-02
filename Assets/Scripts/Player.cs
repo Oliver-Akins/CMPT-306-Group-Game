@@ -73,6 +73,8 @@ public class Player : MonoBehaviour {
 	private int meleeDamage;
 
 	private int rangeDamage;
+	// item magnet collider reference
+	public GameObject itemMagnet;
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -198,6 +200,10 @@ public class Player : MonoBehaviour {
 		// 		TakeDamage(100);
 		// 	}
 		// }
+		
+		// move ItemMagnet to follow center of Player
+		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
 
 		// if(Input.GetKeyDown(KeyCode.N)){
 		// 	DecreaseMaxHealth(100);
@@ -304,11 +310,14 @@ public class Player : MonoBehaviour {
 	}
 
 	public void HealPlayer(int healValue) {
-		currentHealth += healValue;
+		// checks if the player is only getting a portion of healing from the potion
+		int newHealth = maxHealth + stamina < currentHealth + healValue ?
+			currentHealth = maxHealth + stamina :
+			currentHealth + healValue ;
 		HealEffectOverlay();
 
 		// update health bar
-		healthBar.SetCurrentHealth(currentHealth);
+		healthBar.SetCurrentHealth(newHealth);
 	}
 
 	/**
