@@ -2,8 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+using Polarith.AI.Move;
+
+
 public class inGame : MonoBehaviour {
 	GameStateManager GM;
+
+	[SerializeField]
+	private AIMEnvironment env;
 
 	void Awake() {
 		GM = GameStateManager.Instance;
@@ -18,6 +24,7 @@ public class inGame : MonoBehaviour {
 			Player p = GameObject.Find("Player").GetComponent<Player>();
 			GM.player = p;
 			if (GM.playerStats != null) {
+
 				// ! important:
 				// this must come before the stats are set because the coins
 				// are saved as part of the stats, separately from the inventory
@@ -27,6 +34,8 @@ public class inGame : MonoBehaviour {
 
 				p.SetStats(GM.playerStats);
 			};
+
+			this.env.UpdateLayerGameObjects();
 		};
 	}
 
