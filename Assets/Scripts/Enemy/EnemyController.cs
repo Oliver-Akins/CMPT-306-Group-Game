@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour {
 	private Transform target;
 
 	public float speed;
+	public bool dead;
 
 	// variables to restrict the range of enemies can be modified here.
 	public float maxRange;
@@ -51,7 +52,7 @@ public class EnemyController : MonoBehaviour {
 		currentHealth -= damageValue;
 		myAnim.SetTrigger("Hurt");
 		if (currentHealth <= 0){
-			// this needs to be removed here so that the dots don't keep ticking 
+			// this needs to be removed here so that the dots don't keep ticking
 			// when the enemy is dead
 			Destroy(GetComponent<StatusManager>());
 			Die();
@@ -70,7 +71,7 @@ public class EnemyController : MonoBehaviour {
 		// disable enemy script and collider
 		GetComponent<Collider2D>().enabled = false;
 
-		Destroy(GetComponent<StraightAtPlayer>());
+		this.dead = true;
 
 		Invoke("DestroyEnemy", waitTime);
 	}
