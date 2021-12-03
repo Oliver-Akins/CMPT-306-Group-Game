@@ -470,7 +470,7 @@ MonoBehaviour:
     tab4: 0
   advancedInspector: 0
   FilteredEnvironments:
-  - Dangers
+  - Danger
   GameObjects: []
   velocityGizmo:
     Enabled: 0
@@ -506,7 +506,7 @@ MonoBehaviour:
     Prediction: 0
     PredictionMagnitude: 0
     InnerRadius: 0
-    OuterRadius: 2
+    OuterRadius: 3
     RadiusMapping: 2
     ForEachReceptor: 0
 --- !u!114 &1929402850049673436
