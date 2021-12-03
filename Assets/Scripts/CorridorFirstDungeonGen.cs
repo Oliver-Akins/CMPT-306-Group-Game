@@ -7,6 +7,7 @@ using UnityEngine;
 public class CorridorFirstDungeonGen : RandomWalkGen
 {
 	private ArrayList rooms;
+	private HashSet<Vector2Int> coridorPositions;
 
 	[SerializeField]
 	private int corridorLength = 30;
@@ -94,9 +95,6 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 	[SerializeField]
 	private GameObject candlelight;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float candlelightPercent = 0.005f;
 
 
 
@@ -124,6 +122,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 		HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 		rooms = new ArrayList();
+		coridorPositions = new HashSet<Vector2Int>();
 
 		CreateCorridors(floorPositions, potentialRoomPositions);
 		HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
@@ -139,9 +138,6 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
 
-		// AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
-		// AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
-		// AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
 		AddEnemys();
 
 
@@ -158,9 +154,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		AddItemRandomly(coin, coinPercent, posibleItemPositions);
 		AddItemRandomly(allStatUp, allStatUpPercent, posibleItemPositions);
 
-		AddItemRandomly(candlelight, candlelightPercent, posibleItemPositions);
-
-		//tilemapVisualizer.AddItem(startPos, candlelight);
+		spawnLights();
 
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
 		this.finalLevel = floorPositions;
@@ -187,7 +181,6 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 			if (avalibleSpots.Contains(Vector2Int.one)){
 				HashSet<Vector2Int> spawnArea = SquareArea(5,5, startPos);
 				avalibleSpots.RemoveAll(spawnArea.Contains);
-				Debug.Log("removed spawn area");
 			}
 
 			int max = 5 + (GameStateManager.Instance.level / 2);
@@ -228,7 +221,25 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 
 	public void spawnLights(){
-		
+		foreach(HashSet<Vector2Int> room in rooms){
+			HashSet<Vector2Int> avalibleSpotsHash = new HashSet<Vector2Int>(room);
+			avalibleSpotsHash.RemoveWhere(coridorPositions.Contains);
+			List<Vector2Int> avalibleSpots = avalibleSpotsHash.ToList();
+
+			int max = 8;
+			int min = 3;
+			int leftToSpawn = UnityEngine.Random.Range(min, max);
+
+			while (leftToSpawn > 0 && avalibleSpots.Count() > 0){
+				
+				Vector2Int positon = avalibleSpots[(UnityEngine.Random.Range(0, avalibleSpots.Count))];
+				tilemapVisualizer.AddItem(positon, candlelight);
+				avalibleSpots.Remove(positon);
+				HashSet<Vector2Int> spawnArea = SquareArea(4,4, positon);
+				avalibleSpots.RemoveAll(spawnArea.Contains);
+				leftToSpawn -= 1;
+			}
+		}
 	}
 
 
@@ -284,6 +295,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 			currentPos = corridor[corridor.Count - 1];
 			potentialRoomPositions.Add(currentPos);
 			floorPositions.UnionWith(corridor);
+			coridorPositions.UnionWith(corridor);
 		}
 
 		tilemapVisualizer.AddItem(currentPos, nextLevelHole);
