@@ -258,7 +258,7 @@ MonoBehaviour:
   enemyRb: {fileID: 0}
   speed: 0.5
   dead: 0
-  maxRange: 4
+  maxRange: 5
   minRange: 0.75
   attackRange: 1
   maxHealth: 100
