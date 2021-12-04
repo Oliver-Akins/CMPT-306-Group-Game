@@ -72,11 +72,10 @@ public class Projectile : MonoBehaviour {
 				if (bleedTicks > 0 && bleedTickDamage > 0){
 					manager.ApplyBleed(bleedTicks, bleedTickDamage);
 				}
-				this.
-				if (){
-
+				this.howManyPeirces++;
+				if (this.howManyPeirces > this.maxPeirces){
+					Destroy(gameObject);
 				}
-				Destroy(gameObject);
 			}
 		}
 	}
