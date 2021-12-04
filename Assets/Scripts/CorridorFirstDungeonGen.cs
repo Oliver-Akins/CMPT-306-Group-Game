@@ -99,6 +99,12 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	[Range(0.0001f, 0.02f)]
 	private float vampirePercent = 0.001f;
 
+	[SerializeField]
+	private GameObject candlelight;
+	[SerializeField]
+	[Range(0.0001f, 0.02f)]
+	private float candlelightPercent = 0.005f;
+
 
 
 	// Expose the final level map so that the enemies can use it for pathfinding
@@ -157,6 +163,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		AddItemRandomly(coin, coinPercent, posibleItemPositions);
 		AddItemRandomly(allStatUp, allStatUpPercent, posibleItemPositions);
 
+		AddItemRandomly(candlelight, candlelightPercent, posibleItemPositions);
 
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
 		this.finalLevel = floorPositions;
