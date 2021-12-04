@@ -25,14 +25,14 @@ public class Projectile : MonoBehaviour {
 	private int bleedTickDamage = 0;
 
 	// bouncy from player skills
-	public bool isBouncy = true;
-	public int maxBounces = 30;
+	public bool isBouncy = false;
+	public int maxBounces = 0;
 	// track how many bounces have happened
 	public int howManyBounces = 0;
 
 	// peircing from player skills
-	public bool isPeircing = true;
-	public int maxPeirces = 2;
+	public bool isPeircing = false;
+	public int maxPeirces = 0;
 	// track how many enemies the projectile has peirced
 	public int howManyPeirces;
 
@@ -89,6 +89,14 @@ public class Projectile : MonoBehaviour {
 		else if (qualities.Contains("bleedTicks")){
 			this.bleedTicks = (int) qualities["bleedTicks"];
 			this.bleedTickDamage = (int) qualities["bleedTickDamage"];
+		}
+		if (qualities.Contains("maxPeirces")){
+			this.isPeircing = true;
+			this.maxPeirces = (int) qualities["maxPeirces"];
+		}
+		if (qualities.Contains("maxBounces")){
+			this.isBouncy = true;
+			this.maxBounces = (int) qualities["maxBounces"];
 		}
 	}
 };

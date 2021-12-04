@@ -63,6 +63,14 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTicks"] = 8;
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
+        // if its peircing
+        if (true){
+            projectileQualities["maxPeirces"] = 2;
+        }
+        // if its bouncy
+        if (true){
+            projectileQualities["maxBounces"] = 3;
+        }
         ammo.GetComponent<Projectile>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
