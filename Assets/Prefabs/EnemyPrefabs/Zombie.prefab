@@ -470,7 +470,7 @@ MonoBehaviour:
     tab4: 0
   advancedInspector: 0
   FilteredEnvironments:
-  - Danger
+  - Dangers
   GameObjects: []
   velocityGizmo:
     Enabled: 0
