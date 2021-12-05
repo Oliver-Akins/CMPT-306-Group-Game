@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 	// Camera reference to handle aiming weapon attacks
 	public Camera cam;
 
-	Vector2 movement;
+	public Vector2 movement;
 	Vector2 mousePosition;
 
 	// player max health
@@ -396,6 +396,10 @@ public class Player : MonoBehaviour {
 		Destroy(overlay);
 
 		healEffectRunning = false;
+	}
+
+	public void footStepSound(AudioClip clip){
+		SoundAssets.Instance.playWalkSound();	
 	}
 
 	public void AddPotion( ItemTypes.ItemType type, int value){

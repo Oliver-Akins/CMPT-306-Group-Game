@@ -67,21 +67,25 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.STRENGTHUP: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.STRENGTHUP);
 					player.IncreaseStrength(value);
 					break;
 				}
 
 				case ItemTypes.ItemType.AGILITYUP: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.AGILITYUP);
 					player.IncreaseAgility(value);
 					break;
 				}
 
 				case ItemTypes.ItemType.STAMINAUP: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.STAMINAUP);
 					player.IncreaseStamina(value);
 					break;
 				}
 
 				case ItemTypes.ItemType.STATSUP: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.STATSUP);
 					player.IncreaseStrength(value);
 					player.IncreaseAgility(value);
 					player.IncreaseStamina(value);
@@ -89,11 +93,13 @@ public class Object : MonoBehaviour {
 				}
 
 				case ItemTypes.ItemType.KEY: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.KEY);
 					player.AddKey(ItemTypes.ItemType.KEY, value);
 					break;
 				}
 
 				case ItemTypes.ItemType.POISON: {
+					SoundAssets.Instance.playPickupSound(ItemTypes.ItemType.POISON);
 					if(player.currentHealth > 0)
 						player.PickUpPoison(value);
 					break;

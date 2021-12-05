@@ -180,17 +180,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb919b91430774558b988f3e202e5423, type: 3}
---- !u!114 &958833891 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 629655778391971016, guid: 8ed87a399f8782348bef2183cd3b64d9, type: 3}
-  m_PrefabInstance: {fileID: 1109178822}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa62f7b03b9d3f4c845d440ddd7d467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &841977813
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +307,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &958833891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 629655778391971016, guid: 8ed87a399f8782348bef2183cd3b64d9, type: 3}
+  m_PrefabInstance: {fileID: 1109178822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa62f7b03b9d3f4c845d440ddd7d467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &999426100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -714,7 +714,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -812,8 +812,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 1293642670}
   coinPickupSound: {fileID: 8300000, guid: 3e4ded87dbef94f999e0f19f9bf9ab86, type: 3}
+  keyPickupSound: {fileID: 8300000, guid: 7d835af521c924b09b1f670be467d496, type: 3}
   potionPickupSound: {fileID: 8300000, guid: efe9ad3511e4f4baa9249fc25b7152f3, type: 3}
   potionUseSound: {fileID: 8300000, guid: abbe6d5af5b28458b9157fe53e336765, type: 3}
+  statUpSound: {fileID: 8300000, guid: fe3f81c6fa95b4cdab5a9cd7e3b1e4df, type: 3}
+  poisinPickup: {fileID: 8300000, guid: c37f99821f5994184a9e7d0c875f6606, type: 3}
+  footStepSound: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+  deathSound: {fileID: 8300000, guid: 3ae6501d54f84490a9b213eb991d4632, type: 3}
+  arrowUseSound: {fileID: 8300000, guid: b93a88556e1f9426aa57003d99b8fea6, type: 3}
+  fireballUseSound: {fileID: 8300000, guid: 71f4119ad094f46819ba2c4654440aae, type: 3}
+  enemyAttack: {fileID: 8300000, guid: 4e8e71e8855f94516ae0bfee0abb9fea, type: 3}
+  enemyDeath: {fileID: 8300000, guid: 14189c9bcdf1d4351b933a9a41813999, type: 3}
 --- !u!4 &1293642672
 Transform:
   m_ObjectHideFlags: 0
@@ -1048,7 +1057,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 115
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1140,17 +1149,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1988252343 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 629655778391971016, guid: 8ed87a399f8782348bef2183cd3b64d9, type: 3}
-  m_PrefabInstance: {fileID: 269567479}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa62f7b03b9d3f4c845d440ddd7d467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2135202648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8765913521880903166, guid: 45dc0deaf266893e38592ca4425b7aae, type: 3}
@@ -1166,7 +1164,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
