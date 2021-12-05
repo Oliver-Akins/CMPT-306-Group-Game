@@ -17,6 +17,9 @@ public class TilemapVisualizer : MonoBehaviour {
 	private float clutterChance = 0.05f;
 
 	[SerializeField]
+	private GameObject tileGlow;
+
+	[SerializeField]
 	private TileBase lavaClutter1, lavaClutter2, lavaClutter3, lavaClutter4, 
 	stoneClutter1, stoneClutter2, stoneClutter3, stoneClutter4, 
 	coalClutter1, coalClutter2, coalClutter3, coalClutter4,
@@ -99,10 +102,10 @@ public class TilemapVisualizer : MonoBehaviour {
 				TileBase clutterTile = lavaClutter1;
 				switch (tileNumber)
 				{
-					case 0: clutterTile = lavaClutter1; break;
-					case 1: clutterTile = lavaClutter2; break;
-					case 2: clutterTile = lavaClutter3; break;
-					case 3: clutterTile = lavaClutter4; break;
+					case 0: clutterTile = lavaClutter1; AddItem(position, tileGlow); break;
+					case 1: clutterTile = lavaClutter2; AddItem(position, tileGlow); break;
+					case 2: clutterTile = lavaClutter3; AddItem(position, tileGlow); break;
+					case 3: clutterTile = lavaClutter4; AddItem(position, tileGlow); break;
 					case 4: clutterTile = stoneClutter1; break;
 					case 5: clutterTile = stoneClutter2; break;
 					case 6: clutterTile = stoneClutter3; break;
