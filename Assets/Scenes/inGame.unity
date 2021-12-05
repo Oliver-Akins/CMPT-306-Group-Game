@@ -718,7 +718,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -816,8 +816,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 1293642670}
   coinPickupSound: {fileID: 8300000, guid: 3e4ded87dbef94f999e0f19f9bf9ab86, type: 3}
+  keyPickupSound: {fileID: 8300000, guid: 7d835af521c924b09b1f670be467d496, type: 3}
   potionPickupSound: {fileID: 8300000, guid: efe9ad3511e4f4baa9249fc25b7152f3, type: 3}
   potionUseSound: {fileID: 8300000, guid: abbe6d5af5b28458b9157fe53e336765, type: 3}
+  statUpSound: {fileID: 8300000, guid: fe3f81c6fa95b4cdab5a9cd7e3b1e4df, type: 3}
+  poisinPickup: {fileID: 8300000, guid: c37f99821f5994184a9e7d0c875f6606, type: 3}
+  footStepSound: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+  deathSound: {fileID: 8300000, guid: 3ae6501d54f84490a9b213eb991d4632, type: 3}
+  arrowUseSound: {fileID: 8300000, guid: b93a88556e1f9426aa57003d99b8fea6, type: 3}
+  fireballUseSound: {fileID: 8300000, guid: 71f4119ad094f46819ba2c4654440aae, type: 3}
+  enemyAttack: {fileID: 8300000, guid: 4e8e71e8855f94516ae0bfee0abb9fea, type: 3}
+  enemyDeath: {fileID: 8300000, guid: 14189c9bcdf1d4351b933a9a41813999, type: 3}
 --- !u!4 &1293642672
 Transform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1061,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 115
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1159,7 +1168,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1

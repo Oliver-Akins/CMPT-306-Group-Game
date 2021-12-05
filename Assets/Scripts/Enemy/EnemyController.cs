@@ -65,7 +65,8 @@ public class EnemyController : MonoBehaviour {
 		AchievementCollection.killStreak += 1;
 
 		achievements.checkAchievements();
-		// Die animation
+		// Die animation and sound
+		SoundAssets.Instance.playEnemeyDeathSound();
 		myAnim.SetBool("IsDead", true);
 		// disable enemy script and collider
 		GetComponent<Collider2D>().enabled = false;
@@ -75,7 +76,8 @@ public class EnemyController : MonoBehaviour {
 		Invoke("DestroyEnemy", waitTime);
 	}
 
-	void DestroyEnemy(){
+	void DestroyEnemy(){	
+
 		// can have a death effect to if we want
 		Destroy(gameObject);
 
@@ -95,6 +97,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void Attack(){
+		SoundAssets.Instance.playEnemeyAttackSound();	
 		myAnim.SetTrigger("Attack");
 		Player p = FindObjectOfType<Player>();
 		p.TakeDamage(attackDamage);

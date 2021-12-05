@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour {
 	// Camera reference to handle aiming weapon attacks
 	public Camera cam;
 
-	Vector2 movement;
+	public Vector2 movement;
 	Vector2 mousePosition;
 
 	// player max health
@@ -192,6 +193,10 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+		if(currentHealth <= 0){
+			animator.SetBool("isDead", true);
+			Invoke("GameOverScene", 0.75f);
+		}
 		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
 
@@ -216,6 +221,9 @@ public class Player : MonoBehaviour {
 		// if(Input.GetKeyDown(KeyCode.K)){
 		// 	AddKill();
 		// }
+	}
+	void GameOverScene(){
+		SceneManager.LoadScene("gameOver");
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
@@ -313,11 +321,11 @@ public class Player : MonoBehaviour {
 		// checks if the player is only getting a portion of healing from the potion
 		int newHealth = maxHealth + stamina < currentHealth + healValue ?
 			currentHealth = maxHealth + stamina :
-			currentHealth + healValue ;
+			currentHealth += healValue ;
 		HealEffectOverlay();
 
 		// update health bar
-		healthBar.SetCurrentHealth(newHealth);
+		healthBar.SetCurrentHealth(currentHealth);
 	}
 
 	/**
@@ -388,6 +396,10 @@ public class Player : MonoBehaviour {
 		Destroy(overlay);
 
 		healEffectRunning = false;
+	}
+
+	public void footStepSound(AudioClip clip){
+		SoundAssets.Instance.playWalkSound();	
 	}
 
 	public void AddPotion( ItemTypes.ItemType type, int value){
