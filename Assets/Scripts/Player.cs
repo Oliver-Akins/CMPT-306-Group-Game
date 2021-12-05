@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -192,6 +193,10 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+		if(currentHealth <= 0){
+			animator.SetBool("isDead", true);
+			Invoke("GameOverScene", 0.75f);
+		}
 		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
 
@@ -216,6 +221,9 @@ public class Player : MonoBehaviour {
 		// if(Input.GetKeyDown(KeyCode.K)){
 		// 	AddKill();
 		// }
+	}
+	void GameOverScene(){
+		SceneManager.LoadScene("gameOver");
 	}
 
 	// works the same way, but executed on a fixed timer and stuck to the frame rate
