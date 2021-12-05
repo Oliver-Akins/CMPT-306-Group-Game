@@ -45,13 +45,9 @@ public class SoundAssets : MonoBehaviour {
 			case ItemTypes.ItemType.POTION:
 				source.PlayOneShot(potionUseSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.ARROW:
 				source.PlayOneShot(arrowUseSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.FIREBALL:
 				source.PlayOneShot(fireballUseSound);
 				return;
@@ -63,28 +59,18 @@ public class SoundAssets : MonoBehaviour {
 			case ItemTypes.ItemType.SWORD:
 				source.PlayOneShot(swordHitSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.SCYTHE:
 				source.PlayOneShot(swordHitSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.FLAIL:
 				source.PlayOneShot(swordHitSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.ROCK:
 				source.PlayOneShot(rockHitSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.ARROW:
 				source.PlayOneShot(arrowHitSound);
 				return;
-		}
-		switch(type){
 			case ItemTypes.ItemType.FIREBALL:
 				source.PlayOneShot(fireballHitSound);
 				return;
@@ -110,7 +96,7 @@ public class SoundAssets : MonoBehaviour {
 		return;
 	}
 
-		public void playEnemeyDeathSound(){
+	public void playEnemeyDeathSound(){
 
 		source.PlayOneShot(enemyDeath);
 		return;
