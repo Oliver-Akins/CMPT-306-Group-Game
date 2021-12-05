@@ -200,11 +200,11 @@ public class Player : MonoBehaviour {
 		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
 
-		if(Input.GetKeyDown(KeyCode.Space)){
-			if(currentHealth > 0){
-				TakeDamage(100);
-			}
-		}
+		// if(Input.GetKeyDown(KeyCode.Space)){
+		// 	if(currentHealth > 0){
+		// 		TakeDamage(100);
+		// 	}
+		// }
 		
 		// move ItemMagnet to follow center of Player
 		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
