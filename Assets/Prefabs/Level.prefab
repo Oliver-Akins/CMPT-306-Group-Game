@@ -211,6 +211,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d2c37f582e770fd4c8e9944e3f0e00fb, type: 2}
     - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
+      propertyPath: tileGlow
+      value: 
+      objectReference: {fileID: 5845454193432583167, guid: 0ae8e8855efccff4783edba9567acb5d, type: 3}
+    - target: {fileID: 1235553058155720779, guid: 1583f550862cc9d4dbb67de797bace4c, type: 3}
       propertyPath: wallFull
       value: 
       objectReference: {fileID: 11400000, guid: dbf35b2fb0bae184ebe8ea7396164629, type: 2}
@@ -419,6 +423,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1629864596148105528, guid: 2626560137b10894396a0e919896d23d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 1629864596148105530, guid: 2626560137b10894396a0e919896d23d, type: 3}
       propertyPath: m_UsedByComposite
       value: 1

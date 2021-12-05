@@ -313,11 +313,11 @@ public class Player : MonoBehaviour {
 		// checks if the player is only getting a portion of healing from the potion
 		int newHealth = maxHealth + stamina < currentHealth + healValue ?
 			currentHealth = maxHealth + stamina :
-			currentHealth + healValue ;
+			currentHealth += healValue ;
 		HealEffectOverlay();
 
 		// update health bar
-		healthBar.SetCurrentHealth(newHealth);
+		healthBar.SetCurrentHealth(currentHealth);
 	}
 
 	/**
