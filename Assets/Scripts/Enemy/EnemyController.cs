@@ -32,6 +32,8 @@ public class EnemyController : MonoBehaviour {
 	public float startTimeBetweenAttacks;
 	public int attackDamage;
 
+	private int currentLevel;
+
 	void Awake() {
 		achievements = FindObjectOfType<Achievements>();
 	}
@@ -42,6 +44,8 @@ public class EnemyController : MonoBehaviour {
 		myAnim = GetComponent<Animator>();
 		target = FindObjectOfType<Player>().transform;
 		enemyRb = GetComponent<Rigidbody2D>();
+		currentLevel = GameStateManager.Instance.level;
+		Debug.Log(currentLevel);
 		// setup enemy health
 		currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
