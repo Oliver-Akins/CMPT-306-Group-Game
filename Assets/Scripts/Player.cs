@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
 	// player current health - initializes to max health at start
 	public int currentHealth;
-
+	private bool isDead = false;
 	// player health bar
 	public HealthBar healthBar;
 
@@ -171,32 +171,40 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	// not good for physics D: but great for inputs
 	void Update() {
-		// gives a value between -1 and 1 depending on which key left or right,
-		// but if no move in this direction will return 0
-		movement.x = Input.GetAxisRaw("Horizontal");
-		movement.y = Input.GetAxisRaw("Vertical");
+		if (!isDead){
+			// gives a value between -1 and 1 depending on which key left or right,
+			// but if no move in this direction will return 0
+			movement.x = Input.GetAxisRaw("Horizontal");
+			movement.y = Input.GetAxisRaw("Vertical");
 
-		mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+			mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
-		// Sets the animation when we need it
-		animator.SetFloat("Horizontal", movement.x);
-		animator.SetFloat("Vertical", movement.y);
-		// more optimized with square root magnitude as we won't need to calculate it on the vector
-		animator.SetFloat("Speed", movement.sqrMagnitude);
+			// Sets the animation when we need it
+			animator.SetFloat("Horizontal", movement.x);
+			animator.SetFloat("Vertical", movement.y);
+			// more optimized with square root magnitude as we won't need to calculate it on the vector
+			animator.SetFloat("Speed", movement.sqrMagnitude);
 
-		if(Input.GetKeyDown(KeyCode.H)){
-			if(currentHealth < maxHealth + stamina){
-				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
-				if (foundItem != null && foundItem.amount > 0){
-					UseItem(foundItem);
-					SoundAssets.Instance.playUseSound(foundItem.type);
+			if(Input.GetKeyDown(KeyCode.H)){
+				if(currentHealth < maxHealth + stamina){
+					InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
+					if (foundItem != null && foundItem.amount > 0){
+						UseItem(foundItem);
+						SoundAssets.Instance.playUseSound(foundItem.type);
+					}
 				}
 			}
 		}
+	
 		if(currentHealth <= 0){
 			animator.SetBool("isDead", true);
+			isDead = true;
 			Invoke("GameOverScene", 0.75f);
 		}
+
+		// move ItemMagnet to follow center of Player
+		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
 		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
 
@@ -206,10 +214,6 @@ public class Player : MonoBehaviour {
 		// 	}
 		// }
 		
-		// move ItemMagnet to follow center of Player
-		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-
 		// if(Input.GetKeyDown(KeyCode.N)){
 		// 	DecreaseMaxHealth(100);
 		// }

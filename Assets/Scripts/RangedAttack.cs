@@ -18,6 +18,8 @@ public class RangedAttack : MonoBehaviour
 
     public Camera cam;
 
+    private float rotationalTilt = 90f;
+
     // Update is called once per frame
     void Update(){
         
@@ -29,7 +31,7 @@ public class RangedAttack : MonoBehaviour
             Vector3 mouseDirection = (mouseposition - transform.position).normalized;
             // the offset to move the fire position, this moves the fire point outwards
             // can be tweaked as needed, 1f may be enough.
-            Vector3 attackPosition = transform.position + mouseDirection * 2f;
+            Vector3 attackPosition = transform.position + mouseDirection * 1.1f;
             firePoint.SetPositionAndRotation(attackPosition, firePoint.rotation);
 
             float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
@@ -51,8 +53,7 @@ public class RangedAttack : MonoBehaviour
 
     void RangeAttack(){
         InventoryItem item = player.GetEquippedWeaps()["equippedRange"];
-        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
-        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+        //Setup the qualities of the projectile(s)
         var projectileQualities = new Hashtable();
         projectileQualities.Add("damageAmount", player.getRangeDamage());
         if (item.type == ItemTypes.ItemType.ARROW){
@@ -63,17 +64,39 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTicks"] = 8;
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
-        // if its peircing
-        if (true){
-            projectileQualities["maxPeirces"] = 2;
-        }
         // if its bouncy
-        if (true){
+        bool isBouncy = true;
+        if (isBouncy){
             projectileQualities["maxBounces"] = 3;
         }
+        // is AoE
+        bool isAoE = true;
+        if (isAoE){
+            projectileQualities["AoEDamage"] = 5;
+        }
+        // fire in the the character wanted to at least once
+        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+        
         ammo.GetComponent<Projectile>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+
+        // fire extra projectiles
+        int howManyProjectiles = 4;
+        float tmpRot = rotationalTilt;
+        Vector3 tmpPos = firePoint.position;
+   
+        for (int i = 0; i < howManyProjectiles; i ++){
+            Quaternion newRot = Quaternion.AngleAxis( tmpRot, Vector3.forward);
+            rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+
+            GameObject ammo2 = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation * newRot);
+            ammo2.GetComponent<Projectile>().setQualities(projectileQualities);
+            Rigidbody2D rb2 = ammo2.GetComponent<Rigidbody2D>();
+            rb2.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+            tmpRot *= tmpRot;
+        }
 
         source.PlayOneShot(rockThrow);
 

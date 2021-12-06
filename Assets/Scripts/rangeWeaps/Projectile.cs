@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour {
 
 	public Rigidbody2D rb; 
 	public LayerMask enemyLayers;
-
 	private int damageAmount;
 	
 	// Burn from fireball projectiles
@@ -25,16 +24,17 @@ public class Projectile : MonoBehaviour {
 	private int bleedTickDamage = 0;
 
 	// bouncy from player skills
-	public bool isBouncy = false;
-	public int maxBounces = 0;
+	private bool isBouncy = false;
+	private int maxBounces = 0;
 	// track how many bounces have happened
-	public int howManyBounces = 0;
+	private int howManyBounces = 0;
 
-	// peircing from player skills
-	public bool isPeircing = false;
-	public int maxPeirces = 0;
-	// track how many enemies the projectile has peirced
-	public int howManyPeirces;
+	// if the projectile is explody
+	private bool isAoE = false;
+	private int AoEDamage = 0;	
+
+	[SerializeField]
+	private GameObject particleEffect;
 
 	StatusManager manager;
 
@@ -55,10 +55,15 @@ public class Projectile : MonoBehaviour {
 				Vector2 wallNormal = collisionInfo.contacts[0].normal;
 				Vector2 moveDirection = Vector2.Reflect(rb.velocity, wallNormal).normalized;
 				rb.velocity = moveDirection * 20f;
-				this.howManyBounces++;
-				if (this.howManyBounces > this.maxBounces){
-					Destroy(gameObject);
+				if (this.isBouncy){
+					this.howManyBounces++;
+					if (this.howManyBounces >= this.maxBounces){
+						destroyThis();
+					}
+				} else {
+					destroyThis();
 				}
+				
 			}
 
 			// we hit an enemy!
@@ -72,12 +77,16 @@ public class Projectile : MonoBehaviour {
 				if (bleedTicks > 0 && bleedTickDamage > 0){
 					manager.ApplyBleed(bleedTicks, bleedTickDamage);
 				}
-				this.howManyPeirces++;
-				if (this.howManyPeirces > this.maxPeirces){
-					Destroy(gameObject);
+				if (isAoE){
+					Instantiate(particleEffect, controller.GetComponent<Transform>());
 				}
+				destroyThis();
 			}
 		}
+	}
+
+	private void destroyThis(){
+		Destroy(gameObject);
 	}
 
 	public void setQualities(Hashtable qualities){
@@ -90,13 +99,13 @@ public class Projectile : MonoBehaviour {
 			this.bleedTicks = (int) qualities["bleedTicks"];
 			this.bleedTickDamage = (int) qualities["bleedTickDamage"];
 		}
-		if (qualities.Contains("maxPeirces")){
-			this.isPeircing = true;
-			this.maxPeirces = (int) qualities["maxPeirces"];
-		}
 		if (qualities.Contains("maxBounces")){
 			this.isBouncy = true;
 			this.maxBounces = (int) qualities["maxBounces"];
+		}
+		if (qualities.Contains("AoEDamage")){
+			this.isAoE = true;
+			this.AoEDamage = (int) qualities["AoEDamage"];
 		}
 	}
 };
