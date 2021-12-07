@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour {
 		enemyRb = GetComponent<Rigidbody2D>();
 
 		// setup enemy health
-		maxHealth = maxHealth + (20 * (GameStateManager.Instance.level - 1));
+		maxHealth = maxHealth + (10 * (GameStateManager.Instance.level - 1));
 		currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
 	}
