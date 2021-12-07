@@ -77,6 +77,15 @@ public class Player : MonoBehaviour {
 	// item magnet collider reference
 	public GameObject itemMagnet;
 
+	// if they have the dash skill
+	private bool hasDashSkill = true;
+	// dash speed used to add force to the player
+	private int dashSpeed = 500000;
+	// used to track if the player can dash, ie CD is off cooldown
+	private bool canDash = true;
+	// Dash cooldown, can be modded with more skills in Dash
+	int dashCooldown = 80;
+
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
 		stats.Add("strength", this.strength);
@@ -208,7 +217,7 @@ public class Player : MonoBehaviour {
 		// keyboard inputs for testing - delete if needed
 		// un-comment these when testing; should not be in the main build
 
-		// if(Input.GetKeyDown(KeyCode.Space)){
+		// if(Input.GetKeyDown(KeyCode.B)){
 		// 	if(currentHealth > 0){
 		// 		TakeDamage(100);
 		// 	}
@@ -250,6 +259,20 @@ public class Player : MonoBehaviour {
 		// note this isn't perfect when we start adding colliders onto the player
 		firePointRb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
 		firePointRb.rotation = angle;
+
+		if (dashCooldown == 0){
+			canDash = true;
+		} else {
+			dashCooldown--;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space) && canDash){
+			Vector2 mouseDirection = (Input.mousePosition - new Vector3(Screen.width/2, Screen.height/2));
+			rb.AddForce(mouseDirection * dashSpeed * Time.fixedDeltaTime);
+			canDash = false;
+			dashCooldown = 80;
+		}
+
 	}
 
 	private void UseItem(InventoryItem item){
@@ -484,5 +507,4 @@ public class Player : MonoBehaviour {
 	public void ResetKillStreak() {
 		AchievementCollection.killStreak = 0;
 	}
-
 }

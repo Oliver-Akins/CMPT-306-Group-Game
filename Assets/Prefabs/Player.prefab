@@ -210,7 +210,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8765913521880903165
 MonoBehaviour:
@@ -229,6 +229,7 @@ MonoBehaviour:
   firePointRb: {fileID: 8765913523455138912}
   animator: {fileID: 8765913521880903105}
   cam: {fileID: 0}
+  movement: {x: 0, y: 0}
   maxHealth: 200
   currentHealth: 0
   healthBar: {fileID: 8765913523211797934}
@@ -280,6 +281,7 @@ MonoBehaviour:
   player: {fileID: 8765913521880903165}
   source: {fileID: 0}
   rockThrow: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!61 &8765913521880903111
 BoxCollider2D:
   m_ObjectHideFlags: 0

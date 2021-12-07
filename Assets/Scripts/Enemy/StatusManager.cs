@@ -10,6 +10,10 @@ public class StatusManager : MonoBehaviour {
 
 	public List<int> bleedTickTimers = new List<int>();
 	private int bleedTickDamage;
+
+	private float StunTime;
+	private float immuneToStunTime = 3f;
+	private bool isStunned = false;
 	private EnemyController controller;
 
 	void Start(){
@@ -68,5 +72,21 @@ public class StatusManager : MonoBehaviour {
 			bleedTickTimers.RemoveAll(i => i == 0);
 			yield return new WaitForSeconds(0.5f);
 		}
+	}
+
+	public void ApplyStun(float time){
+		StunTime = time;
+		if (!isStunned){
+			isStunned = true;
+			StartCoroutine(Stun());
+		}
+	}
+
+	IEnumerator Stun(){
+		GetComponent<PolarithMovement>().enabled = false;
+		yield return new WaitForSeconds(StunTime);
+		GetComponent<PolarithMovement>().enabled = true;
+		yield return new WaitForSeconds(immuneToStunTime);
+		isStunned = false;
 	}
 };

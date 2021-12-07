@@ -29,12 +29,14 @@ public class Projectile : MonoBehaviour {
 	// track how many bounces have happened
 	private int howManyBounces = 0;
 
-	// if the projectile is explody
-	private bool isAoE = false;
-	private int AoEDamage = 0;	
+	// AOE DOESN'T WORK; maybe one day it will be solvable.
 
-	[SerializeField]
-	private GameObject particleEffect;
+	// if the projectile is explody 
+	// private bool isAoE = false;
+	// private int AoEDamage = 0;	
+
+	// [SerializeField]
+	// private GameObject particleEffect;
 
 	StatusManager manager;
 
@@ -77,9 +79,9 @@ public class Projectile : MonoBehaviour {
 				if (bleedTicks > 0 && bleedTickDamage > 0){
 					manager.ApplyBleed(bleedTicks, bleedTickDamage);
 				}
-				if (isAoE){
-					Instantiate(particleEffect, controller.GetComponent<Transform>());
-				}
+				// if (isAoE){
+				// 	Instantiate(particleEffect, controller.GetComponent<Transform>());
+				// }
 				destroyThis();
 			}
 		}
@@ -103,9 +105,9 @@ public class Projectile : MonoBehaviour {
 			this.isBouncy = true;
 			this.maxBounces = (int) qualities["maxBounces"];
 		}
-		if (qualities.Contains("AoEDamage")){
-			this.isAoE = true;
-			this.AoEDamage = (int) qualities["AoEDamage"];
-		}
+		// if (qualities.Contains("AoEDamage")){
+		// 	this.isAoE = true;
+		// 	this.AoEDamage = (int) qualities["AoEDamage"];
+		// }
 	}
 };

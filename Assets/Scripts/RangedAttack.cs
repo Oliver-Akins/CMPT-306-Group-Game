@@ -70,10 +70,10 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["maxBounces"] = 3;
         }
         // is AoE
-        bool isAoE = true;
-        if (isAoE){
-            projectileQualities["AoEDamage"] = 5;
-        }
+        // bool isAoE = true;
+        // if (isAoE){
+        //     projectileQualities["AoEDamage"] = 5;
+        // }
         // fire in the the character wanted to at least once
         rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
         GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
@@ -83,7 +83,7 @@ public class RangedAttack : MonoBehaviour
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
 
         // fire extra projectiles
-        int howManyProjectiles = 4;
+        int howManyProjectiles = 0;
         float tmpRot = rotationalTilt;
         Vector3 tmpPos = firePoint.position;
    
