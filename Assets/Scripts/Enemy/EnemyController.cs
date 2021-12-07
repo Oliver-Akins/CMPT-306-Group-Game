@@ -44,10 +44,13 @@ public class EnemyController : MonoBehaviour {
 		target = FindObjectOfType<Player>().transform;
 		enemyRb = GetComponent<Rigidbody2D>();
 
-		// setup enemy health
+		// setup enemy health and scaling
 		maxHealth = maxHealth + (10 * (GameStateManager.Instance.level - 1));
 		currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
+
+		// setup attack damage and scaling
+		attackDamage = attackDamage + (2 * (GameStateManager.Instance.level - 1));
 	}
 
 	public void TakeDamage(int damageValue) {
