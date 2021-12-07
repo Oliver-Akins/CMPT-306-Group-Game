@@ -18,9 +18,6 @@ public class Object : MonoBehaviour {
 	private GameObject playerObject;
 	private Rigidbody2D rb;
 
-	//Just for chests right now
-	public List<GameObject> chestLoot;
-
 	void Awake() {
 		player = FindObjectOfType<Player>();
 		achievements = FindObjectOfType<Achievements>();
@@ -51,7 +48,6 @@ public class Object : MonoBehaviour {
 			// exclude poison anmd chests from magnet
 			switch(type) {
 				case ItemTypes.ItemType.POISON:
-				case ItemTypes.ItemType.CHEST:
 					break;
 				default:
 					magnetToPlayer = true;
@@ -133,12 +129,5 @@ public class Object : MonoBehaviour {
 			achievements.checkAchievements();
 			Destroy(gameObject);
 		}
-	}
-
-	// this works better to make sure the player doesn't weirdly run over the chest
-	// i don't think anything else can trigger it but will check
-	void OnCollisionEnter2D(Collision2D collisionInfo){
-		player.openChest(gameObject);
-		achievements.checkAchievements();
 	}
 }

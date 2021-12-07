@@ -477,7 +477,7 @@ public class Player : MonoBehaviour {
 			// open the chest
 			SoundAssets.Instance.playChestOpenSound();
 			UseItem( new InventoryItem {type = ItemTypes.ItemType.KEY, amount = 1});
-			Object script = chest.GetComponent<Object>();
+			Chest script = chest.GetComponent<Chest>();
 			int coins = Random.Range(2, 5);
 			for(int i = 0; i < coins; i++) {
 				Instantiate(script.chestLoot[0], 
