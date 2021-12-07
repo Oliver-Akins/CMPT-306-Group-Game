@@ -135,7 +135,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		CreatRoomsAtDeadEnds(deadEnds, roomPositions);
 		HashSet<Vector2Int> posibleItemPositions = new HashSet<Vector2Int>(roomPositions);
-		HashSet<Vector2Int> posibleEnimiePositions = new HashSet<Vector2Int>(roomPositions);
+		posibleItemPositions.RemoveWhere(coridorPositions.Contains);
 
 
 		floorPositions.UnionWith(roomPositions);
