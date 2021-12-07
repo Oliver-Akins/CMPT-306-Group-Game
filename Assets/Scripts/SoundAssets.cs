@@ -102,7 +102,15 @@ public class SoundAssets : MonoBehaviour {
 		return;
 	}
 
-	
+	public void playChestOpenSound(){
+		source.PlayOneShot(chestOpen);
+		return;
+	}
+
+	public void playChestLockedSound(){
+		source.PlayOneShot(chestLocked);
+		return;
+	}
 
 	public AudioSource source;
 	public AudioClip coinPickupSound;
@@ -122,4 +130,6 @@ public class SoundAssets : MonoBehaviour {
 	public AudioClip arrowHitSound;
 	public AudioClip fireballHitSound;
 
+	public AudioClip chestOpen;
+	public AudioClip chestLocked;
 };

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Object : MonoBehaviour {
 	
@@ -16,6 +17,9 @@ public class Object : MonoBehaviour {
 	private bool magnetToPlayer;
 	private GameObject playerObject;
 	private Rigidbody2D rb;
+
+	//Just for chests right now
+	public List<GameObject> chestLoot;
 
 	void Awake() {
 		player = FindObjectOfType<Player>();
@@ -40,14 +44,14 @@ public class Object : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-
 		// if ItemMagnet collides with object, set magnetToPlayer to true
 		if(col.CompareTag("ItemMagnet")) {
 			playerObject = GameObject.Find("Player");
 
-			// exclude poison from magnet
+			// exclude poison anmd chests from magnet
 			switch(type) {
 				case ItemTypes.ItemType.POISON:
+				case ItemTypes.ItemType.CHEST:
 					break;
 				default:
 					magnetToPlayer = true;
@@ -56,7 +60,6 @@ public class Object : MonoBehaviour {
 		}
 
 		if(col.CompareTag("Player")) {
-			
 			// call corresponding method depending on object type
 			switch(type) {
 
@@ -129,7 +132,13 @@ public class Object : MonoBehaviour {
 			}
 			achievements.checkAchievements();
 			Destroy(gameObject);
-
 		}
+	}
+
+	// this works better to make sure the player doesn't weirdly run over the chest
+	// i don't think anything else can trigger it but will check
+	void OnCollisionEnter2D(Collision2D collisionInfo){
+		player.openChest(gameObject);
+		achievements.checkAchievements();
 	}
 }

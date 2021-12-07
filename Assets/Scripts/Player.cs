@@ -471,6 +471,38 @@ public class Player : MonoBehaviour {
 		AchievementCollection.poisonCollection += 1;
 	}
 
+	public void openChest(GameObject chest){
+		InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.KEY);
+		if (foundItem != null && foundItem.amount > 0){
+			// open the chest
+			SoundAssets.Instance.playChestOpenSound();
+			UseItem( new InventoryItem {type = ItemTypes.ItemType.KEY, amount = 1});
+			Object script = chest.GetComponent<Object>();
+			int coins = Random.Range(2, 5);
+			for(int i = 0; i < coins; i++) {
+				Instantiate(script.chestLoot[0], 
+					chest.transform.position + new Vector3(Random.Range(-2f, 2f),
+					Random.Range(-2f, 2f), 0), 
+					Quaternion.identity);
+			}
+			int pots = Random.Range(1,4);
+			for (int j = 0; j < pots; j++){
+				Instantiate(script.chestLoot[1], 
+				chest.transform.position + new Vector3(Random.Range(-2f, 2f),
+				Random.Range(-2f, 2f), 0), 
+				Quaternion.identity);
+			}
+			Instantiate(script.chestLoot[Random.Range(2, script.chestLoot.Count-1)], 
+				chest.transform.position, 
+				Quaternion.identity);
+			
+			Destroy(chest);
+		} else {
+			// the chest can't be opened; do nothing
+			SoundAssets.Instance.playChestLockedSound();
+		}
+	}
+
 	public void AddKill() {
 		AchievementCollection.killCollection += 1;
 		AchievementCollection.killStreak += 1;

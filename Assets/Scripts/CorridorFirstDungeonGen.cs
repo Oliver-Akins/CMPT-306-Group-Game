@@ -84,6 +84,10 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	[Range(0.0001f, 0.02f)]
 	private float keyPercent = 0.005f;
 
+	// uses the same percent as the keys when being generated
+	[SerializeField]
+	private GameObject chest;
+
 	[SerializeField]
 	private GameObject zombie;
 	
@@ -142,7 +146,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 
 		AddItemRandomly(coinStack, coinStackPercent, posibleItemPositions);
-		AddItemRandomly(key, keyPercent, posibleItemPositions);
+		AddEqualKeysAndChestsRandomly(key, chest, keyPercent, posibleItemPositions);
 		AddItemRandomly(potion, potionPercent, posibleItemPositions);
 		AddItemRandomly(poison, poisonPercent, posibleItemPositions);
 
@@ -173,6 +177,35 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		}
 	}
 
+	/**
+		Still want a random number of keys and chests to be generated but in
+		equal amounts. This toggles the generation of keys and chests, if 
+		only an odd number of generations happen, there will always be one more
+		key than chests. If even there will be an even number of generations.
+		This also allows for keys to be near chests instead of it being completely 
+		random, potentially causing backtracking.
+
+		Enemies also no longer drop keys
+	*/	
+	private void AddEqualKeysAndChestsRandomly(GameObject key,
+	GameObject chest, float chancePerTile, HashSet<Vector2Int> positions){
+		HashSet<Vector2Int> usedPositions = new HashSet<Vector2Int>();
+		bool toggleItem = true;
+		foreach(Vector2Int position in positions){
+			if(UnityEngine.Random.value < chancePerTile){
+				if (toggleItem){
+					tilemapVisualizer.AddItem(position, key);
+				} else {
+					tilemapVisualizer.AddItem(position, chest);
+				}
+				toggleItem = !toggleItem;
+				usedPositions.Add(position);
+			}
+		}
+		foreach(Vector2Int position in usedPositions){
+			positions.Remove(position);
+		}
+	}
 
 	private void AddEnemys(){
 		foreach(HashSet<Vector2Int> room in rooms){
