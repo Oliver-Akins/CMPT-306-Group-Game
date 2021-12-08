@@ -187,7 +187,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
 			UseItem( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
-			// inventory.AddItem(ItemTypes.ItemType.COIN, 500); // if you want lots of moneys to test
+			// inventory.AddItem(ItemTypes.ItemType.COIN, 1000); // if you want lots of moneys to test
 			UIinventory.RefreshInventoryItems();
 		} else {
 			// always need to ensure the player is equipped

@@ -82,6 +82,7 @@ public class RangedAttack : MonoBehaviour
         Hashtable projectileQualities) {
 
         for (int i = 0; i < howManyProjectiles; i++){
+            yield return new WaitForSeconds(.1f); // wait to fire the 2+ projectile
             rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
             
             GameObject ammo2 = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
@@ -89,7 +90,6 @@ public class RangedAttack : MonoBehaviour
             Rigidbody2D rb2 = ammo2.GetComponent<Rigidbody2D>();
             rb2.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
             source.PlayOneShot(rockThrow);
-            yield return new WaitForSeconds(.1f);
         }
     }
 }
