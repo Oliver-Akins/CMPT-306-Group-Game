@@ -78,3 +78,9 @@ crashlytics-build.properties
 
 !/Assets/Scenes/gameOver.unity
 !/Assets/Scenes/gameOver.unity.meta
+
+!/Assets/Scenes/controls.unity
+!/Assets/Scenes/controls.unity.meta
+
+!/Assets/Scenes/Credits.unity
+!/Assets/Scenes/Credits.unity.meta
