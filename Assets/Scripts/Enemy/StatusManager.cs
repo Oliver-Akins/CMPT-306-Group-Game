@@ -15,9 +15,11 @@ public class StatusManager : MonoBehaviour {
 	private float immuneToStunTime = 3f;
 	private bool isStunned = false;
 	private EnemyController controller;
+	private SpriteRenderer sprite;
 
 	void Start(){
 		controller = GetComponent<EnemyController>();
+		sprite = GetComponent<SpriteRenderer>();
 	}
 
 	/**
@@ -44,10 +46,13 @@ public class StatusManager : MonoBehaviour {
 			for(int i = 0; i < burnTickTimers.Count; i++){
 				burnTickTimers[i]--;
 			}
+			sprite.color = Color.yellow;
 			controller.TakeDamage(burnTickDamage);
 			// remove all zero numbers via predicate passed in :)
 			burnTickTimers.RemoveAll(i => i == 0);
 			yield return new WaitForSeconds(0.75f);
+			sprite.color = Color.white;
+			yield return new WaitForSeconds(0.2f);
 		}
 	}
 
@@ -67,10 +72,13 @@ public class StatusManager : MonoBehaviour {
 			for(int i = 0; i < bleedTickTimers.Count; i++){
 				bleedTickTimers[i]--;
 			}
+			sprite.color = Color.red;
 			controller.TakeDamage(bleedTickDamage);
 			// remove all zero numbers via predicate passed in :)
 			bleedTickTimers.RemoveAll(i => i == 0);
 			yield return new WaitForSeconds(0.5f);
+			sprite.color = Color.white;
+			yield return new WaitForSeconds(0.2f);
 		}
 	}
 

@@ -71,24 +71,27 @@ public class RangedAttack : MonoBehaviour
         ammo.GetComponent<Projectile>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+        source.PlayOneShot(rockThrow);
 
         // fire extra projectiles
         int howManyProjectiles = skills["Multiply"];
-        float tmpRot = rotationalTilt;
-        Vector3 tmpPos = firePoint.position;
-   
-        for (int i = 0; i < howManyProjectiles; i ++){
-            Quaternion newRot = Quaternion.AngleAxis( tmpRot, Vector3.forward);
-            rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+        if (howManyProjectiles > 0){
+            StartCoroutine(multiFire(howManyProjectiles, item, projectileQualities));
+        }
+    }
 
-            GameObject ammo2 = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation * newRot);
+    IEnumerator multiFire(int howManyProjectiles, InventoryItem item, 
+        Hashtable projectileQualities) {
+
+        for (int i = 0; i < howManyProjectiles; i++){
+            rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+            
+            GameObject ammo2 = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
             ammo2.GetComponent<Projectile>().setQualities(projectileQualities);
             Rigidbody2D rb2 = ammo2.GetComponent<Rigidbody2D>();
             rb2.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
-            tmpRot *= tmpRot;
+            source.PlayOneShot(rockThrow);
+            yield return new WaitForSeconds(.1f);
         }
-
-        source.PlayOneShot(rockThrow);
-
     }
 }

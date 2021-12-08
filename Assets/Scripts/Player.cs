@@ -85,7 +85,7 @@ public class Player : MonoBehaviour {
 	// dash speed used to add force to the player
 	private int dashSpeed = 700000;
 	// used to track if the player can dash, ie CD is off cooldown
-	private bool canDash = false;
+	private bool canDash = true;
 	// Dash cooldown, can be modded with more skills in Dash
 	int dashCooldown = 80;
 	
@@ -283,15 +283,16 @@ public class Player : MonoBehaviour {
 		firePointRb.MovePosition(rb.position);
 		firePointRb.rotation = angle;
 
+		int dashAmount = GetSkillLevels()["Dash"];
 		// if we can't dash yet do things
-		if (GetSkillLevels()["Dash"] > 0 && !canDash){
+		if (dashAmount > 0 && !canDash){
 			if (dashCooldown == 0){
 				canDash = true;
 			} else {
 				dashCooldown--;
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space) && canDash){
+		if (Input.GetKeyDown(KeyCode.Space) && dashAmount > 0 && canDash){
 			Vector2 mouseDirection = (Input.mousePosition - new Vector3(Screen.width/2, Screen.height/2));
 			rb.AddForce(mouseDirection * dashSpeed * Time.fixedDeltaTime);
 			canDash = false;
