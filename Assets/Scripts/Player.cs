@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Player : MonoBehaviour {
 
@@ -299,7 +300,7 @@ public class Player : MonoBehaviour {
 		}
 		switch(item.type){
 			case ItemTypes.ItemType.POTION:
-				HealPlayer(50); // change this later lol
+				HealPlayer(50 + (int)Math.Ceiling(this.stamina * 0.1)); // change this later lol
 				inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.POTION, amount = 1});
 				UIinventory.RefreshInventoryItems();
 				break;
