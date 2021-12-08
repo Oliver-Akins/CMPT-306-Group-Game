@@ -64,10 +64,10 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTicks"] = 8;
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
+        Dictionary<string, int> skills = player.GetSkillLevels();
         // if its bouncy
-        bool isBouncy = true;
-        if (isBouncy){
-            projectileQualities["maxBounces"] = 3;
+        if (skills["Bouncy"] > 0){
+            projectileQualities["maxBounces"] = 3 * skills["Bouncy"];
         }
         // is AoE
         // bool isAoE = true;
@@ -83,7 +83,7 @@ public class RangedAttack : MonoBehaviour
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
 
         // fire extra projectiles
-        int howManyProjectiles = 0;
+        int howManyProjectiles = skills["Multiply"];
         float tmpRot = rotationalTilt;
         Vector3 tmpPos = firePoint.position;
    

@@ -49,6 +49,10 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private UI_Inventory UIinventory;
 
+	private SkillLevels skillLevels;
+	[SerializeField]
+	private UI_Skills UISkills;
+
 
 	//player skill coins
 	public int skillCoins;
@@ -77,12 +81,10 @@ public class Player : MonoBehaviour {
 	// item magnet collider reference
 	public GameObject itemMagnet;
 
-	// if they have the dash skill
-	private bool hasDashSkill = true;
 	// dash speed used to add force to the player
-	private int dashSpeed = 500000;
+	private int dashSpeed = 700000;
 	// used to track if the player can dash, ie CD is off cooldown
-	private bool canDash = true;
+	private bool canDash = false;
 	// Dash cooldown, can be modded with more skills in Dash
 	int dashCooldown = 80;
 
@@ -133,13 +135,25 @@ public class Player : MonoBehaviour {
 		UIinventory.SetInventory(inventory);
 	}
 
+	public void SetSkillLevels(Dictionary<string, int> skillLevels){
+		this.skillLevels.setSkills(skillLevels);
+		UISkills.setSkillLevelsObject(this.skillLevels);
+	}
+
+	public Dictionary<string, int> GetSkillLevels(){
+		return skillLevels.getSkills();
+	}
+
 	private void Awake() {
 		/**
 			After the first level this gets overriden by the players
 			previous items and equipped weaps
 		*/
 		inventory = new Inventory(UseItem);
+		skillLevels = new SkillLevels();
+		skillLevels.SetInventory(inventory);
 		UIinventory.SetInventory(inventory);
+		UISkills.setSkillLevelsObject(skillLevels);
 	}
 
 	// Start() is called when script is enabled
@@ -152,7 +166,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SCYTHE, 1);
 			UseItem( new InventoryItem {type = ItemTypes.ItemType.FLAIL, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.FLAIL, 1);
-			UseItem( new InventoryItem{type = ItemTypes.ItemType.ARROW});
+			UseItem( new InventoryItem{type = ItemTypes.ItemType.ARROW, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ARROW, 1);
 			UseItem( new InventoryItem{type = ItemTypes.ItemType.FIREBALL, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.FIREBALL, 1);
@@ -170,7 +184,7 @@ public class Player : MonoBehaviour {
 			UseItem(equippedItems["equippedRange"]);
 			UseItem(equippedItems["equippedMelee"]);
 		}
-	
+
 		// initialize max health to inspector value input
 		// also adds the stamina mod to flatly increase the health on 1:1 basis
 		currentHealth = maxHealth + stamina;
@@ -260,19 +274,20 @@ public class Player : MonoBehaviour {
 		firePointRb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
 		firePointRb.rotation = angle;
 
-		if (dashCooldown == 0){
-			canDash = true;
-		} else {
-			dashCooldown--;
+		// if we can't dash yet do things
+		if (GetSkillLevels()["Dash"] > 0 && !canDash){
+			if (dashCooldown == 0){
+				canDash = true;
+			} else {
+				dashCooldown--;
+			}
 		}
-
 		if (Input.GetKeyDown(KeyCode.Space) && canDash){
 			Vector2 mouseDirection = (Input.mousePosition - new Vector3(Screen.width/2, Screen.height/2));
 			rb.AddForce(mouseDirection * dashSpeed * Time.fixedDeltaTime);
 			canDash = false;
-			dashCooldown = 80;
+			dashCooldown = 80 - skillLevels.getSkills()["Dash"] * 2;
 		}
-
 	}
 
 	private void UseItem(InventoryItem item){
@@ -311,6 +326,10 @@ public class Player : MonoBehaviour {
 				this.attackOffset = 1.1f;
 				this.attackRange = .9f;
 				this.meleeDamage = 35;
+				break;
+			case ItemTypes.ItemType.COIN:
+				inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.COIN, amount = 25});
+				UIinventory.RefreshInventoryItems();
 				break;
 		}
 	}

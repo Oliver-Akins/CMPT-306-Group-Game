@@ -66,9 +66,9 @@ public class Melee_Attack : MonoBehaviour {
 			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() 
 				+ player.strength);
 			//if it can stun, stun them
-			bool canStun = true;
-			if (canStun){
-				enemy.GetComponent<StatusManager>().ApplyStun(2f);
+			int stunduration = player.GetSkillLevels()["Stun"];
+			if (stunduration > 0){
+				enemy.GetComponent<StatusManager>().ApplyStun(1f * stunduration);
 			}
 		}
 		source.PlayOneShot(swing);

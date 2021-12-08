@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &280903447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3407196582926706590, guid: 8ed87a399f8782348bef2183cd3b64d9, type: 3}
+  m_PrefabInstance: {fileID: 1109178822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd37ab7b0ef22934cadd0ac0e44cf2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &781201983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -577,6 +588,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1246616680}
+    - target: {fileID: 8765913521880903165, guid: 45dc0deaf266893e38592ca4425b7aae, type: 3}
+      propertyPath: UISkills
+      value: 
+      objectReference: {fileID: 280903447}
     - target: {fileID: 8765913521880903165, guid: 45dc0deaf266893e38592ca4425b7aae, type: 3}
       propertyPath: itemMagnet
       value: 

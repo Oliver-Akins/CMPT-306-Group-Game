@@ -13,12 +13,10 @@ public class FireAoE : MonoBehaviour{
     }
 
     void OnParticleCollision(GameObject other){
-        Debug.Log(other.layer);
         int numCollisionEvents = particle.GetCollisionEvents(other, collisionEvents);
         int i = 0;
         while (i < numCollisionEvents){
             if (other.layer == 8){
-                Debug.Log(collisionEvents[i]);
             }
         }
     }
@@ -29,7 +27,6 @@ public class FireAoE : MonoBehaviour{
         foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
 			enemy.GetComponent<EnemyController>().TakeDamage(10 + player.strength);
-            Debug.Log(enemy);
 	    }
     }
 

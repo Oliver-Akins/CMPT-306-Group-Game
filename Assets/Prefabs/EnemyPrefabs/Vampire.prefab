@@ -41,6 +41,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5315847383542853797}
+  - {fileID: 5575839942473431444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -199,6 +200,10 @@ MonoBehaviour:
   timeBetweenAttacks: 0
   startTimeBetweenAttacks: 1
   attackDamage: 20
+  meleeAttackPoint: {fileID: 5575839942473431444}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &4172707168057615411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +478,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a87245c9463de3fa31578d5e601c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8244683254213441309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5575839942473431444}
+  m_Layer: 8
+  m_Name: meleeAttackPoin t
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5575839942473431444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244683254213441309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3981603266262538860}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8653265443764718557
 GameObject:
   m_ObjectHideFlags: 0
