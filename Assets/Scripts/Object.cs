@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Object : MonoBehaviour {
 	
@@ -40,12 +41,11 @@ public class Object : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-
 		// if ItemMagnet collides with object, set magnetToPlayer to true
 		if(col.CompareTag("ItemMagnet")) {
 			playerObject = GameObject.Find("Player");
 
-			// exclude poison from magnet
+			// exclude poison anmd chests from magnet
 			switch(type) {
 				case ItemTypes.ItemType.POISON:
 					break;
@@ -56,7 +56,6 @@ public class Object : MonoBehaviour {
 		}
 
 		if(col.CompareTag("Player")) {
-			
 			// call corresponding method depending on object type
 			switch(type) {
 
@@ -129,7 +128,6 @@ public class Object : MonoBehaviour {
 			}
 			achievements.checkAchievements();
 			Destroy(gameObject);
-
 		}
 	}
 }

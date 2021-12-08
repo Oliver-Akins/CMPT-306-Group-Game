@@ -446,7 +446,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void footStepSound(AudioClip clip){
-		SoundAssets.Instance.playWalkSound();	
+		SoundAssets.Instance.playWalkSound();
 	}
 
 	public void AddPotion( ItemTypes.ItemType type, int value){
@@ -516,6 +516,38 @@ public class Player : MonoBehaviour {
 	public void PickUpPoison(int poisonValue) {
 		TakeDamage(poisonValue);
 		AchievementCollection.poisonCollection += 1;
+	}
+
+	public void openChest(GameObject chest){
+		InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.KEY);
+		if (foundItem != null && foundItem.amount > 0){
+			// open the chest
+			SoundAssets.Instance.playChestOpenSound();
+			UseItem( new InventoryItem {type = ItemTypes.ItemType.KEY, amount = 1});
+			Chest script = chest.GetComponent<Chest>();
+			int coins = UnityEngine.Random.Range(2, 5);
+			for(int i = 0; i < coins; i++) {
+				Instantiate(script.chestLoot[0],
+					chest.transform.position + new Vector3(UnityEngine.Random.Range(-2f, 2f),
+					UnityEngine.Random.Range(-2f, 2f), 0),
+					Quaternion.identity);
+			}
+			int pots = UnityEngine.Random.Range(1,4);
+			for (int j = 0; j < pots; j++){
+				Instantiate(script.chestLoot[1],
+				chest.transform.position + new Vector3(UnityEngine.Random.Range(-2f, 2f),
+				UnityEngine.Random.Range(-2f, 2f), 0),
+				Quaternion.identity);
+			}
+			Instantiate(script.chestLoot[UnityEngine.Random.Range(2, script.chestLoot.Count-1)],
+				chest.transform.position,
+				Quaternion.identity);
+
+			Destroy(chest);
+		} else {
+			// the chest can't be opened; do nothing
+			SoundAssets.Instance.playChestLockedSound();
+		}
 	}
 
 	public void AddKill() {

@@ -437,19 +437,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2626560137b10894396a0e919896d23d, type: 3}
---- !u!19719996 &4815062150611519259 stripped
-TilemapCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1629864596148105530, guid: 2626560137b10894396a0e919896d23d, type: 3}
-  m_PrefabInstance: {fileID: 6074503454758565409}
-  m_PrefabAsset: {fileID: 0}
---- !u!1839735485 &4815062150611519256 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 1629864596148105529, guid: 2626560137b10894396a0e919896d23d, type: 3}
-  m_PrefabInstance: {fileID: 6074503454758565409}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4815062150611519255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1629864596148105526, guid: 2626560137b10894396a0e919896d23d, type: 3}
+--- !u!4 &4815062151489755289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1629864595273150136, guid: 2626560137b10894396a0e919896d23d, type: 3}
   m_PrefabInstance: {fileID: 6074503454758565409}
   m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &4815062151208017278 stripped
@@ -457,9 +447,19 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 1629864595552922463, guid: 2626560137b10894396a0e919896d23d, type: 3}
   m_PrefabInstance: {fileID: 6074503454758565409}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4815062151489755289 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1629864595273150136, guid: 2626560137b10894396a0e919896d23d, type: 3}
+--- !u!1 &4815062150611519255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1629864596148105526, guid: 2626560137b10894396a0e919896d23d, type: 3}
+  m_PrefabInstance: {fileID: 6074503454758565409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &4815062150611519256 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 1629864596148105529, guid: 2626560137b10894396a0e919896d23d, type: 3}
+  m_PrefabInstance: {fileID: 6074503454758565409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &4815062150611519259 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1629864596148105530, guid: 2626560137b10894396a0e919896d23d, type: 3}
   m_PrefabInstance: {fileID: 6074503454758565409}
   m_PrefabAsset: {fileID: 0}
 --- !u!50 &944560355295018652
@@ -562,6 +562,10 @@ PrefabInstance:
       propertyPath: key
       value: 
       objectReference: {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
+    - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
+      propertyPath: chest
+      value: 
+      objectReference: {fileID: 1465024007719782387, guid: 7cb523bd845678348887a19075416feb, type: 3}
     - target: {fileID: 3641175071597000161, guid: 932dc48f199a0b44e8fe91d5d14250c2, type: 3}
       propertyPath: poison
       value: 
