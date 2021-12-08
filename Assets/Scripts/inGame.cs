@@ -31,9 +31,9 @@ public class inGame : MonoBehaviour {
 				// and this method overwrites the default-instantiated instance
 				// of the inventory with a new one.
 				p.SetInventoryItems(GM.inventory, GM.equippedItems);
+				p.SetStats(GM.playerStats);
 				p.SetSkillLevels(GM.skillLevels);
 
-				p.SetStats(GM.playerStats);
 			};
 
 			this.env.UpdateLayerGameObjects();

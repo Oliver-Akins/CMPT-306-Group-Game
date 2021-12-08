@@ -138,6 +138,7 @@ public class Player : MonoBehaviour {
 
 	public void SetSkillLevels(Dictionary<string, int> skillLevels){
 		this.skillLevels.setSkills(skillLevels);
+		this.skillLevels.SetInventory(this.inventory);
 		UISkills.setSkillLevelsObject(this.skillLevels);
 	}
 
@@ -178,6 +179,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
 			UseItem( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
+			// inventory.AddItem(ItemTypes.ItemType.COIN, 500); // if you want lots of moneys to test
 			UIinventory.RefreshInventoryItems();
 		} else {
 			// always need to ensure the player is equipped
@@ -272,7 +274,7 @@ public class Player : MonoBehaviour {
 		// because the original implementation was on the sprite and rotated the sprite
 		// this is instead rotating the fire point at the center of the player
 		// note this isn't perfect when we start adding colliders onto the player
-		firePointRb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
+		firePointRb.MovePosition(firePointRb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
 		firePointRb.rotation = angle;
 
 		// if we can't dash yet do things

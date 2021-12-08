@@ -131,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765913521880903166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.28, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8765913521973049045}
@@ -237,6 +237,7 @@ MonoBehaviour:
   agility: 0
   stamina: 0
   UIinventory: {fileID: 0}
+  UISkills: {fileID: 0}
   skillCoins: 0
   kills: 0
   keys: 0
@@ -295,7 +296,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12770107, y: -0.28556576}
+  m_Offset: {x: -0.103337005, y: -0.24292862}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -306,7 +307,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.61459786, y: 0.51801413}
+  m_Size: {x: 0.46841362, y: 0.43273985}
   m_EdgeRadius: 0
 --- !u!114 &8765913521880903110
 MonoBehaviour:
@@ -748,7 +749,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765913523455138914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.35, z: 0}
+  m_LocalPosition: {x: -0.13, y: -0.29, z: 0}
   m_LocalScale: {x: 2.54, y: 2.31, z: 0.45}
   m_Children: []
   m_Father: {fileID: 8765913521880903106}

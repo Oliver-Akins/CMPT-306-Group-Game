@@ -31,7 +31,7 @@ public class RangedAttack : MonoBehaviour
             Vector3 mouseDirection = (mouseposition - transform.position).normalized;
             // the offset to move the fire position, this moves the fire point outwards
             // can be tweaked as needed, 1f may be enough.
-            Vector3 attackPosition = transform.position + mouseDirection * 1.1f;
+            Vector3 attackPosition = transform.position + mouseDirection * 1.2f;
             firePoint.SetPositionAndRotation(attackPosition, firePoint.rotation);
 
             float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
