@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e1d08c9be4272154d8e997be8a0bbd6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7a1210581f14f14281a9b92ff83d08e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StunSkillUI: {fileID: 719000316642519238}
-  BouncySkillUI: {fileID: 7157398443021053839}
+  PeircingSkillUI: {fileID: 7157398443021053839}
   DashSkillUI: {fileID: 8842609553430533179}
   MultiplySkillUI: {fileID: 4207299337769606490}
 --- !u!1 &6899980612508247666
@@ -2827,7 +2827,7 @@ GameObject:
   - component: {fileID: 7157398443021053839}
   - component: {fileID: 3645949329269252814}
   m_Layer: 5
-  m_Name: Bouncy
+  m_Name: Peircing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

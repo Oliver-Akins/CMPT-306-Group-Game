@@ -274,7 +274,7 @@ public class Player : MonoBehaviour {
 		// because the original implementation was on the sprite and rotated the sprite
 		// this is instead rotating the fire point at the center of the player
 		// note this isn't perfect when we start adding colliders onto the player
-		firePointRb.MovePosition(firePointRb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
+		firePointRb.MovePosition(rb.position);
 		firePointRb.rotation = angle;
 
 		// if we can't dash yet do things

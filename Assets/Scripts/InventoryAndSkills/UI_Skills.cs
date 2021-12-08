@@ -7,7 +7,7 @@ using CodeMonkey.Utils;
 public class UI_Skills : MonoBehaviour{
     private SkillLevels skillLevels;
     public Transform StunSkillUI;
-    public Transform BouncySkillUI;
+    public Transform PeircingSkillUI;
     public Transform DashSkillUI;
     public Transform MultiplySkillUI;
 
@@ -24,15 +24,15 @@ public class UI_Skills : MonoBehaviour{
             RefreshSkillLevels();
         };
 
-        BouncySkillUI.GetComponent<Button_UI>().MouseOverOnceFunc = () =>{
-             Tooltip.ShowTooltip_Static("Makes your projectiles bounce off walls; " +
-             "bounces increase by 3 for each level");
+        PeircingSkillUI.GetComponent<Button_UI>().MouseOverOnceFunc = () =>{
+             Tooltip.ShowTooltip_Static("Makes your projectiles peirce through enemies; " +
+             "how many times they can peirces increase by 1 for each level");
         };
-        BouncySkillUI.GetComponent<Button_UI>().MouseOutOnceFunc = () => {
+        PeircingSkillUI.GetComponent<Button_UI>().MouseOutOnceFunc = () => {
             Tooltip.HideTooltip_Static();
         };
-        BouncySkillUI.GetComponent<Button_UI>().ClickFunc = () => {
-            skillLevels.BuyStat("Bouncy");
+        PeircingSkillUI.GetComponent<Button_UI>().ClickFunc = () => {
+            skillLevels.BuyStat("Peircing");
             RefreshSkillLevels();
         };
 
@@ -67,8 +67,8 @@ public class UI_Skills : MonoBehaviour{
         TextMeshProUGUI mesh1 = StunSkillUI.transform.Find("SkillUpgradeAmount").GetComponent<TextMeshProUGUI>();
         mesh1.SetText(skills["Stun"].ToString());
 
-        TextMeshProUGUI mesh2 = BouncySkillUI.transform.Find("SkillUpgradeAmount").GetComponent<TextMeshProUGUI>();
-        mesh2.SetText(skills["Bouncy"].ToString());
+        TextMeshProUGUI mesh2 = PeircingSkillUI.transform.Find("SkillUpgradeAmount").GetComponent<TextMeshProUGUI>();
+        mesh2.SetText(skills["Peircing"].ToString());
 
         TextMeshProUGUI mesh3 = DashSkillUI.transform.Find("SkillUpgradeAmount").GetComponent<TextMeshProUGUI>();
         mesh3.SetText(skills["Dash"].ToString());

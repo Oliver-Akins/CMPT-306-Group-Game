@@ -24,16 +24,6 @@ public class RangedAttack : MonoBehaviour
     void Update(){
         
         if (startTimeBetweenShots > 0){     
-
-            // the current mouse position in world coordinates
-            Vector3 mouseposition = cam.ScreenToWorldPoint(Input.mousePosition);
-            // the direction the mouse is relative to the player
-            Vector3 mouseDirection = (mouseposition - transform.position).normalized;
-            // the offset to move the fire position, this moves the fire point outwards
-            // can be tweaked as needed, 1f may be enough.
-            Vector3 attackPosition = transform.position + mouseDirection * 1.2f;
-            firePoint.SetPositionAndRotation(attackPosition, firePoint.rotation);
-
             float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
             if (timeBetweenShots <= 0){
                 if(Input.GetButtonDown("Fire2")){
@@ -65,9 +55,9 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
         Dictionary<string, int> skills = player.GetSkillLevels();
-        // if its bouncy
-        if (skills["Bouncy"] > 0){
-            projectileQualities["maxBounces"] = 3 * skills["Bouncy"];
+        // if its peircing
+        if (skills["Peircing"] > 0){
+            projectileQualities["maxPeirces"] = skills["Peircing"];
         }
         // is AoE
         // bool isAoE = true;

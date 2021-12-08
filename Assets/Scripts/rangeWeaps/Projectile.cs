@@ -24,10 +24,10 @@ public class Projectile : MonoBehaviour {
 	private int bleedTickDamage = 0;
 
 	// bouncy from player skills
-	private bool isBouncy = false;
-	private int maxBounces = 0;
+	private bool isPeircing = false;
+	private int maxPeirces = 0;
 	// track how many bounces have happened
-	private int howManyBounces = 0;
+	private int howManyPeirces = 0;
 
 	// AOE DOESN'T WORK; maybe one day it will be solvable.
 
@@ -48,24 +48,13 @@ public class Projectile : MonoBehaviour {
 		4. do things in trigger and check the layers even though its set
 		TO NOT INTERACT but really the rock doesn't know what its hitting... unless it checks :)
 	*/
-	void OnCollisionEnter2D(Collision2D collisionInfo){
+	void OnTriggerEnter2D(Collider2D collisionInfo){
 		// GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 		// Destroy(effect, 5f);	
 		int hitLayer = collisionInfo.gameObject.layer;
 		if (hitLayer == 7  || hitLayer == 8){
 			if (hitLayer == 7){
-				Vector2 wallNormal = collisionInfo.contacts[0].normal;
-				Vector2 moveDirection = Vector2.Reflect(rb.velocity, wallNormal).normalized;
-				rb.velocity = moveDirection * 20f;
-				if (this.isBouncy){
-					this.howManyBounces++;
-					if (this.howManyBounces >= this.maxBounces){
-						destroyThis();
-					}
-				} else {
-					destroyThis();
-				}
-				
+				destroyThis();
 			}
 
 			// we hit an enemy!
@@ -82,7 +71,14 @@ public class Projectile : MonoBehaviour {
 				// if (isAoE){
 				// 	Instantiate(particleEffect, controller.GetComponent<Transform>());
 				// }
-				destroyThis();
+				if (isPeircing){
+					howManyPeirces++;
+					if (howManyPeirces > maxPeirces){
+						destroyThis();
+					}
+				} else {
+					destroyThis();
+				}
 			}
 		}
 	}
@@ -101,9 +97,9 @@ public class Projectile : MonoBehaviour {
 			this.bleedTicks = (int) qualities["bleedTicks"];
 			this.bleedTickDamage = (int) qualities["bleedTickDamage"];
 		}
-		if (qualities.Contains("maxBounces")){
-			this.isBouncy = true;
-			this.maxBounces = (int) qualities["maxBounces"];
+		if (qualities.Contains("maxPeirces")){
+			this.isPeircing = true;
+			this.maxPeirces = (int) qualities["maxPeirces"];
 		}
 		// if (qualities.Contains("AoEDamage")){
 		// 	this.isAoE = true;
