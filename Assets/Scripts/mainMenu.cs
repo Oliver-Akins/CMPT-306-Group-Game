@@ -14,6 +14,18 @@ public class mainMenu : MonoBehaviour {
 		this.GM.SetGameState(GameState.IN_GAME);
 	}
 
+	public void Credits() {
+		this.GM.SetGameState(GameState.CREDITS);
+	}
+
+	public void Controls() {
+		this.GM.SetGameState(GameState.CONTROLS);
+	}
+
+	public void MainMenu() {
+		this.GM.SetGameState(GameState.MAIN_MENU);
+	}
+
 	public void QuitGame() {
 		Application.Quit();
 	}
