@@ -187,7 +187,6 @@ MonoBehaviour:
   items:
   - {fileID: 5869400407592566631, guid: 096db07e9e9d14a478bc46fc0038cad5, type: 3}
   - {fileID: 6052031072712018367, guid: dc7227a1a17134c89a15dc7f2db7ad98, type: 3}
-  - {fileID: 77740807801443180, guid: 51f2f85f8cff640969193ecbb91000b4, type: 3}
   - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
   - {fileID: 4735331871068047335, guid: 8e73b1042f59b4aaba3f3f4c5ceeff08, type: 3}
   - {fileID: 34320084048513338, guid: 238e278109b7e4a16ace91914d1a57a1, type: 3}
