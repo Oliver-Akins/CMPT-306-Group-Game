@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
-  value: 100
+  value: 15
 --- !u!50 &-8474023120835914510
 Rigidbody2D:
   serializedVersion: 4

@@ -78,6 +78,10 @@ public class Player : MonoBehaviour {
 	// item magnet collider reference
 	public GameObject itemMagnet;
 
+	private SpriteRenderer sr;
+    private Coroutine poisonEffectRoutine;
+    private bool poisonEffectRunning = false;
+
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
 		stats.Add("strength", this.strength);
@@ -167,6 +171,8 @@ public class Player : MonoBehaviour {
 		// also adds the stamina mod to flatly increase the health on 1:1 basis
 		currentHealth = maxHealth + stamina;
 		healthBar.SetMaxHealth(maxHealth + stamina);
+
+		sr = GetComponent<SpriteRenderer>();
 	}
 
 	// Update is called once per frame
@@ -467,10 +473,34 @@ public class Player : MonoBehaviour {
 		AchievementCollection.healthUpCollection += 1;
 	}
 
+
 	public void PickUpPoison(int poisonValue) {
-		TakeDamage(poisonValue);
-		AchievementCollection.poisonCollection += 1;
-	}
+        PoisonEffect(poisonValue);
+        AchievementCollection.poisonCollection += 1;
+    }
+
+    public void PoisonEffect(int poisonValue) {
+        if(!poisonEffectRunning)
+            StartCoroutine(PoisonEffectRoutine(poisonValue));
+    }
+
+    private IEnumerator PoisonEffectRoutine(int poisonValue) {
+
+        poisonEffectRunning = true;
+
+        for(int i = 0; i < 5; i++) {
+            sr.color = Color.green;
+            TakeDamage(poisonValue);
+
+            yield return new WaitForSeconds(1);
+
+            sr.color = Color.white;
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        poisonEffectRunning = false;
+    }
 
 	public void openChest(GameObject chest){
 		InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.KEY);
