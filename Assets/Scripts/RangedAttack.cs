@@ -18,8 +18,6 @@ public class RangedAttack : MonoBehaviour
 
     public Camera cam;
 
-    private float rotationalTilt = 90f;
-
     // Update is called once per frame
     void Update(){
         

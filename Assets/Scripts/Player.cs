@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using CodeMonkey.Utils;
 
 public class Player : MonoBehaviour {
 
@@ -92,6 +93,9 @@ public class Player : MonoBehaviour {
 	private SpriteRenderer sr;
     private Coroutine poisonEffectRoutine;
     private bool poisonEffectRunning = false;
+
+	[SerializeField]
+	private Transform dashEffect;
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -183,7 +187,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
 			UseItem( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
-			// inventory.AddItem(ItemTypes.ItemType.COIN, 500); // if you want lots of moneys to test
+			inventory.AddItem(ItemTypes.ItemType.COIN, 500); // if you want lots of moneys to test
 			UIinventory.RefreshInventoryItems();
 		} else {
 			// always need to ensure the player is equipped
@@ -294,6 +298,16 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.Space) && dashAmount > 0 && canDash){
 			Vector2 mouseDirection = (Input.mousePosition - new Vector3(Screen.width/2, Screen.height/2));
+			Transform dashTransform = Instantiate(dashEffect, rb.position, Quaternion.identity);
+			dashTransform.eulerAngles =  new Vector3(0, 0, CodeMonkey.Utils.UtilsClass.GetAngleFromVectorFloat(mouseDirection));
+			/** 
+				this was used to control how long (x axis) the animation is but 
+				because we are adding force not teleporting, we do not know the
+				distance travelled, :pepehands, this results in the animation being 
+				slightly too big/too small
+			*/
+			// float dashEffectWidth = 35f;
+			// dashTransform.localScale = new Vector3(10f/dashEffectWidth, 1f, 1f);
 			rb.AddForce(mouseDirection * dashSpeed * Time.fixedDeltaTime);
 			canDash = false;
 			dashCooldown = 80 - skillLevels.getSkills()["Dash"] * 2;
