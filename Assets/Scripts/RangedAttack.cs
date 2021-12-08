@@ -55,9 +55,9 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
         Dictionary<string, int> skills = player.GetSkillLevels();
-        // if its peircing
-        if (skills["Peircing"] > 0){
-            projectileQualities["maxPeirces"] = skills["Peircing"];
+        // if its Piercing
+        if (skills["Piercing"] > 0){
+            projectileQualities["maxPeirces"] = skills["Piercing"];
         }
         // is AoE
         // bool isAoE = true;

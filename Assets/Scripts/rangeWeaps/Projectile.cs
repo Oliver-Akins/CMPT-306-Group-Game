@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour {
 	private int bleedTickDamage = 0;
 
 	// bouncy from player skills
-	private bool isPeircing = false;
+	private bool isPiercing = false;
 	private int maxPeirces = 0;
 	// track how many bounces have happened
 	private int howManyPeirces = 0;
@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour {
 				// if (isAoE){
 				// 	Instantiate(particleEffect, controller.GetComponent<Transform>());
 				// }
-				if (isPeircing){
+				if (isPiercing){
 					howManyPeirces++;
 					if (howManyPeirces > maxPeirces){
 						destroyThis();
@@ -98,7 +98,7 @@ public class Projectile : MonoBehaviour {
 			this.bleedTickDamage = (int) qualities["bleedTickDamage"];
 		}
 		if (qualities.Contains("maxPeirces")){
-			this.isPeircing = true;
+			this.isPiercing = true;
 			this.maxPeirces = (int) qualities["maxPeirces"];
 		}
 		// if (qualities.Contains("AoEDamage")){

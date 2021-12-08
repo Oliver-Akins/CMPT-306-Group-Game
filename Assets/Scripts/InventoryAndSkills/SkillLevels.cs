@@ -11,7 +11,7 @@ public class SkillLevels {
 	public SkillLevels(){
 		skillLevels = new Dictionary<string, int>();
 		skillLevels.Add("Stun", 0);
-		skillLevels.Add("Peircing", 0);
+		skillLevels.Add("Piercing", 0);
 		skillLevels.Add("Dash", 0);
 		skillLevels.Add("Multiply", 0);
 	}

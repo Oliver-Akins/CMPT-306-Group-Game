@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StunSkillUI: {fileID: 719000316642519238}
-  PeircingSkillUI: {fileID: 7157398443021053839}
+  PiercingSkillUI: {fileID: 7157398443021053839}
   DashSkillUI: {fileID: 8842609553430533179}
   MultiplySkillUI: {fileID: 4207299337769606490}
 --- !u!1 &6899980612508247666
@@ -2827,7 +2827,7 @@ GameObject:
   - component: {fileID: 7157398443021053839}
   - component: {fileID: 3645949329269252814}
   m_Layer: 5
-  m_Name: Peircing
+  m_Name: Piercing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
