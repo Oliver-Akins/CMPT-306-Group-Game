@@ -63,7 +63,13 @@ public class Melee_Attack : MonoBehaviour {
 		// with a wider range like a sweeping sword attack
 		foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
-			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() + player.strength);
+			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() 
+				+ player.strength);
+			//if it can stun, stun them
+			int stunduration = player.GetSkillLevels()["Stun"];
+			if (stunduration > 0){
+				enemy.GetComponent<StatusManager>().ApplyStun(1f * stunduration);
+			}
 		}
 		source.PlayOneShot(swing);
 	}

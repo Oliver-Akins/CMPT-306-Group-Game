@@ -33,6 +33,9 @@ public class EnemyController : MonoBehaviour {
 	public float startTimeBetweenAttacks;
 	public int attackDamage;
 
+	public Transform meleeAttackPoint;
+	public LayerMask playerLayer;
+
 	void Awake() {
 		achievements = FindObjectOfType<Achievements>();
 	}
@@ -105,7 +108,17 @@ public class EnemyController : MonoBehaviour {
 	public void Attack(){
 		SoundAssets.Instance.playEnemeyAttackSound();	
 		myAnim.SetTrigger("Attack");
-		Player p = FindObjectOfType<Player>();
-		p.TakeDamage(attackDamage);
+		Invoke("dealDamage", .5f);
+	}
+
+	void dealDamage(){
+		Collider2D[] hitplayer = Physics2D.OverlapCircleAll(meleeAttackPoint.position, 1f, playerLayer);
+		foreach(Collider2D player in hitplayer){
+			player.GetComponent<Player>().TakeDamage(attackDamage);
+		}
+	}
+
+	void OnDrawGizmosSelected(){
+		Gizmos.DrawWireSphere(meleeAttackPoint.position, .7f);
 	}
 }
