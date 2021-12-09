@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e8ece2a9f63ac44cf85b0fbec0f35525
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - source: {instanceID: 0}
+  - coinPickupSound: {instanceID: 0}
+  - keyPickupSound: {instanceID: 0}
+  - potionPickupSound: {instanceID: 0}
+  - potionUseSound: {instanceID: 0}
+  - statUpSound: {instanceID: 0}
+  - poisinPickup: {instanceID: 0}
+  - footStepSound: {fileID: 8300000, guid: 7a56f0844234e481d8fcfb2d3778c64b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

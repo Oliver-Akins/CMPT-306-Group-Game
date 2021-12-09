@@ -8,7 +8,9 @@ public enum GameState {
 	MAIN_MENU,
 	IN_GAME,
 	BETWEEN_LEVEL,
-	DEATH
+	DEATH,
+	CREDITS,
+	CONTROLS
 }
 
 public delegate void OnStateChangeHandler();
@@ -55,22 +57,28 @@ public class GameStateManager {
 			switch (state) {
 				case GameState.IN_GAME:
 					SceneManager.LoadScene("inGame");
-
-					// Update the player's stats from the betweenLevels scene
-					if (this._playerStats != null && this._player != null) {
-						this._player.SetStats(this._playerStats);
-					};
-
 					break;
 				case GameState.BETWEEN_LEVEL:
-					// Get the player's stats before the gameobject gets destroyed
+					// Get the player info before the gameobject gets destroyed
 					if (this._player) {
 						this._playerStats = this._player.GetStats();
+						this.inventory = this._player.GetInventoryItems();
+						this.equippedItems = this._player.GetEquippedWeaps();
+						this.skillLevels = this._player.GetSkillLevels();
 					};
+
+					this._level++;
 
 					SceneManager.LoadScene("betweenLevels");
 					break;
+				case GameState.CREDITS:
+					SceneManager.LoadScene("Credits");
+					break;
+				case GameState.CONTROLS:
+					SceneManager.LoadScene("controls");
+					break;
 				default:
+					this._level = 1;
 					SceneManager.LoadScene("mainMenu");
 					break;
 			};
@@ -91,6 +99,16 @@ public class GameStateManager {
 
 
 	//=======================================================================\\
+	// Generic game-data
+
+	private int _level = 1;
+	public int level {
+		get {
+			return this._level;
+		}
+	}
+
+	//=======================================================================\\
 	// Methods relating to the player data
 
 
@@ -107,6 +125,13 @@ public class GameStateManager {
 			}
 		}
 	}
+
+	// The player's inventory, allowing them to save their items between levels
+	public List<InventoryItem> inventory = null;
+
+	public Dictionary<string, InventoryItem> equippedItems = null;
+
+	public Dictionary<string, int> skillLevels = null;
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated

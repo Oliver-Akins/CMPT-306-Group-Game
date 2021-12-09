@@ -8,15 +8,17 @@ public class Melee_Attack : MonoBehaviour {
 	// using a circluar attack point to allow for multiple enemies to be hit
 	public Transform meleeAttackPoint;
 	public Camera cam;
-	public float attackRange = 0.4f;
 	// limit player attack time, increase with agility!
 	private float timeBetweenAttacks;
 	public float startTimeBetweenAttacks;
 	// The enemy layer used to check hits
 	public LayerMask enemyLayers;
-	// attack damage, will change based on weap and strength
-	public int attackDamage;
 	// Update is called once per frame
+	public AudioSource source;
+	// initialize audio source
+
+	public AudioClip swing;
+	//swing sound
 
 	public Player player;
 	void Update() {
@@ -46,23 +48,30 @@ public class Melee_Attack : MonoBehaviour {
 		Vector3 mouseDirection = (mouseposition - transform.position).normalized;
 		// the offset to move the the attack position, this moves the attack point outwards
 		// can be tweaked as needed, 1f may be enough.
-		float attackOffset = 1.5f;
-		Vector3 attackPosition = transform.position + mouseDirection * attackOffset;
+		Vector3 attackPosition = transform.position + mouseDirection * player.getAttackOffset();
 		// attack animation trigger (in animator this is the trigger param)
 		// wondering how we can set this to be more fluid and play other animations
 		animator.SetTrigger("Attack");
+		animator.SetFloat("AttackDirection", attackPosition.x - transform.position.x);
 
 		meleeAttackPoint.SetPositionAndRotation(attackPosition, meleeAttackPoint.rotation);
 		// detect enemies in range/hit, they need to be on the enemy layer btw
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
-			meleeAttackPoint.position, attackRange, enemyLayers);
+			meleeAttackPoint.position, player.getAttackRange(), enemyLayers);
 		
 		// detect enemies hit, this allows for clustered enemies to all get hit
 		// with a wider range like a sweeping sword attack
 		foreach(Collider2D enemy in hitEnemies){
 			// get access to the controller script and access the public methods
-			enemy.GetComponent<EnemyController>().TakeDamage(attackDamage + player.strength);
+			enemy.GetComponent<EnemyController>().TakeDamage(player.getMeleeAttackDamage() 
+				+ player.strength);
+			//if it can stun, stun them
+			int stunduration = player.GetSkillLevels()["Stun"];
+			if (stunduration > 0){
+				enemy.GetComponent<StatusManager>().ApplyStun(1f * stunduration);
+			}
 		}
+		source.PlayOneShot(swing);
 	}
 
 	// used for testing and visually seeing the melee attack point. 
@@ -70,6 +79,6 @@ public class Melee_Attack : MonoBehaviour {
 		if (meleeAttackPoint == null){
 			return;
 		}
-		Gizmos.DrawWireSphere(meleeAttackPoint.position, attackRange);
+		Gizmos.DrawWireSphere(meleeAttackPoint.position, player.getAttackRange());
 	}
 };

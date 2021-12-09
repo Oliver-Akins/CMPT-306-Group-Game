@@ -131,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765913521880903166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.28, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8765913521973049045}
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,14 +203,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8765913521880903165
 MonoBehaviour:
@@ -229,6 +229,7 @@ MonoBehaviour:
   firePointRb: {fileID: 8765913523455138912}
   animator: {fileID: 8765913521880903105}
   cam: {fileID: 0}
+  movement: {x: 0, y: 0}
   maxHealth: 200
   currentHealth: 0
   healthBar: {fileID: 8765913523211797934}
@@ -236,11 +237,14 @@ MonoBehaviour:
   agility: 0
   stamina: 0
   UIinventory: {fileID: 0}
+  UISkills: {fileID: 0}
   skillCoins: 0
   kills: 0
   keys: 0
   damageEffectOverlay: {fileID: 2703339448765065643, guid: bd9afbbe817d44d908b757afbc8caee0, type: 3}
   healEffectOverlay: {fileID: 6443486655133040383, guid: 8c922d299ac9346cc83dec2bbdeed2b0, type: 3}
+  itemMagnet: {fileID: 911110045667942755, guid: 4e34f3c3bc69e4da7884c5edea069053, type: 3}
+  dashEffect: {fileID: 4749125973432492, guid: f61a21468b226e640856e5bb8921ce12, type: 3}
 --- !u!95 &8765913521880903105
 Animator:
   serializedVersion: 3
@@ -277,6 +281,9 @@ MonoBehaviour:
   weapForce: 20
   startTimeBetweenShots: 0.4
   player: {fileID: 8765913521880903165}
+  source: {fileID: 0}
+  rockThrow: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!61 &8765913521880903111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -290,10 +297,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12770107, y: -0.28556576}
+  m_Offset: {x: -0.12770051, y: -0.24292861}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4, y: 0.5}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -301,7 +308,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.61459786, y: 0.51801413}
+  m_Size: {x: 0.59023094, y: 0.4814668}
   m_EdgeRadius: 0
 --- !u!114 &8765913521880903110
 MonoBehaviour:
@@ -318,12 +325,12 @@ MonoBehaviour:
   animator: {fileID: 8765913521880903105}
   meleeAttackPoint: {fileID: 8765913523222956945}
   cam: {fileID: 0}
-  attackRange: 0.5
   startTimeBetweenAttacks: 0.4
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attackDamage: 25
+  source: {fileID: 0}
+  swing: {fileID: 0}
   player: {fileID: 8765913521880903165}
 --- !u!1 &8765913522077439527
 GameObject:
@@ -462,6 +469,7 @@ MonoBehaviour:
   fill: {fileID: 8765913522512543943}
   healthDivPrefab: {fileID: 6199391945314486471, guid: 63912c177fc074645b3385c813ffbbad, type: 3}
   healthDivLayout: {fileID: 8765913523749186401}
+  valuePerDivider: 50
 --- !u!1 &8765913522156689906
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765913523455138914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.288, y: -0.147, z: 0}
+  m_LocalPosition: {x: -0.13, y: -0.29, z: 0}
   m_LocalScale: {x: 2.54, y: 2.31, z: 0.45}
   m_Children: []
   m_Father: {fileID: 8765913521880903106}
@@ -973,6 +981,10 @@ PrefabInstance:
     - target: {fileID: 5059037783078262567, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059037783308174887, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}
+      propertyPath: valuePerDivider
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d2c3198118b34086bec7ec67ffe022d, type: 3}

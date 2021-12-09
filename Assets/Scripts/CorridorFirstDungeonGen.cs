@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CorridorFirstDungeonGen : RandomWalkGen
 {
+	private ArrayList rooms;
+	private HashSet<Vector2Int> coridorPositions;
+
 	[SerializeField]
 	private int corridorLength = 30;
 
@@ -81,23 +84,21 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	[Range(0.0001f, 0.02f)]
 	private float keyPercent = 0.005f;
 
+	// uses the same percent as the keys when being generated
+	[SerializeField]
+	private GameObject chest;
+
 	[SerializeField]
 	private GameObject zombie;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float zombiePercent = 0.005f;
-
+	
 	[SerializeField]
 	private GameObject skeleton;
-	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float skeletonPercent = 0.005f;
-
+	
 	[SerializeField]
 	private GameObject vampire;
+
 	[SerializeField]
-	[Range(0.0001f, 0.02f)]
-	private float vampirePercent = 0.001f;
+	private GameObject candlelight;
 
 
 
@@ -124,6 +125,8 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 	private void CorridorFirstGen() {
 		HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 		HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
+		rooms = new ArrayList();
+		coridorPositions = new HashSet<Vector2Int>();
 
 		CreateCorridors(floorPositions, potentialRoomPositions);
 		HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
@@ -132,20 +135,18 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		CreatRoomsAtDeadEnds(deadEnds, roomPositions);
 		HashSet<Vector2Int> posibleItemPositions = new HashSet<Vector2Int>(roomPositions);
-		HashSet<Vector2Int> posibleEnimiePositions = new HashSet<Vector2Int>(roomPositions);
+		posibleItemPositions.RemoveWhere(coridorPositions.Contains);
 
 
 		floorPositions.UnionWith(roomPositions);
 
 		tilemapVisualizer.PaintFloorTiles(floorPositions);
 
-		AddItemRandomly(zombie, zombiePercent, posibleEnimiePositions);
-		AddItemRandomly(skeleton, skeletonPercent, posibleEnimiePositions);
-		AddItemRandomly(vampire, vampirePercent, posibleEnimiePositions);
+		AddEnemys();
 
 
 		AddItemRandomly(coinStack, coinStackPercent, posibleItemPositions);
-		AddItemRandomly(key, keyPercent, posibleItemPositions);
+		AddEqualKeysAndChestsRandomly(key, chest, keyPercent, posibleItemPositions);
 		AddItemRandomly(potion, potionPercent, posibleItemPositions);
 		AddItemRandomly(poison, poisonPercent, posibleItemPositions);
 
@@ -157,6 +158,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		AddItemRandomly(coin, coinPercent, posibleItemPositions);
 		AddItemRandomly(allStatUp, allStatUpPercent, posibleItemPositions);
 
+		spawnLights();
 
 		WallGen.CreateWalls(floorPositions, tilemapVisualizer);
 		this.finalLevel = floorPositions;
@@ -172,6 +174,104 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 		}
 		foreach(Vector2Int position in usedPositions){
 			positions.Remove(position);
+		}
+	}
+
+	/**
+		Still want a random number of keys and chests to be generated but in
+		equal amounts. This toggles the generation of keys and chests, if 
+		only an odd number of generations happen, there will always be one more
+		key than chests. If even there will be an even number of generations.
+		This also allows for keys to be near chests instead of it being completely 
+		random, potentially causing backtracking.
+
+		Enemies also no longer drop keys
+	*/	
+	private void AddEqualKeysAndChestsRandomly(GameObject key,
+	GameObject chest, float chancePerTile, HashSet<Vector2Int> positions){
+		HashSet<Vector2Int> usedPositions = new HashSet<Vector2Int>();
+		bool toggleItem = true;
+		foreach(Vector2Int position in positions){
+			if(UnityEngine.Random.value < chancePerTile){
+				if (toggleItem){
+					tilemapVisualizer.AddItem(position, key);
+				} else {
+					tilemapVisualizer.AddItem(position, chest);
+				}
+				toggleItem = !toggleItem;
+				usedPositions.Add(position);
+			}
+		}
+		foreach(Vector2Int position in usedPositions){
+			positions.Remove(position);
+		}
+	}
+
+	private void AddEnemys(){
+		foreach(HashSet<Vector2Int> room in rooms){
+			HashSet<Vector2Int> avalibleSpotsHash = new HashSet<Vector2Int>(room);
+			List<Vector2Int> avalibleSpots = avalibleSpotsHash.ToList();
+			if (avalibleSpots.Contains(Vector2Int.one)){
+				HashSet<Vector2Int> spawnArea = SquareArea(5,5, startPos);
+				avalibleSpots.RemoveAll(spawnArea.Contains);
+			}
+
+			int max = 5 + (GameStateManager.Instance.level / 2);
+			int min = 2 + (GameStateManager.Instance.level / 4);
+			int leftToSpawn = UnityEngine.Random.Range(min, max);
+
+			while (leftToSpawn > 0 && avalibleSpots.Count() > 0){
+				int spawnType = UnityEngine.Random.Range(0, 5);
+				GameObject enemy = zombie;
+				switch (spawnType) {
+					case 0:
+					case 1: enemy = zombie; break;
+					case 2:
+					case 3: enemy = skeleton; break;
+					case 4: enemy = vampire; break;
+					default: Debug.Log("ERROR: invaled enemy type index"); break;
+				}
+				
+				Vector2Int positon = avalibleSpots[(UnityEngine.Random.Range(0, avalibleSpots.Count))];
+				tilemapVisualizer.AddItem(positon, enemy);
+				avalibleSpots.Remove(positon);
+				leftToSpawn -= 1;
+			}
+		}
+	}
+
+	private HashSet<Vector2Int> SquareArea(int xRadius, int yRadius, Vector2Int startPosition){
+		HashSet<Vector2Int> area = new HashSet<Vector2Int>();
+		for (int x = -xRadius; x <= xRadius; x++){
+			for (int y = -yRadius; y <= yRadius; y++){
+				area.Add(startPosition + new Vector2Int(x,y));
+			}
+		}
+
+		return area;
+	}
+
+
+
+	public void spawnLights(){
+		foreach(HashSet<Vector2Int> room in rooms){
+			HashSet<Vector2Int> avalibleSpotsHash = new HashSet<Vector2Int>(room);
+			avalibleSpotsHash.RemoveWhere(coridorPositions.Contains);
+			List<Vector2Int> avalibleSpots = avalibleSpotsHash.ToList();
+
+			int max = 8;
+			int min = 3;
+			int leftToSpawn = UnityEngine.Random.Range(min, max);
+
+			while (leftToSpawn > 0 && avalibleSpots.Count() > 0){
+				
+				Vector2Int positon = avalibleSpots[(UnityEngine.Random.Range(0, avalibleSpots.Count))];
+				tilemapVisualizer.AddItem(positon, candlelight);
+				avalibleSpots.Remove(positon);
+				HashSet<Vector2Int> spawnArea = SquareArea(4,4, positon);
+				avalibleSpots.RemoveAll(spawnArea.Contains);
+				leftToSpawn -= 1;
+			}
 		}
 	}
 
@@ -209,6 +309,8 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 
 		foreach (var roomPosition in roomToCreate) {
 			var roomFloor = RunRandomWalk(randomWalkParamiters, roomPosition);
+			roomFloor.Remove(roomPosition);
+			rooms.Add(roomFloor);
 			roomPositions.UnionWith(roomFloor);
 		}
 		return roomPositions;
@@ -226,6 +328,7 @@ public class CorridorFirstDungeonGen : RandomWalkGen
 			currentPos = corridor[corridor.Count - 1];
 			potentialRoomPositions.Add(currentPos);
 			floorPositions.UnionWith(corridor);
+			coridorPositions.UnionWith(corridor);
 		}
 
 		tilemapVisualizer.AddItem(currentPos, nextLevelHole);
