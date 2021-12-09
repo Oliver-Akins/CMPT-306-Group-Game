@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using CodeMonkey.Utils;
 
 public class Player : MonoBehaviour {
 
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour {
 
 	// player current health - initializes to max health at start
 	public int currentHealth;
-
+	private bool isDead = false;
 	// player health bar
 	public HealthBar healthBar;
 
@@ -49,6 +50,10 @@ public class Player : MonoBehaviour {
 	private Inventory inventory;
 	[SerializeField]
 	private UI_Inventory UIinventory;
+
+	private SkillLevels skillLevels;
+	[SerializeField]
+	private UI_Skills UISkills;
 
 
 	//player skill coins
@@ -78,9 +83,19 @@ public class Player : MonoBehaviour {
 	// item magnet collider reference
 	public GameObject itemMagnet;
 
+	// dash speed used to add force to the player
+	private int dashSpeed = 700000;
+	// used to track if the player can dash, ie CD is off cooldown
+	private bool canDash = true;
+	// Dash cooldown, can be modded with more skills in Dash
+	int dashCooldown = 80;
+	
 	private SpriteRenderer sr;
     private Coroutine poisonEffectRoutine;
     private bool poisonEffectRunning = false;
+
+	[SerializeField]
+	private Transform dashEffect;
 
 	public Dictionary<string, int> GetStats() {
 		Dictionary<string, int> stats = new Dictionary<string, int>();
@@ -129,13 +144,26 @@ public class Player : MonoBehaviour {
 		UIinventory.SetInventory(inventory);
 	}
 
+	public void SetSkillLevels(Dictionary<string, int> skillLevels){
+		this.skillLevels.setSkills(skillLevels);
+		this.skillLevels.SetInventory(this.inventory);
+		UISkills.setSkillLevelsObject(this.skillLevels);
+	}
+
+	public Dictionary<string, int> GetSkillLevels(){
+		return skillLevels.getSkills();
+	}
+
 	private void Awake() {
 		/**
 			After the first level this gets overriden by the players
 			previous items and equipped weaps
 		*/
 		inventory = new Inventory(UseItem);
+		skillLevels = new SkillLevels();
+		skillLevels.SetInventory(inventory);
 		UIinventory.SetInventory(inventory);
+		UISkills.setSkillLevelsObject(skillLevels);
 	}
 
 	// Start() is called when script is enabled
@@ -148,7 +176,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SCYTHE, 1);
 			UseItem( new InventoryItem {type = ItemTypes.ItemType.FLAIL, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.FLAIL, 1);
-			UseItem( new InventoryItem{type = ItemTypes.ItemType.ARROW});
+			UseItem( new InventoryItem{type = ItemTypes.ItemType.ARROW, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ARROW, 1);
 			UseItem( new InventoryItem{type = ItemTypes.ItemType.FIREBALL, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.FIREBALL, 1);
@@ -159,6 +187,7 @@ public class Player : MonoBehaviour {
 			inventory.AddItem(ItemTypes.ItemType.SWORD, 1);
 			UseItem( new InventoryItem{ type = ItemTypes.ItemType.ROCK, amount = 1});
 			inventory.AddItem(ItemTypes.ItemType.ROCK, 1);
+			// inventory.AddItem(ItemTypes.ItemType.COIN, 1000); // if you want lots of moneys to test
 			UIinventory.RefreshInventoryItems();
 		} else {
 			// always need to ensure the player is equipped
@@ -178,45 +207,49 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	// not good for physics D: but great for inputs
 	void Update() {
-		// gives a value between -1 and 1 depending on which key left or right,
-		// but if no move in this direction will return 0
-		movement.x = Input.GetAxisRaw("Horizontal");
-		movement.y = Input.GetAxisRaw("Vertical");
+		if (!isDead){
+			// gives a value between -1 and 1 depending on which key left or right,
+			// but if no move in this direction will return 0
+			movement.x = Input.GetAxisRaw("Horizontal");
+			movement.y = Input.GetAxisRaw("Vertical");
 
-		mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+			mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
-		// Sets the animation when we need it
-		animator.SetFloat("Horizontal", movement.x);
-		animator.SetFloat("Vertical", movement.y);
-		// more optimized with square root magnitude as we won't need to calculate it on the vector
-		animator.SetFloat("Speed", movement.sqrMagnitude);
+			// Sets the animation when we need it
+			animator.SetFloat("Horizontal", movement.x);
+			animator.SetFloat("Vertical", movement.y);
+			// more optimized with square root magnitude as we won't need to calculate it on the vector
+			animator.SetFloat("Speed", movement.sqrMagnitude);
 
-		if(Input.GetKeyDown(KeyCode.H)){
-			if(currentHealth < maxHealth + stamina){
-				InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
-				if (foundItem != null && foundItem.amount > 0){
-					UseItem(foundItem);
-					SoundAssets.Instance.playUseSound(foundItem.type);
+			if(Input.GetKeyDown(KeyCode.H)){
+				if(currentHealth < maxHealth + stamina){
+					InventoryItem foundItem = inventory.FindItem(ItemTypes.ItemType.POTION);
+					if (foundItem != null && foundItem.amount > 0){
+						UseItem(foundItem);
+						SoundAssets.Instance.playUseSound(foundItem.type);
+					}
 				}
 			}
 		}
+	
 		if(currentHealth <= 0){
 			animator.SetBool("isDead", true);
+			isDead = true;
 			Invoke("GameOverScene", 0.75f);
 		}
-		// keyboard inputs for testing - delete if needed
-		// un-comment these when testing; should not be in the main build
-
-		// if(Input.GetKeyDown(KeyCode.Space)){
-		// 	if(currentHealth > 0){
-		// 		TakeDamage(100);
-		// 	}
-		// }
 
 		// move ItemMagnet to follow center of Player
 		itemMagnet.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
+		// keyboard inputs for testing - delete if needed
+		// un-comment these when testing; should not be in the main build
 
+		// if(Input.GetKeyDown(KeyCode.B)){
+		// 	if(currentHealth > 0){
+		// 		TakeDamage(100);
+		// 	}
+		// }
+		
 		// if(Input.GetKeyDown(KeyCode.N)){
 		// 	DecreaseMaxHealth(100);
 		// }
@@ -251,8 +284,34 @@ public class Player : MonoBehaviour {
 		// because the original implementation was on the sprite and rotated the sprite
 		// this is instead rotating the fire point at the center of the player
 		// note this isn't perfect when we start adding colliders onto the player
-		firePointRb.MovePosition(rb.position + movement.normalized * agiModdedMoveSpeed * Time.fixedDeltaTime);
+		firePointRb.MovePosition(rb.position);
 		firePointRb.rotation = angle;
+
+		int dashAmount = GetSkillLevels()["Dash"];
+		// if we can't dash yet do things
+		if (dashAmount > 0 && !canDash){
+			if (dashCooldown == 0){
+				canDash = true;
+			} else {
+				dashCooldown--;
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Space) && dashAmount > 0 && canDash){
+			Vector2 mouseDirection = (Input.mousePosition - new Vector3(Screen.width/2, Screen.height/2));
+			Transform dashTransform = Instantiate(dashEffect, rb.position, Quaternion.identity);
+			dashTransform.eulerAngles =  new Vector3(0, 0, CodeMonkey.Utils.UtilsClass.GetAngleFromVectorFloat(mouseDirection));
+			/** 
+				this was used to control how long (x axis) the animation is but 
+				because we are adding force not teleporting, we do not know the
+				distance travelled, :pepehands, this results in the animation being 
+				slightly too big/too small
+			*/
+			// float dashEffectWidth = 35f;
+			// dashTransform.localScale = new Vector3(10f/dashEffectWidth, 1f, 1f);
+			rb.AddForce(mouseDirection * dashSpeed * Time.fixedDeltaTime);
+			canDash = false;
+			dashCooldown = 80 - skillLevels.getSkills()["Dash"] * 2;
+		}
 	}
 
 	private void UseItem(InventoryItem item){
@@ -291,6 +350,10 @@ public class Player : MonoBehaviour {
 				this.attackOffset = 1.1f;
 				this.attackRange = .9f;
 				this.meleeDamage = 35;
+				break;
+			case ItemTypes.ItemType.COIN:
+				inventory.RemoveItem(new InventoryItem{type = ItemTypes.ItemType.COIN, amount = 25});
+				UIinventory.RefreshInventoryItems();
 				break;
 		}
 	}
@@ -543,5 +606,4 @@ public class Player : MonoBehaviour {
 	public void ResetKillStreak() {
 		AchievementCollection.killStreak = 0;
 	}
-
 }

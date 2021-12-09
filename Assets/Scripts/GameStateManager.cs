@@ -64,6 +64,7 @@ public class GameStateManager {
 						this._playerStats = this._player.GetStats();
 						this.inventory = this._player.GetInventoryItems();
 						this.equippedItems = this._player.GetEquippedWeaps();
+						this.skillLevels = this._player.GetSkillLevels();
 					};
 
 					this._level++;
@@ -129,6 +130,8 @@ public class GameStateManager {
 	public List<InventoryItem> inventory = null;
 
 	public Dictionary<string, InventoryItem> equippedItems = null;
+
+	public Dictionary<string, int> skillLevels = null;
 
 	// Allow updating the player's stats by passing a dictionary through with
 	// the stats that are able to be updated

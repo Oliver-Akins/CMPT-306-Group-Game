@@ -10,10 +10,16 @@ public class StatusManager : MonoBehaviour {
 
 	public List<int> bleedTickTimers = new List<int>();
 	private int bleedTickDamage;
+
+	private float StunTime;
+	private float immuneToStunTime = 3f;
+	private bool isStunned = false;
 	private EnemyController controller;
+	private SpriteRenderer sprite;
 
 	void Start(){
 		controller = GetComponent<EnemyController>();
+		sprite = GetComponent<SpriteRenderer>();
 	}
 
 	/**
@@ -40,10 +46,13 @@ public class StatusManager : MonoBehaviour {
 			for(int i = 0; i < burnTickTimers.Count; i++){
 				burnTickTimers[i]--;
 			}
+			sprite.color = Color.yellow;
 			controller.TakeDamage(burnTickDamage);
 			// remove all zero numbers via predicate passed in :)
 			burnTickTimers.RemoveAll(i => i == 0);
 			yield return new WaitForSeconds(0.75f);
+			sprite.color = Color.white;
+			yield return new WaitForSeconds(0.2f);
 		}
 	}
 
@@ -63,10 +72,29 @@ public class StatusManager : MonoBehaviour {
 			for(int i = 0; i < bleedTickTimers.Count; i++){
 				bleedTickTimers[i]--;
 			}
+			sprite.color = Color.red;
 			controller.TakeDamage(bleedTickDamage);
 			// remove all zero numbers via predicate passed in :)
 			bleedTickTimers.RemoveAll(i => i == 0);
 			yield return new WaitForSeconds(0.5f);
+			sprite.color = Color.white;
+			yield return new WaitForSeconds(0.2f);
 		}
+	}
+
+	public void ApplyStun(float time){
+		StunTime = time;
+		if (!isStunned){
+			isStunned = true;
+			StartCoroutine(Stun());
+		}
+	}
+
+	IEnumerator Stun(){
+		GetComponent<PolarithMovement>().enabled = false;
+		yield return new WaitForSeconds(StunTime);
+		GetComponent<PolarithMovement>().enabled = true;
+		yield return new WaitForSeconds(immuneToStunTime);
+		isStunned = false;
 	}
 };

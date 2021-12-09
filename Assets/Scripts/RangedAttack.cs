@@ -16,8 +16,11 @@ public class RangedAttack : MonoBehaviour
 
 	public AudioClip rockThrow;
 
+    public Camera cam;
+
     // Update is called once per frame
     void Update(){
+        
         if (startTimeBetweenShots > 0){     
             float agiMod = startTimeBetweenShots * (( (float)player.agility /2) / 10);
             if (timeBetweenShots <= 0){
@@ -38,8 +41,7 @@ public class RangedAttack : MonoBehaviour
 
     void RangeAttack(){
         InventoryItem item = player.GetEquippedWeaps()["equippedRange"];
-        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
-        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+        //Setup the qualities of the projectile(s)
         var projectileQualities = new Hashtable();
         projectileQualities.Add("damageAmount", player.getRangeDamage());
         if (item.type == ItemTypes.ItemType.ARROW){
@@ -50,11 +52,44 @@ public class RangedAttack : MonoBehaviour
             projectileQualities["burnTicks"] = 8;
             projectileQualities["burnTickDamage"] = 8 + player.strength/2;
         }
-        ammo.GetComponent<RangeWeap>().setQualities(projectileQualities);
+        Dictionary<string, int> skills = player.GetSkillLevels();
+        // if its Piercing
+        if (skills["Piercing"] > 0){
+            projectileQualities["maxPeirces"] = skills["Piercing"];
+        }
+        // is AoE
+        // bool isAoE = true;
+        // if (isAoE){
+        //     projectileQualities["AoEDamage"] = 5;
+        // }
+        // fire in the the character wanted to at least once
+        rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+        GameObject ammo = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+        
+        ammo.GetComponent<Projectile>().setQualities(projectileQualities);
         Rigidbody2D rb = ammo.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
-
         source.PlayOneShot(rockThrow);
 
+        // fire extra projectiles
+        int howManyProjectiles = skills["Multiply"];
+        if (howManyProjectiles > 0){
+            StartCoroutine(multiFire(howManyProjectiles, item, projectileQualities));
+        }
+    }
+
+    IEnumerator multiFire(int howManyProjectiles, InventoryItem item, 
+        Hashtable projectileQualities) {
+
+        for (int i = 0; i < howManyProjectiles; i++){
+            yield return new WaitForSeconds(.1f); // wait to fire the 2+ projectile
+            rangedWeapPrefab.GetComponent<SpriteRenderer>().sprite = item.GetSprite();
+            
+            GameObject ammo2 = Instantiate(rangedWeapPrefab, firePoint.position, firePoint.rotation);
+            ammo2.GetComponent<Projectile>().setQualities(projectileQualities);
+            Rigidbody2D rb2 = ammo2.GetComponent<Rigidbody2D>();
+            rb2.AddForce(firePoint.up * weapForce, ForceMode2D.Impulse);
+            source.PlayOneShot(rockThrow);
+        }
     }
 }
