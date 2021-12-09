@@ -8,7 +8,9 @@ public enum GameState {
 	MAIN_MENU,
 	IN_GAME,
 	BETWEEN_LEVEL,
-	DEATH
+	DEATH,
+	CREDITS,
+	CONTROLS
 }
 
 public delegate void OnStateChangeHandler();
@@ -68,6 +70,12 @@ public class GameStateManager {
 					this._level++;
 
 					SceneManager.LoadScene("betweenLevels");
+					break;
+				case GameState.CREDITS:
+					SceneManager.LoadScene("Credits");
+					break;
+				case GameState.CONTROLS:
+					SceneManager.LoadScene("controls");
 					break;
 				default:
 					this._level = 1;
