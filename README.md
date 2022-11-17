@@ -38,17 +38,18 @@ Various mechanics were implemented to support an infinite dungeon crawler game; 
 - Procedural level generation
 - Enemy randomization
 - Enemy AI (with the help of Polarith)
+- Enemy and player animation
 - Player movement and combat
 - Player weapons with different combat styles
 - Player skill system to further enhance combat
 - Player pickups, including permanent power ups, items and coins
-- Loading system for levels, player skill buy screens and player's current inventory/stats between levels
-- Inventory system; item types, stackable items, equippable weapons in left/right click, and more
-- General UI; inventory screen and skill buy ui in-game
+- Loading system for levels, player skill buy screens and player's current inventory/stats/skills between levels
+- Inventory system; item types, stackable items, equippable weapons on left/right click, and more
+- General UI; inventory panels and skill buy UI in-game
 - Main Menu and Stat Buy screens
 - Music system
 - Sound Effects
-- Achivement System that tracks players progress in several ways, such as killstreaks, total kills, various amounts of items picked up.
+- Achievement System that tracks players progress in several ways, such as killstreaks, total kills, various amounts of items picked up
 
 
 ### Rewards
