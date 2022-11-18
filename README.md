@@ -17,8 +17,10 @@ Stats could be upgraded between levels and affected the player power in differen
 - Stamina: increases player health and the effectiveness of health potions.
 
 ### Weapons
-Several weapons are available to the player, most weapons types focusing on different ranged weapons:
-- Sword: a basic weapon that does damage in a small arc from the player.
+Several weapons are available to the player:
+- Sword: a melee weapon that does moderate amount of damage in a moderate arc from the player.
+- Flail: a melee weapon that does a small amount of damage in a large arc from the player.
+- Scythe: a melee weapon that does heavy damage narrow arc from the player.
 - Rock: a thrown weapon that is easy to target and hit with that does moderate damage.
 - Arrow: a thrown weapon that hits enemies for a moderate amount of damage and leaves a small bleed DoT (damage of time) effect on enemies.
 - Fireball: a small, but hard to hit with, fireball that does a small amount of initial damage but leaves enemies on fire; while the enemy is on fire, they periodically take heavy fire damage.
