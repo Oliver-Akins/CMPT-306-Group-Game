@@ -32,6 +32,8 @@ To further modify the player's power, there are four skills to choose from and l
 - Dash: Allows the player access to the Dash ability, which allows the player to quickly move a great distance. With each subsequent invested level past the first reduces the cooldown of the dash ability.
 - Multiply: modifies ranged attacks to fire multiple times based on the level invested into this skill.
 
+To see our milestones as we developed the game and to play the final build of the game follow the link: https://oliver.akins.me/CMPT-306-Group-Game/
+
 ## Development
 This project was used as the final project and primary evaluation for the introductory Game Mechanics class (CMPT 306) at the University of Saskatchewan; we had specific goals to achieve to gain a base understanding of game dev. We worked together and delegated various tasks to ensure each team member had work they wanted to complete or had the skills to complete. We often had discussions in weekly meetings, frequent communication via a Discord server with a GitHub webhook to keep track of work completed and Pull Requests (PR). As a team we were able to support each other through tricky problems and review each others work through feedback and PRs.  
 
